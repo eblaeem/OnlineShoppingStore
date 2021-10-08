@@ -1,0 +1,23 @@
+[
+  {
+    "outputFileName": "wwwroot/styles.css",
+    "inputFiles": [
+      "node_modules/bootstrap/dist/css/bootstrap.rtl.css"
+
+    ],
+    "minify": {
+      "enabled": true,
+      "commentMode": "all"
+    }
+  },
+  {
+    "outputFileName": "wwwroot/scripts.js",
+    "inputFiles": [
+      "node_modules/jquery/dist/jquery.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "preserveImportantComments": false
+    }
+  }
+]
