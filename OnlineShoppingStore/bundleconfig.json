@@ -2,8 +2,9 @@
   {
     "outputFileName": "wwwroot/styles.css",
     "inputFiles": [
-      "node_modules/bootstrap/dist/css/bootstrap.rtl.css"
-
+      "node_modules/font-awesome/css/font-awesome.css",
+      "node_modules/bootstrap/dist/css/bootstrap.rtl.css",
+      
     ],
     "minify": {
       "enabled": true,
@@ -13,7 +14,8 @@
   {
     "outputFileName": "wwwroot/scripts.js",
     "inputFiles": [
-      "node_modules/jquery/dist/jquery.js"
+      "node_modules/jquery/dist/jquery.js",
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
     ],
     "minify": {
       "enabled": true,
