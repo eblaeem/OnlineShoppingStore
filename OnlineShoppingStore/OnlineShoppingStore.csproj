@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Admin\js\NewFolder\**" />
+    <Content Remove="wwwroot\Admin\js\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\Admin\js\NewFolder\**" />
+    <None Remove="wwwroot\Admin\js\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="node_modules\%40popperjs\core\package.json" />
     <Content Include="node_modules\.package-lock.json" />
     <Content Include="node_modules\bootstrap\dist\css\bootstrap-grid.css" />

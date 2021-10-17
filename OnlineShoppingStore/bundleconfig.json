@@ -2,12 +2,13 @@
   {
     "outputFileName": "wwwroot/styles.css",
     "inputFiles": [
-      "node_modules/font-awesome/css/font-awesome.css",
-      "node_modules/bootstrap/dist/css/bootstrap.rtl.css",
-      
+      "node_modules/bootstrap/dist/css/bootstrap.css",
+      "node_modules/normalize.css/normalize.css",
+      "node_modules/perfect-scrollbar/css/perfect-scrollbar.css"
+
     ],
     "minify": {
-      "enabled": true,
+      "enabled": false,
       "commentMode": "all"
     }
   },
@@ -15,10 +16,10 @@
     "outputFileName": "wwwroot/scripts.js",
     "inputFiles": [
       "node_modules/jquery/dist/jquery.js",
-      "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+      "node_modules/materialize-css/dist/js/materialize.js"
     ],
     "minify": {
-      "enabled": true,
+      "enabled": false,
       "preserveImportantComments": false
     }
   }
