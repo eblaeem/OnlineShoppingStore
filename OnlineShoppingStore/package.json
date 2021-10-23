@@ -5,10 +5,13 @@
   "devDependencies": {
     "bootstrap": "5.1.1",
     "jquery": "3.6.0",
+    "jquery-nice-select": "1.1.0",
     "jquery-validation": "1.19.3",
     "jquery-validation-unobtrusive": "3.2.12",
+    "jquery.countdown": "1.2.8",
     "materialize-css": "1.0.0",
     "normalize.css": "8.0.1",
+    "owl.carousel": "2.3.4",
     "perfect-scrollbar": "1.5.2"
   }
 }

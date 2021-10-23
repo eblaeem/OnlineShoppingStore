@@ -1,6 +1,6 @@
 [
   {
-    "outputFileName": "wwwroot/styles.css",
+    "outputFileName": "wwwroot/Admin/css/AdminStyles.css",
     "inputFiles": [
       "node_modules/bootstrap/dist/css/bootstrap.css",
       "node_modules/normalize.css/normalize.css",
@@ -13,10 +13,37 @@
     }
   },
   {
-    "outputFileName": "wwwroot/scripts.js",
+    "outputFileName": "wwwroot/Admin/js/AdminScripts.js",
     "inputFiles": [
       "node_modules/jquery/dist/jquery.js",
       "node_modules/materialize-css/dist/js/materialize.js"
+    ],
+    "minify": {
+      "enabled": false,
+      "preserveImportantComments": false
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/SiteStyles.css",
+    "inputFiles": [
+      "node_modules/bootstrap/dist/css/bootstrap.css",
+      "node_modules/owl.carousel/dist/assets/owl.carousel.css",
+      "node_modules/jquery-nice-select/css/nice-select.css"
+
+    ],
+    "minify": {
+      "enabled": false,
+      "commentMode": "all"
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/SiteScripts.js",
+    "inputFiles": [
+      "node_modules/jquery/dist/jquery.js",
+      "node_modules/bootstrap/dist/js/bootstrap.js",
+      "node_modules/owl.carousel/dist/owl.carousel.js",
+      "node_modules/jquery.countdown/jquery.countdown.js",
+      "node_modules/jquery-nice-select/js/jquery.nice-select.js"
     ],
     "minify": {
       "enabled": false,
