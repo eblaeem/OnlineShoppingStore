@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Domain.Entities.User;
 
 namespace OnlineShoppingStore.Persistance.Context
 {
-    public class DataBaseContext:DbContext
+    public class DataBaseContext:DbContext, IDataBaseContext
     {
         public DataBaseContext(DbContextOptions options):base(options)
         {

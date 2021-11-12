@@ -1,13 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShoppingStore.Application.Services.Users.Queries.GetUsers;
 
 namespace OnlineShoppingStore.Areas.Admin.Controllers
 {
     public class UsersController : Controller
     {
-        [Area("Admin")]
-        public IActionResult Index()
+        private readonly IGetUsersService _getUsersService;
+
+        public UsersController(IGetUsersService getUsersService)
         {
-            return View();
+            _getUsersService = getUsersService;
+        }
+
+        [Area("Admin")]
+        public IActionResult Index(string searchKey, int page =1)
+        {
+            return View(_getUsersService.ExecuteGetUsersDtos(
+                new RequstGetUserDto
+                {
+                    SearchKey = searchKey,
+                    Page = page
+                }));
         }
     }
 }
