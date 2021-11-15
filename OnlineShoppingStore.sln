@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{AAC9C4D6-9132-4296-B985-65E494BA791A}"
 EndProject
@@ -17,17 +17,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{E17D28D1-7849-44AD-958F-BEA55BD7066C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShoppingStore.Common", "OnlineShoppingStore.Common\OnlineShoppingStore.Common.csproj", "{01AA1ADD-488D-4B8D-A358-16A72890BCE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShoppingStore.Common", "OnlineShoppingStore.Common\OnlineShoppingStore.Common.csproj", "{01AA1ADD-488D-4B8D-A358-16A72890BCE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShoppingStore.Application", "OnlineShoppingStore.Application\OnlineShoppingStore.Application.csproj", "{AB3B0AD4-37E0-4443-85D2-E1621871BC97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShoppingStore.Application", "OnlineShoppingStore.Application\OnlineShoppingStore.Application.csproj", "{AB3B0AD4-37E0-4443-85D2-E1621871BC97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShoppingStore.Domain", "OnlineShoppingStore.Domain\OnlineShoppingStore.Domain.csproj", "{1E1E1107-08E8-4277-B536-D56CABCFD759}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShoppingStore.Domain", "OnlineShoppingStore.Domain\OnlineShoppingStore.Domain.csproj", "{1E1E1107-08E8-4277-B536-D56CABCFD759}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShoppingStore.Persistance", "OnlineShoppingStore.Persistance\OnlineShoppingStore.Persistance.csproj", "{D12839D6-6AD8-4D52-84C7-129C7428D7DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShoppingStore.Persistance", "OnlineShoppingStore.Persistance\OnlineShoppingStore.Persistance.csproj", "{D12839D6-6AD8-4D52-84C7-129C7428D7DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShoppingStore.Infrastructure", "OnlineShoppingStore.Infrastructure\OnlineShoppingStore.Infrastructure.csproj", "{8AAF2E76-6969-4C4E-8904-A37828E5F95F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShoppingStore.Infrastructure", "OnlineShoppingStore.Infrastructure\OnlineShoppingStore.Infrastructure.csproj", "{8AAF2E76-6969-4C4E-8904-A37828E5F95F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShoppingStore", "OnlineShoppingStore\OnlineShoppingStore.csproj", "{80C8CE6C-D69E-4E98-9CDC-844D4DF6860B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShoppingStore", "OnlineShoppingStore\OnlineShoppingStore.csproj", "{80C8CE6C-D69E-4E98-9CDC-844D4DF6860B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

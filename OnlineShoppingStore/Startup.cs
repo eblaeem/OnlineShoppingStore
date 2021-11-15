@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShoppingStore.Application.Interfaces.Context;
+using OnlineShoppingStore.Application.Services.Users.Commands.CreateUser;
+using OnlineShoppingStore.Application.Services.Users.Queries.GetRoles;
 using OnlineShoppingStore.Application.Services.Users.Queries.GetUsers;
 using OnlineShoppingStore.Persistance.Context;
 
@@ -24,6 +26,8 @@ namespace OnlineShoppingStore
         {
             services.AddScoped<IDataBaseContext, DataBaseContext>();
             services.AddScoped<IGetUsersService, GetUsersService>();
+            services.AddScoped<ICreateUserService, CreateUserService>();
+            services.AddScoped<IGetRolesService, GetRolesService>();
 
 
             services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(option =>
