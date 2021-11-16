@@ -1,6 +1,7 @@
 ﻿using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Common.ResultDto;
 using OnlineShoppingStore.Domain.Entities.User;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
@@ -14,42 +15,57 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
             _db = db;
         }
 
-        public ResultDto<ResultCreateUserDto> ExecuteCreateUser(RequsetCreateUserDto requset)
+        public ResultDto<ResultCreateUserDto> ExecuteCreateUser(RequsetCreateUserDto requset, System.Threading.CancellationToken cancellationToken)
         {
-            User user = new User()
+            try
             {
-                FullName = requset.FullName,
-                Email = requset.Email,
-                //Password = requset.Password
-            };
-            List<UserRole> userRole = new List<UserRole>();
-
-            foreach (var item in requset.Roles)
-            {
-                var roles = _db.Roles.Find(item.Id);
-                userRole.Add(new UserRole
+                User user = new User()
                 {
-                    Role = roles,
-                    RoleId = roles.Id,
-                    User = user,
-                    UserId = user.Id
-                });
-            }
+                    FullName = requset.FullName,
+                    Email = requset.Email,
+                    //Password = requset.Password
+                };
+                List<UserRole> userRole = new List<UserRole>();
 
-            user.UserRoles = userRole;
-
-            _db.Users.Add(user);
-            _db.SaveChanges();
-
-            return new ResultDto<ResultCreateUserDto>()
-            {
-                IsSuccess = true,
-                Message = "ثبت نام کاربر با موفقیت انجام شد.",
-                Result = new ResultCreateUserDto()
+                foreach (var item in requset.Roles)
                 {
-                    UserId = user.Id
+                    var roles = _db.Roles.Find(item.Id);
+                    userRole.Add(new UserRole
+                    {
+                        Role = roles,
+                        RoleId = roles.Id,
+                        User = user,
+                        UserId = user.Id
+                    });
                 }
-            };
+
+                user.UserRoles = userRole;
+
+                _db.Users.Add(user);
+                _db.SaveChanges();
+
+                return new ResultDto<ResultCreateUserDto>()
+                {
+                    IsSuccess = true,
+                    Message = "ثبت نام کاربر با موفقیت انجام شد.",
+                    Result = new ResultCreateUserDto()
+                    {
+                        UserId = user.Id
+                    }
+                };
+            }
+            catch (Exception)
+            {
+                return new ResultDto<ResultCreateUserDto>()
+                {
+                    Result = new ResultCreateUserDto()
+                    {
+                        UserId = 0,
+                    },
+                    Message = "ثبت نام کاربر با خطا مواجه شد",
+                    IsSuccess = false
+                };
+            }
         }
     }
 }

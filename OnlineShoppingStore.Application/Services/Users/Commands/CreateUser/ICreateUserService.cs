@@ -1,10 +1,10 @@
 ﻿using OnlineShoppingStore.Common.ResultDto;
-using static OnlineShoppingStore.Application.Services.Users.Commands.CreateUser.CreateUserService;
+using System.Threading;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
 {
     public interface ICreateUserService
     {
-        ResultDto<ResultCreateUserDto> ExecuteCreateUser(RequsetCreateUserDto requset);
+        ResultDto<ResultCreateUserDto> ExecuteCreateUser(RequsetCreateUserDto requset,CancellationToken cancellationToken);
     }
 }

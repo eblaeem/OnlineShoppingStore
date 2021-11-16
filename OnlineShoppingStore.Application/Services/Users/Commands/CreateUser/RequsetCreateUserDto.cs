@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using static OnlineShoppingStore.Application.Services.Users.Commands.CreateUser.CreateUserService;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
 {
