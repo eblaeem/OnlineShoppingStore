@@ -2,6 +2,7 @@
 using OnlineShoppingStore.Common.ResultDto;
 using OnlineShoppingStore.Domain.Entities.User;
 using System;
+using System.Threading;
 using System.Collections.Generic;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
@@ -15,7 +16,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
             _db = db;
         }
 
-        public ResultDto<ResultCreateUserDto> ExecuteCreateUser(RequsetCreateUserDto requset, System.Threading.CancellationToken cancellationToken)
+        public ResultDto<ResultCreateUserDto> ExecuteCreateUser(RequsetCreateUserDto requset, CancellationToken cancellationToken)
         {
             try
             {
@@ -62,7 +63,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
                     {
                         UserId = 0,
                     },
-                    Message = "ثبت نام کاربر با خطا مواجه شد",
+                    Message = "ثبت نام کاربر با خطا مواجه شد.",
                     IsSuccess = false
                 };
             }

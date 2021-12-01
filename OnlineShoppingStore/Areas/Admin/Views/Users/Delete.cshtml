@@ -1,0 +1,19 @@
+﻿@using OnlineShoppingStore.Application.Services.Users.Commands.DeleteUser
+@model OnlineShoppingStore.Common.ResultDto.ResultDto<ResultDeleteUserDto>
+ 
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>هشدار</h1>
+
+<h3>آیا از حذف کاربر مطمئن هستید؟</h3>
+<div>
+    <hr />
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Result.UserId" />
+        <input type="submit" value="حذف" class="btn btn-danger" />
+        <a class="btn btn-dark" asp-action="Index">بازگشت</a>
+    </form>
+</div>

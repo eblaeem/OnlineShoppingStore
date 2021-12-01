@@ -9,6 +9,13 @@ using OnlineShoppingStore.Application.Services.Users.Commands.CreateUser;
 using OnlineShoppingStore.Application.Services.Users.Queries.GetRoles;
 using OnlineShoppingStore.Application.Services.Users.Queries.GetUsers;
 using OnlineShoppingStore.Persistance.Context;
+using FluentValidation.AspNetCore;
+using OnlineShoppingStore.Areas.Admin.Models;
+using FluentValidation;
+using OnlineShoppingStore.Application.Services.Users.Commands.DeleteUser;
+using OnlineShoppingStore.Application.Services.Users.Commands.ChangeUserState;
+using OnlineShoppingStore.Application.Services.Users.Commands.EditUser;
+using OnlineShoppingStore.Application.Services.Users.Queries.GetUserById;
 
 namespace OnlineShoppingStore
 {
@@ -24,11 +31,19 @@ namespace OnlineShoppingStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddScoped<IDataBaseContext, DataBaseContext>();
+            services.AddControllers().AddFluentValidation(options =>
+            {
+                options.RegisterValidatorsFromAssemblyContaining<CreateViewModel>();
+            });
             services.AddScoped<IGetUsersService, GetUsersService>();
+            services.AddScoped<IGetUserByIdService, GetUserByIdService>();
             services.AddScoped<ICreateUserService, CreateUserService>();
             services.AddScoped<IGetRolesService, GetRolesService>();
-
+            services.AddScoped<IDeleteUserService, DeleteUserService>();
+            services.AddScoped<IChangeUserStateService, ChangeUserStateSerive>();
+            services.AddScoped<IEditUserService, EditUserService>();    
 
             services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(option =>
             option.UseSqlServer(Configuration.GetConnectionString("OnlineShoppingStoreDb")));
@@ -66,6 +81,8 @@ namespace OnlineShoppingStore
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
         }
     }
 }

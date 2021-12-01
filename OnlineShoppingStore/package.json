@@ -13,6 +13,7 @@
     "normalize.css": "8.0.1",
     "owl.carousel": "2.3.4",
     "perfect-scrollbar": "1.5.2",
-    "fluentvalidation-ts": "2.2.2"
+    "fluentvalidation-ts": "2.2.2",
+    "sweetalert2": "11.2.0"
   }
 }

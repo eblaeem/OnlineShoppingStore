@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using OnlineShoppingStore.Domain.Entities.Common;
+using System.Collections.Generic;
 
 namespace OnlineShoppingStore.Domain.Entities.User
 {
-    public class User
+    public class User:BaseEntity<long>
     {
-        public long Id { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public bool IsActive { get; set; }
 
 
         public ICollection<UserRole> UserRoles { get; set; }

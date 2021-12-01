@@ -21,6 +21,10 @@ namespace OnlineShoppingStore.Persistance.Context
             modelBuilder.Entity<Role>().HasData(new Role { Id = 1, Name = nameof(RoleName.Admin) });
             modelBuilder.Entity<Role>().HasData(new Role { Id = 2, Name = nameof(RoleName.Operator) });
             modelBuilder.Entity<Role>().HasData(new Role { Id = 3, Name = nameof(RoleName.Customer) });
+
+            modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
+
+            modelBuilder.Entity<User>().HasQueryFilter(x => x.IsDeleted == false);
         }
     }
 

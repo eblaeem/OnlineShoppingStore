@@ -33,9 +33,16 @@
                                             <td class="sorting_1">@item.FullName</td>
                                             <td>@item.Email</td>
                                             <td>
-                                                <button class="btn btn-outline-primary">ویرایش</button>
-                                                <button class="btn btn-outline-danger">حذف</button>
-                                                <button class="btn btn-outline-warning">غیر فعال</button>
+                                                <a href="/Admin/Users/Edit/@item.Id" class="btn btn-outline-primary">ویرایش</a>
+                                                <a href="/Admin/Users/Delete/@item.Id" class="btn btn-outline-danger">حذف</a>
+                                                @if (item.IsActive)
+                                                {
+                                                    <button class="btn btn-outline-warning" onclick="ChangeUserState('@item.Id')">غیر فعال</button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-outline-success" onclick="ChangeUserState('@item.Id')">فعال</button>
+                                                }
                                             </td>
                                         </tr>
                                     }
@@ -49,4 +56,6 @@
     </div>
 </div>
 
-
+@section scripts{
+    <script src="~/Admin/js/index/index.js"> </script>
+}
