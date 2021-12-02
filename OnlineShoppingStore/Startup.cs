@@ -16,6 +16,7 @@ using OnlineShoppingStore.Application.Services.Users.Commands.DeleteUser;
 using OnlineShoppingStore.Application.Services.Users.Commands.ChangeUserState;
 using OnlineShoppingStore.Application.Services.Users.Commands.EditUser;
 using OnlineShoppingStore.Application.Services.Users.Queries.GetUserById;
+using OnlineShoppingStore.Application.Services.DashboardInfo.Queries;
 
 namespace OnlineShoppingStore
 {
@@ -43,7 +44,8 @@ namespace OnlineShoppingStore
             services.AddScoped<IGetRolesService, GetRolesService>();
             services.AddScoped<IDeleteUserService, DeleteUserService>();
             services.AddScoped<IChangeUserStateService, ChangeUserStateSerive>();
-            services.AddScoped<IEditUserService, EditUserService>();    
+            services.AddScoped<IEditUserService, EditUserService>();
+            services.AddScoped<IGetUserCount, GetUserCount>();
 
             services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(option =>
             option.UseSqlServer(Configuration.GetConnectionString("OnlineShoppingStoreDb")));

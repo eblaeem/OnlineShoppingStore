@@ -1,0 +1,10 @@
+﻿@using OnlineShoppingStore.Areas.Admin.Views.Dashbord.Components.GetCustomerCount
+
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div> @await Component.InvokeAsync(typeof(GetUserCount))</div>
