@@ -4,6 +4,8 @@ using OnlineShoppingStore.Domain.Entities.User;
 using System;
 using System.Threading;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using OnlineShoppingStore.Common;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
 {
@@ -16,15 +18,99 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
             _db = db;
         }
 
-        public ResultDto<ResultCreateUserDto> ExecuteCreateUser(RequsetCreateUserDto requset, CancellationToken cancellationToken)
+        public ResultDto<ResultCreateUserDto> ExecuteCreateUser(RequsetCreateUserDto requset)
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(requset.FullName))
+                {
+                    return new ResultDto<ResultCreateUserDto>()
+                    {
+                        Result = new ResultCreateUserDto()
+                        {
+                            UserId = 0
+                        },
+                        IsSuccess = false,
+                        Message = "لطفاً نام و نام خانوادگی را وارد نمایید."
+                    };
+                }
+
+                if (string.IsNullOrWhiteSpace(requset.Email))
+                {
+                    return new ResultDto<ResultCreateUserDto>()
+                    {
+                        Result = new ResultCreateUserDto()
+                        {
+                            UserId = 0
+                        },
+                        IsSuccess = false,
+                        Message = "لطفاً ایمیل را وارد نمایید."
+                    };
+                }
+                
+                if (string.IsNullOrWhiteSpace(requset.Password))
+                {
+                    return new ResultDto<ResultCreateUserDto>()
+                    {
+                        Result = new ResultCreateUserDto()
+                        {
+                            UserId = 0
+                        },
+                        IsSuccess = false,
+                        Message = "لطفاً رمز عبور را وارد نمایید."
+                    };
+                }
+                
+                if (string.IsNullOrWhiteSpace(requset.RePassword))
+                {
+                    return new ResultDto<ResultCreateUserDto>()
+                    {
+                        Result = new ResultCreateUserDto()
+                        {
+                            UserId = 0
+                        },
+                        IsSuccess = false,
+                        Message = "لطفاً تکرار رمز عبور را وارد نمایید."
+                    };
+                }
+               
+                if (requset.Password != requset.RePassword)
+                {
+                    return new ResultDto<ResultCreateUserDto>()
+                    {
+                        Result = new ResultCreateUserDto()
+                        {
+                            UserId = 0
+                        },
+                        IsSuccess = false,
+                        Message = "رمز عبور و تکرار آن یکسان نمی باشد."
+                    };
+                }
+
+                var emailRegex = @"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Z0-9.-]+\.[A-Z]{2,}$";
+                var match = Regex.Match(requset.Email, emailRegex, RegexOptions.IgnoreCase);
+                if (!match.Success)
+                {
+                    return new ResultDto<ResultCreateUserDto>()
+                    {
+                        Result = new ResultCreateUserDto()
+                        {
+                            UserId = 0
+                        },
+                        IsSuccess = false,
+                        Message = "مقدار ایمیل را بصورت صحیح وارد نمایید."
+                    };
+                }
+
+                var passwordHasher = new PasswordHasher();
+                var hashedPashword = passwordHasher.HashPassword(requset.Password);
+
                 User user = new User()
                 {
                     FullName = requset.FullName,
                     Email = requset.Email,
-                    //Password = requset.Password
+                    Password = hashedPashword,
+                    IsActive = true
                 };
                 List<UserRole> userRole = new List<UserRole>();
 

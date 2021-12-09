@@ -1,0 +1,8 @@
+﻿.form-account-title label {
+    font-weight: bold;
+}
+
+.form-auth-row {
+    letter-spacing: 0.5px !important;
+    padding-right:10px !important;
+}

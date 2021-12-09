@@ -17,6 +17,9 @@ using OnlineShoppingStore.Application.Services.Users.Commands.ChangeUserState;
 using OnlineShoppingStore.Application.Services.Users.Commands.EditUser;
 using OnlineShoppingStore.Application.Services.Users.Queries.GetUserById;
 using OnlineShoppingStore.Application.Services.DashboardInfo.Queries;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace OnlineShoppingStore
 {
@@ -32,6 +35,16 @@ namespace OnlineShoppingStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options =>
+            {
+                options.LoginPath = new PathString("/");
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
+            });
 
             services.AddScoped<IDataBaseContext, DataBaseContext>();
             services.AddControllers().AddFluentValidation(options =>
@@ -71,6 +84,7 @@ namespace OnlineShoppingStore
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

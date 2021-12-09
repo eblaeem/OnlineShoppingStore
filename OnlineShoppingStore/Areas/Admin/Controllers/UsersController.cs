@@ -62,7 +62,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateViewModel model, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(CreateViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                             Id = model.RoleId
                         }
                     }
-            }, cancellationToken);
+            });
 
             return RedirectToAction("Index");
         }
