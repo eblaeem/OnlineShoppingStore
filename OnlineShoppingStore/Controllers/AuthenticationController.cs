@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShoppingStore.Application.Services.Users.Commands.CreateUser;
+using OnlineShoppingStore.Application.Services.Users.Commands.UserLogin;
 using OnlineShoppingStore.Common.RoleName;
 using OnlineShoppingStore.Models.ViewModels.AuthenticationViewModel;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -12,10 +14,12 @@ namespace OnlineShoppingStore.Controllers
     public class AuthenticationController : Controller
     {
         private readonly ICreateUserService _createUserService;
+        private readonly IUserLoginService _userLoginService;
 
-        public AuthenticationController(ICreateUserService createUserService)
+        public AuthenticationController(ICreateUserService createUserService, IUserLoginService userLoginService)
         {
             _createUserService = createUserService;
+            _userLoginService = userLoginService;
         }
 
         [HttpGet]
@@ -61,6 +65,47 @@ namespace OnlineShoppingStore.Controllers
                 HttpContext.SignInAsync(principle, properties);
             }
             return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult SignIn(SignInViewModel request)
+        {
+            var signInResult = _userLoginService.ExecuteUserLogin(new RequsetloginDto
+            {
+                Password = request.Password,
+                UserName = request.Email
+            });
+            if (signInResult.IsSuccess)
+            {
+                var claims = new List<Claim>();
+                {
+                    new Claim(ClaimTypes.Email, request.Email);
+                    new Claim(ClaimTypes.Email, request.Password);
+                }
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+                var properties = new AuthenticationProperties()
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTime.Now.AddDays(5),
+                };
+                HttpContext.SignInAsync(principal, properties);
+            }
+                return null;
+        }
+
+        public IActionResult SignOunt()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

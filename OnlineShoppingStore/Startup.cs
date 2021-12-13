@@ -5,21 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Application.Services.Users.Commands.CreateUser;
-using OnlineShoppingStore.Application.Services.Users.Queries.GetRoles;
-using OnlineShoppingStore.Application.Services.Users.Queries.GetUsers;
 using OnlineShoppingStore.Persistance.Context;
 using FluentValidation.AspNetCore;
 using OnlineShoppingStore.Areas.Admin.Models;
-using FluentValidation;
-using OnlineShoppingStore.Application.Services.Users.Commands.DeleteUser;
-using OnlineShoppingStore.Application.Services.Users.Commands.ChangeUserState;
-using OnlineShoppingStore.Application.Services.Users.Commands.EditUser;
-using OnlineShoppingStore.Application.Services.Users.Queries.GetUserById;
-using OnlineShoppingStore.Application.Services.DashboardInfo.Queries;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using System;
+using OnlineShoppingStore.Application;
 
 namespace OnlineShoppingStore
 {
@@ -35,6 +27,7 @@ namespace OnlineShoppingStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureAppServices(Configuration);
             services.AddAuthentication(options =>
             {
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -46,23 +39,17 @@ namespace OnlineShoppingStore
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
             });
 
-            services.AddScoped<IDataBaseContext, DataBaseContext>();
+            
             services.AddControllers().AddFluentValidation(options =>
             {
                 options.RegisterValidatorsFromAssemblyContaining<CreateViewModel>();
             });
-            services.AddScoped<IGetUsersService, GetUsersService>();
-            services.AddScoped<IGetUserByIdService, GetUserByIdService>();
-            services.AddScoped<ICreateUserService, CreateUserService>();
-            services.AddScoped<IGetRolesService, GetRolesService>();
-            services.AddScoped<IDeleteUserService, DeleteUserService>();
-            services.AddScoped<IChangeUserStateService, ChangeUserStateSerive>();
-            services.AddScoped<IEditUserService, EditUserService>();
-            services.AddScoped<IGetUserCount, GetUserCount>();
 
+            services.AddScoped<IDataBaseContext, DataBaseContext>();
             services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(option =>
             option.UseSqlServer(Configuration.GetConnectionString("OnlineShoppingStoreDb")));
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
