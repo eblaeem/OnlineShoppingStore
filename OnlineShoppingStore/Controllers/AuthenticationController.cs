@@ -8,6 +8,7 @@ using OnlineShoppingStore.Models.ViewModels.AuthenticationViewModel;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Controllers
 {
@@ -29,8 +30,12 @@ namespace OnlineShoppingStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignUp(SignUpViewModel request)
+        public async Task<IActionResult> SignUp(SignUpViewModel request)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
             var signUpResult = _createUserService.ExecuteCreateUser(new RequsetCreateUserDto
             {
                 FullName = request.FullName,
@@ -55,18 +60,16 @@ namespace OnlineShoppingStore.Controllers
                     new Claim(ClaimTypes.Email, request.Email),
                     new Claim(ClaimTypes.Role, RoleName.Customer),
                 };
-
-                var identity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principle = new ClaimsPrincipal(identity);
                 var properties = new AuthenticationProperties()
                 {
-                    IsPersistent = true
+                    IsPersistent = true,
                 };
-                HttpContext.SignInAsync(principle, properties);
+                await HttpContext.SignInAsync(principle, properties);
             }
             return View();
         }
-
 
         [HttpGet]
         public IActionResult SignIn()
@@ -75,8 +78,12 @@ namespace OnlineShoppingStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult SignIn(SignInViewModel request)
+        public async Task<IActionResult> SignIn(SignInViewModel request)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
             var signInResult = _userLoginService.ExecuteUserLogin(new RequsetloginDto
             {
                 Password = request.Password,
@@ -84,27 +91,30 @@ namespace OnlineShoppingStore.Controllers
             });
             if (signInResult.IsSuccess)
             {
-                var claims = new List<Claim>();
+                var claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Email, request.Email);
-                    new Claim(ClaimTypes.Email, request.Password);
-                }
+                    new Claim(ClaimTypes.NameIdentifier, signInResult.Result.UserId.ToString()),
+                    new Claim(ClaimTypes.Name, signInResult.Result.FullName),
+                    new Claim(ClaimTypes.Email, request.Email),
+                    new Claim(ClaimTypes.Role, signInResult.Result.Roles)
+                };
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
                 var properties = new AuthenticationProperties()
                 {
                     IsPersistent = true,
-                    ExpiresUtc = DateTime.Now.AddDays(5),
+                    ExpiresUtc = DateTime.Now.AddDays(1)
                 };
-                HttpContext.SignInAsync(principal, properties);
+
+                await HttpContext.SignInAsync(principal, properties);
             }
-                return null;
+
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult SignOunt()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
             return RedirectToAction("Index", "Home");
         }
     }
