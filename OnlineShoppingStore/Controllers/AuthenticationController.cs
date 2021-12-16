@@ -30,18 +30,18 @@ namespace OnlineShoppingStore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(SignUpViewModel request)
+        public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(request);
+                return View(model);
             }
             var signUpResult = _createUserService.ExecuteCreateUser(new RequsetCreateUserDto
             {
-                FullName = request.FullName,
-                Email = request.Email,
-                Password = request.Password,
-                RePassword = request.RePassword,
+                FullName = model.FullName,
+                Email = model.Email,
+                Password = model.Password,
+                RePassword = model.RePassword,
                 Roles = new List<RolesCreateUserDto>()
                 {
                     new RolesCreateUserDto
@@ -56,8 +56,8 @@ namespace OnlineShoppingStore.Controllers
                 var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.NameIdentifier, signUpResult.Result.UserId.ToString()),
-                    new Claim(ClaimTypes.Name, request.FullName),
-                    new Claim(ClaimTypes.Email, request.Email),
+                    new Claim(ClaimTypes.Name, model.FullName),
+                    new Claim(ClaimTypes.Email, model.Email),
                     new Claim(ClaimTypes.Role, RoleName.Customer),
                 };
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -78,37 +78,38 @@ namespace OnlineShoppingStore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn(SignInViewModel request)
+        public async Task<IActionResult> SignIn(SignInViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(request);
+                return View(model);
             }
             var signInResult = _userLoginService.ExecuteUserLogin(new RequsetloginDto
             {
-                Password = request.Password,
-                UserName = request.Email
+                Password = model.Password,
+                UserName = model.Email
             });
-            if (signInResult.IsSuccess)
+            if (!signInResult.IsSuccess)
             {
-                var claims = new List<Claim>()
+                ViewBag.ErrorMessage = signInResult.Message;
+                return View();
+            }
+            var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.NameIdentifier, signInResult.Result.UserId.ToString()),
                     new Claim(ClaimTypes.Name, signInResult.Result.FullName),
-                    new Claim(ClaimTypes.Email, request.Email),
+                    new Claim(ClaimTypes.Email, model.Email),
                     new Claim(ClaimTypes.Role, signInResult.Result.Roles)
                 };
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal(identity);
-                var properties = new AuthenticationProperties()
-                {
-                    IsPersistent = true,
-                    ExpiresUtc = DateTime.Now.AddDays(1)
-                };
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+            var properties = new AuthenticationProperties()
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTime.Now.AddDays(1)
+            };
 
-                await HttpContext.SignInAsync(principal, properties);
-            }
-
+            await HttpContext.SignInAsync(principal, properties);
             return RedirectToAction("Index", "Home");
         }
 
@@ -117,5 +118,7 @@ namespace OnlineShoppingStore.Controllers
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
+
+     
     }
 }

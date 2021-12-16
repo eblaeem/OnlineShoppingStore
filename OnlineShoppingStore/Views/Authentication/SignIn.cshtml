@@ -46,6 +46,7 @@
                                                 <label class="text-info float-end">ایمیل</label>
                                                 <input type="email" class="form-control" asp-for="Email">
                                                 <span asp-validation-for="Email"></span>
+                                                @ViewBag.ErrorMessage
                                             </div>
 
                                             <div class="form-account-title">
@@ -87,4 +88,5 @@
     <!-- scroll_Progress------------------------->
 
 </body>
+
 </html>
