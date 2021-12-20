@@ -19,6 +19,38 @@ namespace OnlineShoppingStore.Persistance.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.Category", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("ParentCategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentCategoryId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.Role", b =>
                 {
                     b.Property<long>("Id")
@@ -113,6 +145,15 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.ToTable("UserRoles");
                 });
 
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.Category", b =>
+                {
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.Products.Category", "ParentCategory")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("ParentCategoryId");
+
+                    b.Navigation("ParentCategory");
+                });
+
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.UserRole", b =>
                 {
                     b.HasOne("OnlineShoppingStore.Domain.Entities.User.Role", "Role")
@@ -130,6 +171,11 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.Category", b =>
+                {
+                    b.Navigation("SubCategories");
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.Role", b =>

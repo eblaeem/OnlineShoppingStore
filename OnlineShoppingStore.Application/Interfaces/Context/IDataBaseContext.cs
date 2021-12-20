@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OnlineShoppingStore.Domain.Entities.Products;
 using OnlineShoppingStore.Domain.Entities.User;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace OnlineShoppingStore.Application.Interfaces.Context
         DbSet<User> Users { get; set; }
         DbSet<Role> Roles { get; set; }
         DbSet<UserRole> UserRoles { get; set; }
+        DbSet<Category> Categories { get; set; }
 
 
         int SaveChanges(bool acceptAllChangesOnSuccess);

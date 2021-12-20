@@ -19,4 +19,8 @@
     <ProjectReference Include="..\OnlineShoppingStore.Domain\OnlineShoppingStore.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
