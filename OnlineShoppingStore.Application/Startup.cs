@@ -9,6 +9,7 @@ using OnlineShoppingStore.Application.Services.Users.Commands.UserLogin;
 using OnlineShoppingStore.Application.Services.Users.Queries.GetRoles;
 using OnlineShoppingStore.Application.Services.Users.Queries.GetUserById;
 using OnlineShoppingStore.Application.Services.Users.Queries.GetUsers;
+using System.Linq;
 
 namespace OnlineShoppingStore.Application
 {
@@ -16,6 +17,20 @@ namespace OnlineShoppingStore.Application
     {
         public static void ConfigureAppServices(this IServiceCollection services, IConfiguration configuration)
         {
+            //var allServicesBasedOnIService = typeof(IService).Assembly.GetTypes()
+            //.Where(x => typeof(IService).IsAssignableFrom(x) && !x.IsAbstract && x.IsClass);
+            //foreach (var service in allServicesBasedOnIService)
+            //{
+            //    var intf = service.GetInterfaces().FirstOrDefault(x => typeof(IService).IsAssignableFrom(x));
+            //    if (intf != null)
+            //    {
+            //        services.AddScoped(intf, service);
+            //    }
+            //    else
+            //    {
+            //        services.AddScoped(service);
+            //    }
+            //}
             services.AddScoped<IGetUsersService, GetUsersService>();
             services.AddScoped<IGetUserByIdService, GetUserByIdService>();
             services.AddScoped<ICreateUserService, CreateUserService>();

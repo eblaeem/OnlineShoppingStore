@@ -4,8 +4,8 @@
     "inputFiles": [
       "node_modules/bootstrap/dist/css/bootstrap.css",
       "node_modules/normalize.css/normalize.css",
+      "node_modules/sweetalert2/dist/sweetalert2.css",
       "node_modules/perfect-scrollbar/css/perfect-scrollbar.css"
-
     ],
     "minify": {
       "enabled": false,
@@ -18,7 +18,8 @@
       "node_modules/jquery/dist/jquery.js",
       "node_modules/materialize-css/dist/js/materialize.js",
       "node_modules/fluentvalidation-ts/dist/fluentvalidation-ts.umd.production.min.js",
-      "node_modules/sweetalert2/dist/sweetalert2.all.js"
+      "node_modules/sweetalert2/dist/sweetalert2.js",
+      "node_modules/perfect-scrollbar/dist/perfect-scrollbar.js"
 
 
     ],

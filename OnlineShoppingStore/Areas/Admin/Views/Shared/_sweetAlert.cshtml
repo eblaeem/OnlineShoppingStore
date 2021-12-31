@@ -1,0 +1,33 @@
+﻿@if ((bool)TempData["Success"] != false)
+{
+<script>
+
+    Swal.fire({
+        icon: 'success',
+        title: "تبریک!",
+        confirmButtonText: "تایید",
+        confirmButtonColor: '#66BB6A',
+        text: '@TempData["Message"]',
+        type: 'success'
+    }).then(function () {
+        window.location = "Index"
+    });
+</script>
+}
+else
+{
+<script>
+        Swal.fire({
+            title: "هشدار!",
+            confirmButtonText: "تایید",
+            confirmButtonColor: "#2196F3",
+            text: '@TempData["Message"]',
+            type: "error"
+        }).then(function () {
+            $('#FullName').val(""),
+            $('#Email').val(""),
+            $('#Password').val(""),
+            $('#RePassword').val("")
+        });
+</script>
+}

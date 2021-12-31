@@ -73,16 +73,22 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
             {
                 FullName = model.FullName,
                 Email = model.Email,
+                Password = model.Password,
+                RePassword = model.RePassword,
                 Roles = new List<RolesCreateUserDto>()
+                {
+                    new RolesCreateUserDto()
                     {
-                        new RolesCreateUserDto()
-                        {
-                            Id = model.RoleId
-                        }
+                        Id = model.RoleId
                     }
+                }
             });
 
-            return RedirectToAction("Index");
+            TempData["Success"] = result.IsSuccess;
+            TempData["Message"] = result.Message;
+
+            return View(model);
+
         }
 
         [HttpGet]
@@ -90,7 +96,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         {
             ViewBag.RoleNameSelectList = new SelectList(_getRolesService.ExecuteGetRole().Result, "Id", "Name");
             var user = _getUserByIdService.ExecuteGetUserById(id);
-            
+
             var model = new EditViewModel()
             {
                 FullName = user.Result.FullName,

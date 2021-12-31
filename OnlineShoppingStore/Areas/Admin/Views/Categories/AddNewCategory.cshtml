@@ -1,0 +1,47 @@
+﻿@model OnlineShoppingStore.Areas.Admin.Models.CategoriesViewModel.AddNewCategoryViewModel
+
+@{
+    ViewData["Title"] = "AddNewCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Adminlayout.cshtml";
+}
+
+<section class="basic-elements">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4 class="card-title mb-0">افزودن گروه محصول</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="px-3">
+                        <form class="form" method="post" asp-area="Admin"
+                              asp-controller="Categories" asp-action="AddNewCategory">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <input type="hidden" asp-for="@Model.parentId" value="@ViewBag.parentId" />
+                                            <label for="basicInput">نام دسته بندی</label>
+                                            <input type="text" class="form-control" asp-for="@Model.name">
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                        <fieldset class="form-group">
+                                            <br />
+                                            <button type="submit" class="btn btn-success col-md-12">اضافه کردن به لیست</button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
