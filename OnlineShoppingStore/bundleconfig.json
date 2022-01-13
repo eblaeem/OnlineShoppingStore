@@ -3,8 +3,7 @@
     "outputFileName": "wwwroot/Admin/css/AdminStyles.css",
     "inputFiles": [
       "node_modules/bootstrap/dist/css/bootstrap.css",
-      "node_modules/normalize.css/normalize.css",
-      "node_modules/sweetalert2/dist/sweetalert2.css",
+      "node_modules/bootstrap-extended/lib/bootstrap-extended.css",
       "node_modules/perfect-scrollbar/css/perfect-scrollbar.css"
     ],
     "minify": {
@@ -16,11 +15,14 @@
     "outputFileName": "wwwroot/Admin/js/AdminScripts.js",
     "inputFiles": [
       "node_modules/jquery/dist/jquery.js",
-      "node_modules/materialize-css/dist/js/materialize.js",
-      "node_modules/fluentvalidation-ts/dist/fluentvalidation-ts.umd.production.min.js",
-      "node_modules/sweetalert2/dist/sweetalert2.js",
-      "node_modules/perfect-scrollbar/dist/perfect-scrollbar.js"
-
+      "node_modules/@popperjs/core/dist/cjs/popper.js",
+      "node_modules/bootstrap/dist/js/bootstrap.js",
+      "node_modules/perfect-scrollbar/dist/perfect-scrollbar.js",
+      "node_modules/hammerjs/hammer.js",
+      "node_modules/jquery-blockui/jquery.blockUI.js",
+      "node_modules/jquery-match-height/dist/jquery.matchHeight.js",
+      "node_modules/jquery-sliding-menu-plugin/js/jquery-sliding-menu-plugin.js",
+      "node_modules/headroom.js/dist/headroom.js"
 
     ],
     "minify": {
@@ -31,10 +33,7 @@
   {
     "outputFileName": "wwwroot/css/SiteStyles.css",
     "inputFiles": [
-      "node_modules/bootstrap/dist/css/bootstrap.css",
-      "node_modules/owl.carousel/dist/assets/owl.carousel.css",
-      "node_modules/jquery-nice-select/css/nice-select.css"
-
+      "node_modules/bootstrap/dist/css/bootstrap.css"
     ],
     "minify": {
       "enabled": false,
@@ -45,10 +44,7 @@
     "outputFileName": "wwwroot/js/SiteScripts.js",
     "inputFiles": [
       "node_modules/jquery/dist/jquery.js",
-      "node_modules/bootstrap/dist/js/bootstrap.js",
-      "node_modules/owl.carousel/dist/owl.carousel.js",
-      "node_modules/jquery.countdown/jquery.countdown.js",
-      "node_modules/jquery-nice-select/js/jquery.nice-select.js"
+      "node_modules/bootstrap/dist/js/bootstrap.js"
     ],
     "minify": {
       "enabled": false,

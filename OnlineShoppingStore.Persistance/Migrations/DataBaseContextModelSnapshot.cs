@@ -51,6 +51,33 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Setting.CustomizerSetting", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Key");
+
+                    b.ToTable("CustomizerSettings");
+                });
+
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Setting.SettingValue", b =>
+                {
+                    b.Property<string>("SettingKey")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("SettingKey", "Value");
+
+                    b.ToTable("SettingValue");
+                });
+
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.Role", b =>
                 {
                     b.Property<long>("Id")
@@ -152,6 +179,17 @@ namespace OnlineShoppingStore.Persistance.Migrations
                         .HasForeignKey("ParentCategoryId");
 
                     b.Navigation("ParentCategory");
+                });
+
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Setting.SettingValue", b =>
+                {
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.Setting.CustomizerSetting", "Setting")
+                        .WithMany()
+                        .HasForeignKey("SettingKey")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Setting");
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.UserRole", b =>
