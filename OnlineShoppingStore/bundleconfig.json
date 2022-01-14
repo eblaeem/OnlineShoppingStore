@@ -28,7 +28,8 @@
   {
     "outputFileName": "wwwroot/css/SiteStyles.css",
     "inputFiles": [
-      "node_modules/bootstrap/dist/css/bootstrap.css"
+      "node_modules/bootstrap/dist/css/bootstrap.css",
+      "node_modules/owl.carousel/dist/assets/owl.carousel.css"
     ],
     "minify": {
       "enabled": false,
@@ -39,7 +40,8 @@
     "outputFileName": "wwwroot/js/SiteScripts.js",
     "inputFiles": [
       "node_modules/jquery/dist/jquery.js",
-      "node_modules/bootstrap/dist/js/bootstrap.js"
+      "node_modules/bootstrap/dist/js/bootstrap.js",
+      "node_modules/owl.carousel/dist/owl.carousel.js"
     ],
     "minify": {
       "enabled": false,

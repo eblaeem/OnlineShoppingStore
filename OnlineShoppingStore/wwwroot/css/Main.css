@@ -9,7 +9,7 @@ body {
     background: #f5f5f5 !important;
     direction: rtl;
     overflow-x: hidden;
-    font-family: iransans-light !important;
+    font-family: iran-sans !important;
 }
 
 ul {
@@ -18,7 +18,7 @@ ul {
 
 a {
     text-decoration: none;
-    font-family: iransans-light;
+    font-family: iran-sans;
 }
 
     a:hover {
@@ -26,17 +26,16 @@ a {
     }
 
 h1, h2, h3, h4, h5, h6, span, div {
-    font-family: iransans-light;
+    font-family: iran-sans;
 }
 
 @font-face {
-    font-family: iransans-light;
+    font-family: iran-sans;
     font-style: normal;
     font-weight: normal;
-    src: url('/admin/fonts/IRANSansWeb_UltraLight.eot');
-    src: url('/admin/fonts/IRANSansWeb_UltraLight.eot') format('embedded-opentype'), url('/admin/fonts/IRANSansWeb_UltraLight.woff2') format('woff2'), url('/admin/fonts/IRANSansWeb_UltraLight.woff') format('woff'), url('/admin/fonts/IRANSansWeb_UltraLight.ttf') format('truetype'), url('/admin/fonts/IRANSansWeb_UltraLight.svg') format('svg');
+    src: url('/admin/fonts/iran-sans/iran-sans.eot');
+    src: url('/admin/fonts/iran-sans/iran-sans.eot') format('embedded-opentype'), url('/admin/fonts/iran-sans/iran-sans.woff2') format('woff2'), url('/admin/fonts/iran-sans/iran-sans.woff') format('woff'), url('/admin/fonts/iran-sans/iran-sans.ttf') format('truetype'), url('/admin/fonts/iran-sans/iran-sans.svg') format('svg');
 }
-
 
 .pr {
     float: right !important;
@@ -1809,7 +1808,7 @@ header.header-main {
         }
 
     .countdown .countdown-value {
-        font-family: 'iransans-light';
+        font-family: 'iran-sans';
         font-weight: 400;
         width: 50px;
         height: 50px;
@@ -1822,7 +1821,7 @@ header.header-main {
     .countdown .countdown-label {
         padding-top: .25rem;
         color: #8c8c8c;
-        font-family: 'iransans-light';
+        font-family: 'iran-sans';
         font-size: .75rem;
         font-weight: 600;
     }

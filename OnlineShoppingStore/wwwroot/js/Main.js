@@ -197,32 +197,6 @@
         $('.sticky-sidebar').theiaStickySidebar();
     }
 
-    //   countdown----------------------------
-    ! function (l) {
-        var t = {
-            init: function () {
-                t.countDown()
-            },
-            countDown: function (t, i) {
-                l(".countdown").each(function () {
-                    var t = l(this),
-                        a = l(this).data("date-time"),
-                        e = l(this).data("labels");
-                    (i || t).countdown(a, function (t) {
-                        l(this).html(t.strftime('<div class="countdown-item"><div class="countdown-value">%D</div><div class="countdown-label">' + e["label-day"] + '</div></div><div class="countdown-item"><div class="countdown-value">%H</div><div class="countdown-label">' + e["label-hour"] + '</div></div><div class="countdown-item"><div class="countdown-value">%M</div><div class="countdown-label">' + e["label-minute"] + '</div></div><div class="countdown-item"><div class="countdown-value">%S</div><div class="countdown-label">' + e["label-second"] + "</div></div>"))
-                    })
-                })
-            },
-        };
-        l(function () {
-            t.init()
-        })
-    }(jQuery);
-    const cd = new Date().getFullYear() + 1
-    $('#countdown').countdown({
-        year: cd
-    });
-
     // checkout-coupon-------------------------------
     $(".showcoupon").on("click", function () {
         $(".checkout-coupon").slideToggle(200);
@@ -409,12 +383,6 @@
     }
 
 
-    var $customEvents = $('#custom-events');
-    $customEvents.lightGallery();
-
-    var colours = ['#21171A', '#81575E', '#9C5043', '#8F655D'];
-    $customEvents.on('onBeforeSlide.lg', function (event, prevIndex, index) {
-        $('.lg-outer').css('background-color', colours[index])
-    });
+  
     // product-img-----------------------------
 });
