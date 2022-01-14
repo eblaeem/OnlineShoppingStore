@@ -14,6 +14,7 @@ namespace OnlineShoppingStore.Application.Interfaces.Context
         DbSet<UserRole> UserRoles { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<CustomizerSetting> CustomizerSettings { get; set; }
+        DbSet<SettingValue> SettingValues { get; set; }
 
 
         int SaveChanges(bool acceptAllChangesOnSuccess);

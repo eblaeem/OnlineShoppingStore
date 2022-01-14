@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Common.CustomizerSettingsName;
 using OnlineShoppingStore.Common.RoleName;
 using OnlineShoppingStore.Domain.Entities.Products;
 using OnlineShoppingStore.Domain.Entities.Setting;
@@ -19,6 +18,7 @@ namespace OnlineShoppingStore.Persistance.Context
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<CustomizerSetting> CustomizerSettings { get; set; }
+        public DbSet<SettingValue> SettingValues { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,7 +31,6 @@ namespace OnlineShoppingStore.Persistance.Context
             modelBuilder.Entity<CustomizerSetting>().Property(x => x.Key).HasMaxLength(200);
             modelBuilder.Entity<SettingValue>().HasKey(x => new { x.SettingKey, x.Value });
             modelBuilder.Entity<SettingValue>().HasOne(x => x.Setting).WithMany().HasForeignKey(x => x.SettingKey).IsRequired();
-
         }
 
         private void SeedData(ModelBuilder modelBuilder)
