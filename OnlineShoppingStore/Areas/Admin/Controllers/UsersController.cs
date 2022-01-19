@@ -101,6 +101,8 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
             {
                 FullName = user.Result.FullName,
                 Email = user.Result.Email,
+                Password = user.Result.Passwrod,
+                RePassword = user.Result.RePasswrod,
                 RoleId = user.Result.RoleId
             };
             return View(model);
@@ -120,6 +122,8 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Id = model.Id,
                 FullName = model.FullName,
                 Email = model.Email,
+                Password= model.Password,
+                RePassword = model.RePassword,
                 Roles = new List<RolesCreateUserDto>()
                 {
                     new RolesCreateUserDto()
@@ -132,27 +136,10 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-
-        [HttpGet]
-        public IActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new StatusCodeResult((int)HttpStatusCode.BadRequest);
-            }
-            var user = _deleteUserService.ExecuteDeleteUser((long)id);
-            if (user == null)
-            {
-                return StatusCode(404);
-            }
-            return View(user);
-        }
-
         [HttpPost]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(long userId)
         {
-            _deleteUserService.ExecuteDeleteUser(id);
-            return RedirectToAction("Index");
+            return Json(_deleteUserService.ExecuteDeleteUser(userId));
         }
 
         [HttpPost]

@@ -13,12 +13,12 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.DeleteUser
         {
             _db = db;
         }
-        ResultDto<ResultDeleteUserDto> IDeleteUserService.ExecuteDeleteUser(long id)
+        ResultDto IDeleteUserService.ExecuteDeleteUser(long userId)
         {
-            var user = _db.Users.Find(id);
+            var user = _db.Users.Find(userId);
             if (user == null)
             {
-                return new ResultDto<ResultDeleteUserDto>
+                return new ResultDto
                 {
                     IsSuccess = false,
                     Message = "کاربری با چنین مشخصات یافت نشد."
@@ -27,11 +27,10 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.DeleteUser
             user.DeletedTime = DateTime.Now;
             user.IsDeleted = true;
             _db.SaveChanges();
-            return new ResultDto<ResultDeleteUserDto>
+            return new ResultDto
             {
-                Result = new ResultDeleteUserDto { UserId = id },
                 Message = "کاربر با موفقیت حذف شد.",
-                IsSuccess = true,
+                IsSuccess = true
             };
         }
     }

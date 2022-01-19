@@ -33,6 +33,8 @@ namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUserById
                 {
                     FullName = user.FullName,
                     Email = user.Email,
+                    Passwrod = user.Password,
+                    RePasswrod = user.Password,
                     RoleId = user.UserRoles.FirstOrDefault().RoleId,
                 }
             };

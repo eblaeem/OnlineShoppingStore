@@ -3,6 +3,7 @@
     "outputFileName": "wwwroot/Admin/css/AdminStyles.css",
     "inputFiles": [
       "node_modules/bootstrap/dist/css/bootstrap.css",
+      "node_modules/sweetalert2/dist/sweetalert2.css",
       "wwwroot/Admin/css/main/components.css",
       "wwwroot/Admin/css/main/main-components.css",
       "wwwroot/Admin/css/main/vertical-menu.css"
@@ -18,7 +19,11 @@
       "wwwroot/Admin/js/main/vendor.js",
       "wwwroot/Admin/js/main/app-menu.min.js",
       "wwwroot/Admin/js/main/app.min.js",
-      "wwwroot/Admin/js/main/customizer.min.js"
+      "wwwroot/Admin/js/main/customizer.min.js",
+      "node_modules/sweetalert2/dist/sweetalert2.js",
+      "node_modules/jquery-validation/dist/jquery.validate.js",
+      "node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
+      "node_modules/fluentvalidation-ts/dist/fluentvalidation-ts.cjs.development.js"
     ],
     "minify": {
       "enabled": false,
