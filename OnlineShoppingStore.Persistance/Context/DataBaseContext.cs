@@ -43,6 +43,7 @@ namespace OnlineShoppingStore.Persistance.Context
         private void ApplyQueryFilter(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<Category>().HasQueryFilter(x=>x.IsDeleted == false);
         }
     }
 

@@ -6,7 +6,7 @@
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#7cacbe',
-        confirmButtonText: 'بله ، کاربر حذف شود',
+        confirmButtonText: 'بله',
         cancelButtonText: 'خیر'
     }).then((result) => {
         if (result.value) {
@@ -54,7 +54,7 @@
 function ChangeUserState(userId) {
     Swal.fire({
         title: 'تغییر وضعیت کاربر',
-        text: "کاربر گرامی از تغییر وضعیت کاربر مطمئن هستید؟",
+        text: "آیا از تغییر وضعیت کاربر مطمئن هستید؟",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',

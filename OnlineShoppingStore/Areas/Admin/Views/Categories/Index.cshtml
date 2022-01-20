@@ -52,7 +52,7 @@
                                                     {
                                                         <a href="~/admin/categories/index?parentId=@item.Id" class="btn btn-info">مشاهده لیست زیر گروه ها </a>
                                                     }
-
+                                                    <button class="btn btn-outline-danger" onclick="DeleteCategory('@item.Id')">حذف</button>
                                                 </td>
                                             </tr>
                                         }
@@ -66,3 +66,7 @@
         </div>
     </div>
 </section>
+
+@section scripts{
+    <script src="~/Admin/js/category-controller/index.js"></script>
+}
