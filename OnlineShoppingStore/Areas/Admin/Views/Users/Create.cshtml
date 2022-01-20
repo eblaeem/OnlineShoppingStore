@@ -92,8 +92,9 @@
     @if (TempData["Message"] != null)
     {
         <partial name="_SweetAlert" />
-        TempData["Success"] = null;
+        TempData["IsSuccess"] = null;
         TempData["Message"] = null;
+        
     }
 }
 

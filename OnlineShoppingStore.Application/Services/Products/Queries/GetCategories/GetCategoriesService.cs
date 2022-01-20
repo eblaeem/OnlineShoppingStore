@@ -30,7 +30,7 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategorie
                     ParentCategoryDto
                     {
                         Id = c.Id,
-                        name = c.Name,
+                        Name = c.Name,
                     }
                     :null,
                     HasChild = c.SubCategories.Count() > 0 ? true : false,
@@ -40,7 +40,7 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategorie
             return new ResultDto<ICollection<CategoriesDto>>()
             {
                 IsSuccess = true,
-                Message = "",
+                Message = "لیست با موفقیت ثبت شد.",
                 Result = categories,
             };
         }

@@ -84,7 +84,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 }
             });
 
-            TempData["Success"] = result.IsSuccess;
+            TempData["IsSuccess"] = result.IsSuccess;
             TempData["Message"] = result.Message;
 
             return View(model);

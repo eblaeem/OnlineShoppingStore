@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="main-menu menu-static menu-light menu-accordion menu-shadow"
+     data-scroll-to-active="true" style="touch-action: none; user-select: none;
+                -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class="nav-item has-sub">
+                <a href="javascript: void(0);">
+                    <i class="la la-home"></i>
+                    <span class="menu-title">پنل مدیریت</span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" asp-area="Admin"
+                           asp-controller="Home" asp-action="Dashboard">
+                            <i></i>
+                            <span>داشبورد</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-sub">
+                <a href="javascript: void(0);">
+                    <i class="la la-user"></i>
+                    <span class="menu-title">مدیریت کاربران</span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" asp-area="Admin"
+                           asp-controller="Users" asp-action="Create">
+                            <i></i>
+                            <span>ایجاد کاربر جدید</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="menu-item" asp-area="Admin"
+                           asp-controller="Users" asp-action="Index">
+                            <i></i>
+                            <span>لیست کاربران</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-sub">
+                <a href="javascript: void(0);">
+                    <i class="la la-border-none"></i>
+                    <span class="menu-title">مدیریت محصولات</span>
+                </a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item" asp-area="Admin"
+                           asp-controller="Categories" asp-action="AddNewCategory">
+                            <i></i>
+                            <span>ایجاد گروه جدید</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="menu-item" asp-area="Admin"
+                           asp-controller="Categories" asp-action="Index">
+                            <i></i>
+                            <span>لیست گروه محصولات</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</div>

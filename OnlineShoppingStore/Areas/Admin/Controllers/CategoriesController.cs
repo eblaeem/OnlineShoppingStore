@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 namespace OnlineShoppingStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class Categories : Controller
+    public class CategoriesController : Controller
     {
         private readonly IFacadDesignPattern _facad;
 
-        public Categories(IFacadDesignPattern facad)
+        public CategoriesController(IFacadDesignPattern facad)
         {
             _facad = facad;
         }
 
-        public async Task<IActionResult> Index(long? paranretId)
+        public async Task<IActionResult> Index(long? parentId)
         {
-            return View(_facad.GetCategoriesService.ExecuteIGetCategoriesService(paranretId).Result);
+            return View(_facad.GetCategoriesService.ExecuteIGetCategoriesService(parentId).Result);
         }
 
         [HttpGet]
@@ -30,8 +30,12 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewCategory(AddNewCategoryViewModel model)
         {
-            var result =_facad.AddNewProductService.ExecuteAddNewProduct(model.parentId, model.name);
-            return View(result);
+            var result =_facad.AddNewCategoryService.ExecuteAddNewProduct(model.parentId, model.name);
+
+            TempData["Message"] = result.Message;
+            TempData["IsSuccess"] = result.IsSuccess;
+
+            return View(model);
         }
 
     }

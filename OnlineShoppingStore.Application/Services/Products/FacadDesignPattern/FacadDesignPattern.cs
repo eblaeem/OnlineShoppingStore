@@ -12,12 +12,12 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
             _db = db;
         }
 
-        private AddNewProductSerive _addNewProductService;
+        private AddNewCategoryService _addNewCategorytService;
         private GetCategoriesService _getCategoriesService;
 
-        public AddNewProductSerive AddNewProductService
+        public AddNewCategoryService AddNewCategoryService
         {
-            get { return _addNewProductService ??= new AddNewProductSerive(_db); }
+            get { return _addNewCategorytService ??= new AddNewCategoryService(_db); }
         }
 
         public GetCategoriesService GetCategoriesService

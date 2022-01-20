@@ -4,7 +4,7 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
 {
     public interface IFacadDesignPattern
     {
-        AddNewProductSerive AddNewProductService { get; }
+        AddNewCategoryService AddNewCategoryService { get; }
         GetCategoriesService GetCategoriesService { get; }
     }
 }

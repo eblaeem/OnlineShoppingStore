@@ -33,7 +33,7 @@ namespace OnlineShoppingStore
             //Add Services With Startup ExentionMethod 
             services.ConfigureAppServices(Configuration);
 
-            //Add Services With FacadeDesignPattern
+            //Add Services With FacadeDesignPattern, FacadeInjection
             services.AddScoped<IFacadDesignPattern, FacadDesignPattern>();
 
             services.AddAuthentication(options =>

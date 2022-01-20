@@ -2,7 +2,7 @@
 
 namespace OnlineShoppingStore.Application.Services.Products
 {
-    public interface IAddNewProductService
+    public interface IAddNewCategoryService
     {
         ResultDto ExecuteAddNewProduct(long? ParentId, string Name);
     }

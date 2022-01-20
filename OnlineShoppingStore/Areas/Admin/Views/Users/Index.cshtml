@@ -6,57 +6,60 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="content-wrapper">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="">
-                    <h4 class="card-title">لیست کاربران</h4>
+<section class="basic-elements">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="">
+                        <h4 class="card-title">لیست کاربران</h4>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body collapse show">
-                <div class="card-block card-dashboard">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr role="row">
-                                        <th>نام</th>
-                                        <th>ایمیل</th>
-                                        <th>تاریخ ثبت</th>
-                                        <th>عملیات</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.Users)
-                                    {
+
+                <div class="card-body collapse show">
+                    <div class="card-block card-dashboard">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
                                         <tr role="row">
-                                            <td class="sorting_1">@item.FullName</td>
-                                            <td>@item.Email</td>
-                                            <td>@item.CreateDate</td>
-                                            <td>
-                                                <a href="/Admin/Users/Edit/@item.Id" class="btn btn-outline-primary">ویرایش</a>
-                                                <button class="btn btn-outline-danger" onclick="DeleteUser('@item.Id')">حذف</button>
-                                                @if (item.IsActive)
-                                                {
-                                                    <button class="btn btn-outline-warning" onclick="ChangeUserState('@item.Id')">غیر فعال</button>
-                                                }
-                                                else
-                                                {
-                                                    <button class="btn btn-outline-success" onclick="ChangeUserState('@item.Id')">فعال</button>
-                                                }
-                                            </td>
+                                            <th>نام</th>
+                                            <th>ایمیل</th>
+                                            <th>تاریخ ثبت</th>
+                                            <th>عملیات</th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Users)
+                                        {
+                                            <tr role="row">
+                                                <td class="sorting_1">@item.FullName</td>
+                                                <td>@item.Email</td>
+                                                <td>@item.CreateDate</td>
+                                                <td>
+                                                    <a href="/Admin/Users/Edit/@item.Id" class="btn btn-outline-primary">ویرایش</a>
+                                                    <button class="btn btn-outline-danger" onclick="DeleteUser('@item.Id')">حذف</button>
+                                                    @if (item.IsActive)
+                                                    {
+                                                        <button class="btn btn-outline-warning" onclick="ChangeUserState('@item.Id')">غیر فعال</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button class="btn btn-outline-success" onclick="ChangeUserState('@item.Id')">فعال</button>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 @section scripts{
     <script src="~/Admin/js/index/index.js"></script>

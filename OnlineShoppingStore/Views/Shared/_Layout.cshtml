@@ -8,7 +8,7 @@
     <link href="~/css/SiteStyles.css" rel="stylesheet" />
     <link href="~/css/Main.css" rel="stylesheet" />
     <link href="~/css/Responsive.css" rel="stylesheet" />
-    
+
 </head>
 <body>
     <!-- header-------------------------------->
@@ -21,7 +21,7 @@
                             <div class="col-lg-3 pr">
                                 <div class="header-logo row text-right">
                                     <a href="#">
-                                        <img src="~/images/logo.png" alt="دیجی اسمارت">
+                                        <img src="~/images/logo.png" alt="کالا مارکت">
                                     </a>
                                 </div>
                             </div>
@@ -46,28 +46,43 @@
                             <div class="header-account text-left">
                                 <div class="d-block">
                                     <div class="account-box">
-                                        <div class="nav-account d-block pl">
-                                            <span class="icon-account">
-                                                <img src="~/images/man.png" class="avator">
-                                            </span>
-                                            <span class="title-account">حساب کاربری</span>
-                                            <div class="dropdown-menu">
-                                                <ul class="account-uls mb-0">
-                                                    <li class="account-item">
-                                                        <a href="#" class="account-link">پنل کاربری</a>
-                                                    </li>
-                                                    <li class="account-item">
-                                                        <a href="#" class="account-link">سفارشات من</a>
-                                                    </li>
-                                                    <li class="account-item">
-                                                        <a href="#" class="account-link">تنظیمات</a>
-                                                    </li>
-                                                    <li class="account-item">
-                                                        <a href="#" class="account-link">خروج</a>
-                                                    </li>
-                                                </ul>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <div class="nav-account d-block pl">
+                                                <span class="icon-account">
+                                                    <img src="~/images/man.png" class="avator">
+                                                </span>
+                                                <span class="title-account">@User.Identity.Name</span>
+                                                <div class="dropdown-menu">
+                                                    <ul class="account-uls mb-0">
+                                                        <li class="account-item">
+                                                            <a href="#" class="account-link">پنل کاربری</a>
+                                                        </li>
+                                                        <li class="account-item">
+                                                            <a href="#" class="account-link">سفارشات من</a>
+                                                        </li>
+                                                        <li class="account-item">
+                                                            <a href="#" class="account-link">تنظیمات</a>
+                                                        </li>
+                                                        <li class="account-item">
+                                                            <a href="~/authentication/SignOunt" class="account-link">خروج</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="nav-account d-block pl">
+                                                <a href="~/authentication/signup">
+                                                    <span class="title-account">ثبت نام</span>
+                                                </a>
+
+                                                <a href="~/authentication/signin">
+                                                    <span class="title-account">ورود</span>
+                                                </a>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -1090,7 +1105,6 @@
         </svg>
     </div>
     <!-- scroll_Progress------------------------->
-
     <!-- file js---------------------------------------------------->
     <script src="~/js/SiteScripts.js"></script>
     <script src="~/js/Main.js"></script>

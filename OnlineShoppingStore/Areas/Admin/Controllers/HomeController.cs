@@ -3,7 +3,7 @@
 namespace OnlineShoppingStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class Home : Controller
+    public class HomeController : Controller
     {
         public IActionResult Dashboard()
         {

@@ -4,11 +4,11 @@ using OnlineShoppingStore.Domain.Entities.Products;
 
 namespace OnlineShoppingStore.Application.Services.Products
 {
-    public class AddNewProductSerive : IAddNewProductService
+    public class AddNewCategoryService : IAddNewCategoryService
     {
         private readonly IDataBaseContext _db;
 
-        public AddNewProductSerive(IDataBaseContext db)
+        public AddNewCategoryService(IDataBaseContext db)
         {
             _db = db;
         }
