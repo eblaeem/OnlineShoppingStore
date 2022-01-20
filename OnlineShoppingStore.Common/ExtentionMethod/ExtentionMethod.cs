@@ -8,10 +8,10 @@ namespace OnlineShoppingStore.Common
     {
         public static string ToshamsiDate(this DateTime date)
         {
-            CultureInfo info = new("fa-Ir");
+            CultureInfo info = new("fa-IR");
             info.DateTimeFormat.Calendar = new PersianCalendar();
             Thread.CurrentThread.CurrentCulture = info;
-            var str = date.ToString("yyyy/MM/dd HH:mm:ss");
+            var str = date.ToString("HH:mm:ss yyyy/MM/dd");
             return str;
         }
     }

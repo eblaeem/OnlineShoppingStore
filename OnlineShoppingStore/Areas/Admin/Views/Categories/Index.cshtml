@@ -26,6 +26,7 @@
                                         <tr role="row">
                                             <th>دسته بندی</th>
                                             <th>نام گروه اصلی</th>
+                                            <th>تاریخ ثبت</th>
                                             <th>عملیات</th>
                                         </tr>
                                     </thead>
@@ -42,6 +43,7 @@
 
                                                     <text> @parent </text>
                                                 </td>
+                                                <td>@item.CreateDate</td>
                                                 <td>
                                                     @if (item.Parent == null)
                                                     {

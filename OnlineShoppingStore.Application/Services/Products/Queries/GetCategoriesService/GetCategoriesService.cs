@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShoppingStore.Application.Interfaces.Context;
+using OnlineShoppingStore.Common;
 using OnlineShoppingStore.Common.ResultDto;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategorie
                     }
                     :null,
                     HasChild = c.SubCategories.Count() > 0 ? true : false,
+                    CreateDate = c.InsertTime.ToshamsiDate()
                 }).ToList();
 
 

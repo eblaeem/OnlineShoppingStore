@@ -6,6 +6,7 @@
         public string Name { get; set; }
         public bool HasChild { get; set; }
         public ParentCategoryDto Parent { get; set; }
+        public string CreateDate { get; set; }
 
     }
 }
