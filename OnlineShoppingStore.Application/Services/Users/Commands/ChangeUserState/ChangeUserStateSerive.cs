@@ -25,7 +25,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.ChangeUserStat
             }
             user.IsActive = !user.IsActive;
             _db.SaveChanges();
-            string userState = user.IsActive == true ? "غیرفعال" : "فعال";
+            string userState = user.IsActive == true ? "فعال" : "غیرفعال";
             return new ResultDto()
             {
                 IsSuccess = true,
