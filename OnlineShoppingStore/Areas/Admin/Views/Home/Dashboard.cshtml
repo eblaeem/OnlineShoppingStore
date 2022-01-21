@@ -1,4 +1,5 @@
-﻿@using OnlineShoppingStore.Areas.Admin.Views.Dashbord.Components.GetCustomerCount
+﻿@using OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetCategoriesCount
+@using OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetUsersCount
 
 
 @{
@@ -7,4 +8,7 @@
 }
 
 
-<div> @await Component.InvokeAsync(typeof(GetUserCount))</div>
+<div class="row">
+    @await Component.InvokeAsync(typeof(GetUsersCount))
+    @await Component.InvokeAsync(typeof(GetCategoriesCount))
+</div>

@@ -1,0 +1,26 @@
+﻿@model OnlineShoppingStore.Application.Services.DashboardInfo.Queries.Categories.CatCountResultDto
+@{
+    Layout = null;
+}
+
+<div class="col-xl-3 col-lg-6 col-12">
+    <div class="card pull-up">
+        <div class="card-content">
+            <div class="card-body">
+                <div class="media d-flex">
+                    <div class="media-body text-left">
+                        <h6>تعداد گروه محصولات:</h6>
+                        <h3 class="text-success">@Model.CatCount</h3>
+                    </div>
+                    <div>
+                        <i class="font-large-2 la la-window-maximize text-success"></i>
+                    </div>
+                </div>
+                <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                    <div class="bg-success progress-bar" role="progressbar"
+                         style="width: 30%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

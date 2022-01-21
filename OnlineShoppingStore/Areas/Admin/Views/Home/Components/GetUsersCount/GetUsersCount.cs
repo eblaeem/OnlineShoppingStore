@@ -2,13 +2,13 @@
 using OnlineShoppingStore.Application.Services.DashboardInfo.Queries;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Areas.Admin.Views.Dashbord.Components.GetCustomerCount
+namespace OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetUsersCount
 {
-    public class GetUserCount : ViewComponent
+    public class GetUsersCount : ViewComponent
     {
         private readonly IGetUserCount _getCustomerCount;
 
-        public GetUserCount(IGetUserCount getCustomerCount)
+        public GetUsersCount(IGetUserCount getCustomerCount)
         {
             _getCustomerCount = getCustomerCount;
         }
