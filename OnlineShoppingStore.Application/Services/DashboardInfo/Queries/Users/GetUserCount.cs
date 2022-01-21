@@ -13,7 +13,7 @@ namespace OnlineShoppingStore.Application.Services.DashboardInfo.Queries
         }
         public ResultGetUserCountDto ExecuteGetUserCount()
         {
-            var count =  _db.Users.Count();
+            var count =  _db.Users.Where(u=>u.IsActive == true && u.IsDeleted != true).Count();
             return new ResultGetUserCountDto { UserCount = count };
         }
     }
