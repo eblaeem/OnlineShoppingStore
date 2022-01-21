@@ -38,7 +38,7 @@
                                                 <td>@item.CreateDate</td>
                                                 <td>
                                                     <a href="/Admin/Users/Edit/@item.Id" class="btn btn-outline-primary">ویرایش</a>
-                                                    <button class="btn btn-outline-danger" onclick="DeleteUser('@item.Id')">حذف</button>
+                                                    <button class="btn btn-outline-danger" onclick="DeleteUser('@item.Id','@item.FullName')">حذف</button>
                                                     @if (item.IsActive)
                                                     {
                                                         <button class="btn btn-outline-warning" onclick="ChangeUserState('@item.Id')">غیر فعال</button>

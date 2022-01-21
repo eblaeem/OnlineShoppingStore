@@ -1,7 +1,7 @@
-﻿function DeleteUser(userId) {
+﻿function DeleteUser(userId,fullName) {
     swal.fire({
         title: 'حذف کاربر',
-        text: "آیا از حذف کاربر مطمئن هستید؟",
+        text: `آیا از حذف ${fullName} مطمئن هستید؟`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',

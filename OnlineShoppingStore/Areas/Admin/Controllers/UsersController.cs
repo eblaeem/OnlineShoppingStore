@@ -111,7 +111,6 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditViewModel model, CancellationToken cancellationToken)
         {
-            //var user = _editUserService.ExecuteEditUser(model);
             if (!ModelState.IsValid)
             {
                 return View(model);
