@@ -1,7 +1,7 @@
-﻿function DeleteCategory(id) {
+﻿function DeleteCategory(id,name) {
     swal.fire({
         title: 'حذف گروه',
-        text: "آیا از حذف گروه مطمئن هستید؟",
+        text: `آیا از حذف گروه ${name} مطمئن هستید؟`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',

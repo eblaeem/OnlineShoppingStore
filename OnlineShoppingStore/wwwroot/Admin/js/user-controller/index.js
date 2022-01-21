@@ -51,10 +51,10 @@
     })
 }
 
-function ChangeUserState(userId) {
+function ChangeUserState(userId,fullName) {
     Swal.fire({
         title: 'تغییر وضعیت کاربر',
-        text: "آیا از تغییر وضعیت کاربر مطمئن هستید؟",
+        text: `آیا از تغییر وضعیت ${fullName} مطمئن هستید؟`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',

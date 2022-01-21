@@ -25,12 +25,11 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.ChangeUserStat
             }
             user.IsActive = !user.IsActive;
             _db.SaveChanges();
-            string fullName = user.FullName;
             string userState = user.IsActive == true ? "فعال" : "غیرفعال";
             return new ResultDto()
             {
                 IsSuccess = true,
-                Message = $"کاربر {fullName} با موفقیت {userState} شد."
+                Message = $"کاربر با موفقیت {userState} شد."
             };   
         }
     }

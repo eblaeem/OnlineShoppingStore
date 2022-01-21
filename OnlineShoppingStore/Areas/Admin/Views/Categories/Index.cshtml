@@ -54,7 +54,7 @@
                                                         <a href="~/admin/categories/index?parentId=@item.Id" class="btn btn-info">مشاهده لیست زیر گروه ها </a>
                                                     }
                                                     <a href="~/Admin/categories/edit?id=@item.Id" class="btn btn-outline-primary">ویرایش</a>
-                                                    <button class="btn btn-outline-danger" onclick="DeleteCategory('@item.Id')">حذف</button>
+                                                    <button class="btn btn-outline-danger" onclick="DeleteCategory('@item.Id', '@item.Name')">حذف</button>
                                                 </td>
                                             </tr>
                                         }
