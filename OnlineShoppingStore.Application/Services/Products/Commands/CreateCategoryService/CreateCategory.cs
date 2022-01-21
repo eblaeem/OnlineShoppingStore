@@ -4,15 +4,15 @@ using OnlineShoppingStore.Domain.Entities.Products;
 
 namespace OnlineShoppingStore.Application.Services.Products
 {
-    public class AddNewCategoryService : IAddNewCategoryService
+    public class CreateCategoryService : ICreateCategoryService
     {
         private readonly IDataBaseContext _db;
 
-        public AddNewCategoryService(IDataBaseContext db)
+        public CreateCategoryService(IDataBaseContext db)
         {
             _db = db;
         }
-        public ResultDto ExecuteAddNewProduct(long? ParentId, string Name)
+        public ResultDto ExecuteCreateCategory(long? ParentId, string Name)
         {
             if (string.IsNullOrEmpty(Name))
             {

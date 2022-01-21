@@ -2,8 +2,8 @@
 
 namespace OnlineShoppingStore.Application.Services.Products
 {
-    public interface IAddNewCategoryService
+    public interface ICreateCategoryService
     {
-        ResultDto ExecuteAddNewProduct(long? ParentId, string Name);
+        ResultDto ExecuteCreateCategory(long? ParentId, string Name);
     }
 }

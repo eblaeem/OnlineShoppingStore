@@ -1,0 +1,63 @@
+﻿@model OnlineShoppingStore.Areas.Admin.Models.EditCategoryViewModel.EditCategoryViewModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Adminlayout.cshtml";
+}
+
+<section class="basic-elements">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        @if (ViewBag.parentId != null)
+                        {
+                            <h4 class="card-title mb-0">افزودن زیرگروه محصول</h4>
+                        }
+                        else
+                        {
+                            <h4 class="card-title mb-0">افزودن گروه محصول</h4>
+                        }
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="px-3">
+                        <form action="edit" method="post">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                        <fieldset class="form-group position-relative has-icon-left">
+                                            <input type="hidden" asp-for="@Model.Id" />
+                                            <input type="text" class="form-control mb-1"
+                                                   placeholder="نام دسته بندی" asp-for="@Model.Name">
+                                            <div class="form-control-position">
+                                                <i class="ft-grid fa-2x text-bitbucket"></i>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mt-3">
+                                        <fieldset class="form-group">
+                                            <button type="submit" class="btn btn-bitbucket col-md-2" onclick="editCategory('@Model.Id')">ویرایش</button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts
+{
+    @if (TempData["Message"] != null)
+    {
+        <partial name="_SweetAlert" />
+        TempData["IsSuccess"] = null;
+        TempData["Message"] = null;
+
+    }
+}

@@ -1,7 +1,7 @@
-﻿@model OnlineShoppingStore.Areas.Admin.Models.CategoriesViewModel.AddNewCategoryViewModel
+﻿@model OnlineShoppingStore.Areas.Admin.Models.CategoriesViewModel.CreateCategoryViewModel
 
 @{
-    ViewData["Title"] = "AddNewCategory";
+    ViewData["Title"] = "create";
     Layout = "~/Areas/Admin/Views/Shared/_Adminlayout.cshtml";
 }
 
@@ -13,25 +13,26 @@
                     <div class="card-title-wrap bar-success">
                         @if (ViewBag.parentId != null)
                         {
-                            <h4 class="card-title mb-0">افزودن زیرگروه محصول</h4>
+                            <h4 class="card-title mb-0">ایجاد زیر گروه جدید</h4>
+
                         }
                         else
                         {
-                            <h4 class="card-title mb-0">افزودن گروه محصول</h4>
+                            <h4 class="card-title mb-0">ایجاد گروه جدید</h4>
                         }
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="px-3">
                         <form class="form" method="post" asp-area="Admin"
-                              asp-controller="Categories" asp-action="AddNewCategory">
+                              asp-controller="Categories" asp-action="create">
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
                                         <fieldset class="form-group position-relative has-icon-left">
                                             <input type="hidden" asp-for="@Model.parentId" value="@ViewBag.parentId" />
                                             <input type="text" class="form-control mb-1"
-                                                   placeholder="نام دسته بندی" asp-for="@Model.name">
+                                                   placeholder="نام دسته بندی" asp-for="@Model.Name">
                                             <div class="form-control-position">
                                                 <i class="ft-grid fa-2x text-bitbucket"></i>
                                             </div>

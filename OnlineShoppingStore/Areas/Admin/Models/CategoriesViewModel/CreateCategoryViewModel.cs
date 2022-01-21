@@ -1,8 +1,8 @@
 ﻿namespace OnlineShoppingStore.Areas.Admin.Models.CategoriesViewModel
 {
-    public class AddNewCategoryViewModel
+    public class CreateCategoryViewModel
     {
         public long? parentId { get; set; }
-        public string name { get; set; }
+        public string Name { get; set; }
     }
 }

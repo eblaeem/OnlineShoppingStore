@@ -1,6 +1,8 @@
 ﻿using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Application.Services.Products.Commands.DeleteCategoryService;
+using OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetCategories;
+using OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryByIdService;
 
 namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
 {
@@ -13,13 +15,15 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
             _db = db;
         }
 
-        private AddNewCategoryService _addNewCategorytService;
+        private GetCategoryById _getCategoryById;
+        private CreateCategoryService _createCategorytService;
         private GetCategoriesService _getCategoriesService;
         private DeleteCategoryService _deleteCategoryService;
+        private EditCategoryService _editCategoryService;
 
-        public AddNewCategoryService AddNewCategoryService
+        public CreateCategoryService CreateCategoryService
         {
-            get { return _addNewCategorytService ??= new AddNewCategoryService(_db); }
+            get { return _createCategorytService ??= new CreateCategoryService(_db); }
         }
 
         public GetCategoriesService GetCategoriesService
@@ -30,6 +34,16 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
         public DeleteCategoryService DeleteCategoryService
         {
             get { return _deleteCategoryService ??= new DeleteCategoryService(_db); }
+        }
+
+        public EditCategoryService EditCategoryService
+        {
+            get { return _editCategoryService ??= new EditCategoryService(_db); }
+        }
+
+        public GetCategoryById GetGetCategoryById
+        {
+            get { return _getCategoryById ??= new GetCategoryById(_db); }
         }
     }
 }
