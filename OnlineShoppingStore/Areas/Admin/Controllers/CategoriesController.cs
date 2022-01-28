@@ -41,7 +41,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(long id)
+        public IActionResult Delete(long id)
         {
             return Json(_facad.DeleteCategoryService.ExecuteDeleteCategory(id));
         }

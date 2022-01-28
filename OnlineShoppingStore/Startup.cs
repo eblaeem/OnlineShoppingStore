@@ -54,7 +54,7 @@ namespace OnlineShoppingStore
             });
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(UnicodeRanges.All));
             services.AddScoped<IDataBaseContext, DataBaseContext>();
-            services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(option =>
+            services.AddDbContext<DataBaseContext>(option =>
             option.UseSqlServer(Configuration.GetConnectionString("OnlineShoppingStoreDb")));
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 

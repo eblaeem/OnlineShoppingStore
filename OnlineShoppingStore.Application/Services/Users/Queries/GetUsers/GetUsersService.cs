@@ -1,7 +1,5 @@
 ﻿using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Common;
-using System;
-using System.Globalization;
 using System.Linq;
 
 namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUsers
@@ -23,8 +21,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUsers
                     p => p.FullName.Contains(requst.SearchKey) &&
                     p.Email.Contains(requst.SearchKey));
             }
-            PersianCalendar pc = new PersianCalendar();
-            var userList = users.ToPaged(requst.Page, 20, out int rowsCount).Select(p => new GetUsersDto
+            var userList = users.ToPaged(requst.Page, 20, out int rowsCount).Where(p=>!p.IsDeleted).Select(p => new GetUsersDto
             {
                 CreateDate = p.InsertTime.ToshamsiDate(),
                 FullName = p.FullName,

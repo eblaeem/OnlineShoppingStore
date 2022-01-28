@@ -21,7 +21,7 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategorie
             var categories = _db.Categories
                 .Include(c => c.ParentCategory)
                 .Include(c => c.SubCategories)
-                .Where(c => c.ParentCategoryId == parentId)
+                .Where(c => c.ParentCategoryId == parentId && c.IsDeleted == false)
                 .ToList()
                 .Select(c => new CategoriesDto
                 {
@@ -30,8 +30,8 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategorie
                     Parent = c.ParentCategory != null ? new
                     ParentCategoryDto
                     {
-                        Id = c.Id,
-                        Name = c.Name,
+                        Id = c.ParentCategory.Id,
+                        Name = c.ParentCategory.Name,
                     }
                     :null,
                     HasChild = c.SubCategories.Count() > 0 ? true : false,
@@ -42,8 +42,8 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategorie
             return new ResultDto<ICollection<CategoriesDto>>()
             {
                 IsSuccess = true,
-                Message = "لیست با موفقیت ثبت شد.",
-                Result = categories,
+                Message = "لیست با موفقیت برگشت داده شد.",
+                Result = categories
             };
         }
     }

@@ -105,7 +105,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
                 var passwordHasher = new PasswordHasher();
                 var hashedPashword = passwordHasher.HashPassword(requset.Password);
 
-                User user = new User()
+                User user = new()
                 {
                     FullName = requset.FullName,
                     Email = requset.Email,
