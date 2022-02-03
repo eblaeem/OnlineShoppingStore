@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShoppingStore.Persistance.Context;
 
 namespace OnlineShoppingStore.Persistance.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220128114709_AddCostStrategyToProduct")]
+    partial class AddCostStrategyToProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,11 +66,36 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Property<long>("ProductId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("StrategyId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
+                    b.HasIndex("StrategyId");
+
                     b.ToTable("Costs");
+                });
+
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.CostStrategy", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("StrategyName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CostStrategies");
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.Customer", b =>
@@ -229,17 +256,11 @@ namespace OnlineShoppingStore.Persistance.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("BasePrice")
-                        .HasColumnType("decimal(10,4)");
-
                     b.Property<bool>("Displayed")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(10,4)");
 
                     b.HasKey("Id");
 
@@ -289,32 +310,12 @@ namespace OnlineShoppingStore.Persistance.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("PropertyTypeId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PropertyTypeId");
-
                     b.ToTable("Properties");
-                });
-
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.PropertyType", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PropertyType");
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.Status", b =>
@@ -470,6 +471,23 @@ namespace OnlineShoppingStore.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.Products.CostStrategy", "Strategy")
+                        .WithMany()
+                        .HasForeignKey("StrategyId");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Strategy");
+                });
+
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.CostStrategy", b =>
+                {
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.Products.Product", "Product")
+                        .WithMany("CostStrategies")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Product");
                 });
 
@@ -571,15 +589,6 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Navigation("Property");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.Property", b =>
-                {
-                    b.HasOne("OnlineShoppingStore.Domain.Entities.Products.PropertyType", "PropertyType")
-                        .WithMany("Properties")
-                        .HasForeignKey("PropertyTypeId");
-
-                    b.Navigation("PropertyType");
-                });
-
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Setting.SettingValue", b =>
                 {
                     b.HasOne("OnlineShoppingStore.Domain.Entities.Setting.CustomizerSetting", "Setting")
@@ -633,6 +642,8 @@ namespace OnlineShoppingStore.Persistance.Migrations
                 {
                     b.Navigation("Costs");
 
+                    b.Navigation("CostStrategies");
+
                     b.Navigation("Images");
 
                     b.Navigation("ProductCategories");
@@ -643,11 +654,6 @@ namespace OnlineShoppingStore.Persistance.Migrations
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.Property", b =>
                 {
                     b.Navigation("ProductProperties");
-                });
-
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.PropertyType", b =>
-                {
-                    b.Navigation("Properties");
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.Status", b =>

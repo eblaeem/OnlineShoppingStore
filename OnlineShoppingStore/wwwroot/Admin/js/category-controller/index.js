@@ -18,7 +18,7 @@
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 type: "POST",
-                url: "Delete",
+                url: "Categories/Delete",
                 data: postData,
                 success: function (data) {
                     if (data.isSuccess == true) {

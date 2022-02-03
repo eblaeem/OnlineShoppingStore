@@ -14,7 +14,6 @@ namespace OnlineShoppingStore.Application.Interfaces.Context
         DbSet<UserRole> UserRoles { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Cost> Costs { get; set; }
-        DbSet<CostStrategy> CostStrategies { get; set; }
         DbSet<Customer> Customers { get; set; }
         DbSet<Image> Images { get; set; }
         DbSet<Order> Orders { get; set; }
@@ -23,6 +22,7 @@ namespace OnlineShoppingStore.Application.Interfaces.Context
         DbSet<ProductCategory> ProductCategories { get; set; }
         DbSet<ProductProperty> ProductProperties { get; set; }
         DbSet<Property> Properties { get; set; }
+        DbSet<PropertyType> PropertyTypes  { get; set; }
         DbSet<Status> Status { get; set; }
 
         DbSet<CustomizerSetting> CustomizerSettings { get; set; }

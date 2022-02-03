@@ -5,7 +5,10 @@ namespace OnlineShoppingStore.Domain.Entities.Products
     public class Product
     {
         public long Id { get; set; }
+        public decimal Quantity { get; set; }
+        public decimal BasePrice { get; set; }
         public string Name { get; set; }
+        public bool Displayed { get; set; }
 
 
         public virtual ICollection<ProductCategory> ProductCategories { get; set; } = new HashSet<ProductCategory>();

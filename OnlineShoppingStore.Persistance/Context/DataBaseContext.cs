@@ -17,7 +17,6 @@ namespace OnlineShoppingStore.Persistance.Context
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Cost> Costs { get; set; }
-        public DbSet<CostStrategy> CostStrategies { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -25,13 +24,13 @@ namespace OnlineShoppingStore.Persistance.Context
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductProperty> ProductProperties { get; set; }
+        public DbSet<PropertyType> PropertyTypes { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<Status> Status { get; set; }
 
 
         public DbSet<CustomizerSetting> CustomizerSettings { get; set; }
         public DbSet<SettingValue> SettingValues { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,7 +40,7 @@ namespace OnlineShoppingStore.Persistance.Context
             modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
 
             modelBuilder.Entity<ProductCategory>().HasKey(pc => new { pc.ProductId, pc.CategoryId });
-            modelBuilder.Entity<ProductProperty>().HasKey(pp => new { pp.ProductId, pp.PropertiyId });
+            modelBuilder.Entity<ProductProperty>().HasKey(pp => new { pp.ProductId, pp.PropertyId });
             modelBuilder.Entity<OrderStatus>().HasKey(os => new { os.OrderId, os.StatusId });
             modelBuilder.Entity<OrderItem>().HasKey(oi => new { oi.OrderId, oi.ProductId });
 
@@ -55,7 +54,7 @@ namespace OnlineShoppingStore.Persistance.Context
                         .WithMany(p => p.ProductProperties).HasForeignKey(pp => pp.ProductId);
 
             modelBuilder.Entity<ProductProperty>().HasOne<Property>(pp => pp.Property)
-                        .WithMany(p => p.ProductProperties).HasForeignKey(pp => pp.PropertiyId);
+                        .WithMany(p => p.ProductProperties).HasForeignKey(pp => pp.PropertyId);
 
             modelBuilder.Entity<OrderStatus>().HasOne<Order>(os => os.Order)
                         .WithMany(o => o.OrderStatuses).HasForeignKey(os => os.OrderId);
@@ -67,6 +66,7 @@ namespace OnlineShoppingStore.Persistance.Context
             modelBuilder.Entity<Product>().HasMany(p => p.Costs).WithOne(c => c.Product);
             modelBuilder.Entity<Product>().HasMany(p => p.Images).WithOne(e => e.Product);
             modelBuilder.Entity<Customer>().HasMany(c=>c.Orders).WithOne(o => o.Customer);
+            modelBuilder.Entity<PropertyType>().HasMany(p => p.Properties).WithOne(p => p.PropertyType);
 
 
             modelBuilder.Entity<CustomizerSetting>().HasKey(x => x.Key);
@@ -85,6 +85,8 @@ namespace OnlineShoppingStore.Persistance.Context
         private static void HasColumnType(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Cost>().Property(c => c.Price).HasColumnType("decimal(10,4)");
+            modelBuilder.Entity<Product>().Property(c => c.Quantity).HasColumnType("decimal(10,4)");
+            modelBuilder.Entity<Product>().Property(c => c.BasePrice).HasColumnType("decimal(10,4)");
             modelBuilder.Entity<OrderItem>().Property(c => c.OrderQuantity).HasColumnType("decimal(10,4)");
             modelBuilder.Entity<OrderItem>().Property(c => c.Price).HasColumnType("decimal(10,4)");
         }

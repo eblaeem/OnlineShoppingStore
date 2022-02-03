@@ -1,7 +1,10 @@
-﻿using OnlineShoppingStore.Application.Interfaces.Context;
+﻿using Microsoft.AspNetCore.Hosting;
+using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Application.Services.DashboardInfo.Queries.Categories;
 using OnlineShoppingStore.Application.Services.Products.Commands.DeleteCategoryService;
 using OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService;
+using OnlineShoppingStore.Application.Services.Products.Commands.Products;
+using OnlineShoppingStore.Application.Services.Products.Queries.GetAllCategoriesService;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetCategories;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryByIdService;
 
@@ -10,10 +13,12 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
     public class FacadDesignPattern : IFacadDesignPattern
     {
         private readonly IDataBaseContext _db;
+        private readonly IHostingEnvironment _environment;
 
-        public FacadDesignPattern(IDataBaseContext db)
+        public FacadDesignPattern(IDataBaseContext db, IHostingEnvironment environment)
         {
             _db = db;
+            _environment = environment;
         }
 
         private GetCategoryById _getCategoryById;
@@ -21,7 +26,9 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
         private GetCategoriesService _getCategoriesService;
         private DeleteCategoryService _deleteCategoryService;
         private EditCategoryService _editCategoryService;
-        private GetCategoriesCount _categoriesCount;
+        private GetCategoriesCount _getCategoriesCount;
+        private AddNewProduct _addNewProduct;
+        private GetAllCategoriesService _getAllCategoriesService;
 
         public CreateCategoryService CreateCategoryService
         {
@@ -50,7 +57,16 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
 
         public GetCategoriesCount GetCategoriesCount
         {
-            get { return _categoriesCount ??= new GetCategoriesCount(_db); }
+            get { return _getCategoriesCount ??= new GetCategoriesCount(_db); }
+        }
+        public AddNewProduct AddNewProduct
+        {
+            get { return _addNewProduct ?? new AddNewProduct(_db, _environment); }
+        }
+
+        public GetAllCategoriesService GetAllCategoriesService
+        {
+            get { return _getAllCategoriesService ?? new GetAllCategoriesService(_db); }
         }
     }
 }
