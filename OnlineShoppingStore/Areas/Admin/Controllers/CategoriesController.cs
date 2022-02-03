@@ -30,7 +30,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateCategoryViewModel model)
+        public async Task<IActionResult> Create(CreateViewModel model)
         {
             var result = _facad.CreateCategoryService.ExecuteCreateCategory(model.parentId, model.Name);
 
@@ -50,7 +50,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(long id)
         {
             var cat = _facad.GetGetCategoryById.ExecuteGetCategoryById(id);
-            var model = new EditCategoryViewModel
+            var model = new EditViewModel
             {
                 Id = id,
                 Name = cat.Result.Name,
@@ -59,7 +59,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditCategoryViewModel model)
+        public async Task<IActionResult> Edit(EditViewModel model)
         {
             var result = _facad.EditCategoryService.ExecuteEditCategory(new RequestEditDto
             {

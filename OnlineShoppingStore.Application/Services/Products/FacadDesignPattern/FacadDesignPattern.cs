@@ -5,6 +5,7 @@ using OnlineShoppingStore.Application.Services.Products.Commands.DeleteCategoryS
 using OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService;
 using OnlineShoppingStore.Application.Services.Products.Commands.Products;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetAllCategoriesService;
+using OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetCategories;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryByIdService;
 
@@ -29,6 +30,7 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
         private GetCategoriesCount _getCategoriesCount;
         private AddNewProduct _addNewProduct;
         private GetAllCategoriesService _getAllCategoriesService;
+        private GetAllProductService _getAllProductService;
 
         public CreateCategoryService CreateCategoryService
         {
@@ -67,6 +69,11 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
         public GetAllCategoriesService GetAllCategoriesService
         {
             get { return _getAllCategoriesService ?? new GetAllCategoriesService(_db); }
+        }
+
+        public GetAllProductService GetAllProductService
+        {
+            get { return _getAllProductService ?? new GetAllProductService(_db); }
         }
     }
 }

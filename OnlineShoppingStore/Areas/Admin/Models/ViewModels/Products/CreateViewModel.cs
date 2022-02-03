@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace OnlineShoppingStore.Areas.Admin.Models.CreateProductViewModel
 {
-    public class CreateProductViewModel
+    public class CreateViewModel
     {
         public long CategoryId { get; set; }
         public string Name { get; set; }

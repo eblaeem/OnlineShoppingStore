@@ -32,6 +32,8 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
                     Name = request.Name,
                     Quantity = request.Quantity,
                     Displayed = request.Displayed,
+                    BasePrice = request.BasePrice,
+                    InsertTime = DateTime.Now
                 };
                 //product.ProductProperties = request.ProductProperties;
                 _db.Products.Add(product);

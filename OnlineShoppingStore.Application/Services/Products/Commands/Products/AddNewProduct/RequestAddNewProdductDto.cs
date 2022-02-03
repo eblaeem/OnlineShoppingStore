@@ -10,6 +10,7 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
         public string Name { get; set; }
         public bool Displayed { get; set; }
         public decimal Price { get; set; }
+        public decimal BasePrice { get; set; }
         public decimal Quantity { get; set; }
         public string StrategyName { get; set; }
 

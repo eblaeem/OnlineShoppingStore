@@ -2,7 +2,6 @@
 {
     public class ProductCategory
     {
-        private string _tenantId;
         public long ProductId { get; set; }
         public long CategoryId { get; set; }
 

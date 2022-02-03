@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShoppingStore.Application.Services.Products.Commands.Products;
 using OnlineShoppingStore.Application.Services.Products.FacadDesignPattern;
-using OnlineShoppingStore.Areas.Admin.Models.CreateProductViewModel;
-using OnlineShoppingStore.Domain.Entities.Products;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,7 +19,8 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var model = _facad.GetAllProductService.ExecuteGetAllProductService().Result;
+            return View(model);
         }
 
         [HttpGet]

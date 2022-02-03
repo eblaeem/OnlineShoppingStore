@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategories
 {
-    public partial class GetCategoriesService : IGetCategoriesService
+    public class GetCategoriesService : IGetCategoriesService
     {
         private readonly IDataBaseContext _db;
 

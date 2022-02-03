@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using OnlineShoppingStore.Domain.Entities.Common;
+using System.Collections.Generic;
 
 namespace OnlineShoppingStore.Domain.Entities.Products
 {
-    public class Product
+    public class Product:BaseEntity
     {
-        public long Id { get; set; }
         public decimal Quantity { get; set; }
         public decimal BasePrice { get; set; }
         public string Name { get; set; }
