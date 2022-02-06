@@ -1,61 +1,15 @@
-﻿@model OnlineShoppingStore.Application.Services.Products.Commands.Products.RequestAddNewProdductDto
+﻿@model OnlineShoppingStore.Application.Services.Products.Commands.Products.RequestAddNewProductDto
+@using OnlineShoppingStore.Application.Services.Products.Queries.GetAllPropertiesService
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var productProperties = (List<RequestGetAllPropertiesDto>)ViewBag.GetAllProp;
 }
 
-<style>
-    .upload__inputfile {
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-        overflow: hidden;
-        position: absolute;
-        z-index: -1;
-    }
-
-    .upload-img-wrap {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 0 -10px;
-    }
-
-    .upload-img-box {
-        width: 200px;
-        padding: 10px 10px;
-        margin-bottom: 12px;
-    }
-
-    .upload-img-close {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.5);
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        text-align: center;
-        line-height: 24px;
-        z-index: 1;
-        cursor: pointer;
-    }
-
-        .upload-img-close:after {
-            content: '\2716';
-            font-size: 14px;
-            color: white;
-        }
-
-    .img-bg {
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        position: relative;
-        border-radius: 10px;
-        padding-bottom: 100%;
-    }
-</style>
+@section styles{
+    <link href="~/Admin/css/product-controller/create.css" rel="stylesheet" />
+ }
 
 <section class="basic-elements">
     <div class="row">
@@ -75,19 +29,16 @@
 
                                     <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
                                         <fieldset class="form-group">
-                                            <select class="form-select ltr" asp-for="CategoryId" asp-items="@ViewBag.GetAllCat">
+                                            <select class="form-select" asp-for="CategoryId" asp-items="@ViewBag.GetAllCat">
                                             </select>
                                         </fieldset>
                                     </div>
 
                                     <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
-                                        <fieldset class="form-group position-relative has-icon-left">
+                                        <fieldset class="form-group">
                                             <input type="text" class="form-control mb-1"
                                                    placeholder="نام یا مدل محصول" asp-for="Name">
                                             <span asp-validation-for="Name"></span>
-                                            <div class="form-control-position">
-                                                <i class="ft-package fa-2x text-bitbucket"></i>
-                                            </div>
                                         </fieldset>
                                     </div>
 
@@ -102,19 +53,46 @@
                                     <div class="col-xl-2 col-lg-3 col-md-6 mb-1">
                                         <fieldset class="form-group">
                                             <input type="number" class="form-control mb-1"
-                                                   placeholder="قیمت پایه" asp-for="Price">
-                                            <span asp-validation-for="Price"></span>
+                                                   placeholder="قیمت پایه" asp-for="BasePrice">
+                                            <span asp-validation-for="BasePrice"></span>
                                         </fieldset>
                                     </div>
 
                                     <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
                                         <fieldset class="form-group position-relative">
                                             <label class="form-check-label" for="Displayed">نمایش در سایت؟</label>
-                                            <input type="checkbox" class="form-check-input state icheckbox_square-red hover mr-1" asp-for="Displayed">
+                                            <input type="checkbox" asp-for="Displayed"
+                                                   class="form-check-input state icheckbox_square-red hover mr-1">
                                         </fieldset>
                                     </div>
                                 </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title-wrap bar-success">
+                            <h4 class="card-title mb-0">افزودن ویژگی های محصول:</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="px-3">
+                            <div class="form-body">
+                                <div class="row">
+                                        @for (int i = 0; i < productProperties.Count; i++)
+                                        {
+                                            var prop = productProperties[i];
+                                    <div class="align-items-center col-lg-2 d-flex">
+                                        <label class="form-check-label col-lg-3">
+                                            @prop.Title:
+                                        </label>
+                                        <input type="hidden" name="PropertyDtos[@i].PropertyId" value="@prop.Id" />
+                                        <input class="form-control" name="PropertyDtos[@i].PropertyName" />
+                                    </div>
+                                        }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -151,5 +129,5 @@
 </section>
 
 @section scripts{
-<script src="~/Admin/js/product-controller/create.js"></script>
+    <script src="~/Admin/js/product-controller/create.js"></script>
 }

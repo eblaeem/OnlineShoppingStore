@@ -4,6 +4,7 @@ using OnlineShoppingStore.Application.Services.Products.Commands.EditCategorySer
 using OnlineShoppingStore.Application.Services.Products.Commands.Products;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetAllCategoriesService;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService;
+using OnlineShoppingStore.Application.Services.Products.Queries.GetAllPropertiesService;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetCategories;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryByIdService;
 
@@ -20,5 +21,6 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
         AddNewProduct AddNewProduct { get; }
         GetAllCategoriesService GetAllCategoriesService { get; }
         GetAllProductService GetAllProductService { get; }
+        GetAllPropertiesService GetAllPropertiesService { get; }
     }
 }

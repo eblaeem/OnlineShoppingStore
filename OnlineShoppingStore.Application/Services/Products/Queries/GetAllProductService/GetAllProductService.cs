@@ -28,6 +28,7 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllProduc
                                    CatName = c.Name,
                                    SubCatName = ca.Name,
                                    Displayed = p.Displayed,
+                                   BasePrice = p.BasePrice,
                                    CreatedDate = p.InsertTime.ToshamsiDate()
                                }).ToList();
 

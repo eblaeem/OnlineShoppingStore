@@ -21,7 +21,7 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
             _environment = environment;
         }
 
-        public ResultDto ExecuteAddNewProduct(RequestAddNewProdductDto request)
+        public ResultDto ExecuteAddNewProduct(RequestAddNewProductDto request)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
 
                 Cost cost = new()
                 {
-                    Price = request.Price,
+                    //Price = request.BasePrice + PropPrice,
                     Product = product
                 };
                 _db.Costs.Add(cost);

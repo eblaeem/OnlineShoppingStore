@@ -6,6 +6,6 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
 {
     public interface IAddNewProduct
     {
-        ResultDto ExecuteAddNewProduct(RequestAddNewProdductDto request);
+        ResultDto ExecuteAddNewProduct(RequestAddNewProductDto request);
     }
 }

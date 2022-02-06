@@ -27,11 +27,12 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.GetAllCat = new SelectList(_facad.GetAllCategoriesService.ExecuteGetAllCategories().Result, "Id", "Name");
+            ViewBag.GetAllProp = _facad.GetAllPropertiesService.ExecuteGetAllProperties().Result;
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(RequestAddNewProdductDto request)
+        public IActionResult Create(RequestAddNewProductDto request)
         {
             List<IFormFile> images = new();
             for (int i = 0; i < Request.Form.Files.Count; i++)
