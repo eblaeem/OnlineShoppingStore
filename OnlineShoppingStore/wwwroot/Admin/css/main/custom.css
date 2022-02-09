@@ -1,0 +1,42 @@
+﻿/*#region Variables*/
+:root {
+    --white:#fff;
+    --black:#000;
+    --main-bg-color: rgb(32 80 129 / 80%);
+}
+/*#endregion*/
+
+/*#region RoadMap*/
+.main-roadmap {
+    background-color: var(--main-bg-color);
+    margin: 1.5rem 1.5rem 0;
+    border-radius: 5px;
+    color: var(--white);
+    height: 30px;
+}
+    .main-roadmap a {
+        padding: 0px 10px;
+        text-decoration: none;
+        color: var(--white);
+    }
+        .main-roadmap a:hover {
+            color: var(--black);
+            font-weight: bold;
+        }
+    .main-roadmap i {
+        transform: rotateZ(267deg);
+    }
+    .main-roadmap h6 {
+        padding: 0px 10px;
+        margin-bottom: 0px !important;
+        font-weight: bold;
+    }
+
+/*#endregion */
+
+/*#region Card*/
+.card-header {
+    background-color: var(--main-bg-color);
+    color: var(--white);
+}
+/*#endregion*/

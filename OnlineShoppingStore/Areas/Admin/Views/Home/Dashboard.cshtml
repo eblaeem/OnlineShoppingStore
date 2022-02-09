@@ -3,8 +3,16 @@
 
 
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewBag.Title = "داشبورد";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section roadMap{
+    <div class="d-flex align-items-center main-roadmap">
+        <a href="/index">پنل مدیریت</a>
+        <i class="la la-location-arrow"></i>
+        <h6>داشبورد</h6>
+    </div>
 }
 
 

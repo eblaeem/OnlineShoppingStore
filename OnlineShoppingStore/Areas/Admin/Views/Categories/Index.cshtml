@@ -2,8 +2,16 @@
 @model ICollection<CategoriesDto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "لیست گروه محصولات";
     Layout = "~/Areas/Admin/Views/Shared/_Adminlayout.cshtml";
+}
+
+@section roadMap{
+    <div class="d-flex align-items-center main-roadmap">
+        <a href="categories/index">مدیریت گروه محصول</a>
+        <i class="la la-location-arrow"></i>
+        <h6>لیست گروه محصولات</h6>
+    </div>
 }
 
 <section class="basic-elements">

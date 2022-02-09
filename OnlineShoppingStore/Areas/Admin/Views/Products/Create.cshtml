@@ -2,14 +2,22 @@
 @using OnlineShoppingStore.Application.Services.Products.Queries.GetAllPropertiesService
 
 @{
-    ViewData["Title"] = "Create";
+    ViewBag.Title = "ایجاد محصول جدید";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     var productProperties = (List<RequestGetAllPropertiesDto>)ViewBag.GetAllProp;
 }
 
 @section styles{
     <link href="~/Admin/css/product-controller/create.css" rel="stylesheet" />
- }
+}
+
+@section roadMap{
+    <div class="d-flex align-items-center main-roadmap">
+        <a href="index">مدیریت محصول</a>
+        <i class="la la-location-arrow"></i>
+        <h6>ایجاد محصول جدید</h6>
+    </div>
+}
 
 <section class="basic-elements">
     <div class="row">
@@ -19,7 +27,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title-wrap bar-success">
-                            <h4 class="card-title mb-0">ایجاد محصول جدید</h4>
+                            <h4 class="card-title mb-0">مشخصات اصلی محصول</h4>
                         </div>
                     </div>
                     <div class="card-body">
@@ -74,24 +82,24 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title-wrap bar-success">
-                            <h4 class="card-title mb-0">افزودن ویژگی های محصول:</h4>
+                            <h4 class="card-title mb-0">افزودن ویژگی های محصول</h4>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="px-3">
                             <div class="form-body">
                                 <div class="row">
-                                        @for (int i = 0; i < productProperties.Count; i++)
-                                        {
-                                            var prop = productProperties[i];
-                                    <div class="align-items-center col-lg-2 d-flex">
-                                        <label class="form-check-label col-lg-3">
-                                            @prop.Title:
-                                        </label>
-                                        <input type="hidden" name="PropertyDtos[@i].PropertyId" value="@prop.Id" />
-                                        <input class="form-control" name="PropertyDtos[@i].PropertyName" />
-                                    </div>
-                                        }
+                                    @for (int i = 0; i < productProperties.Count; i++)
+                                    {
+                                        var prop = productProperties[i];
+                                        <div class="align-items-center col-lg-2 d-flex">
+                                            <label class="form-check-label col-lg-3">
+                                                @prop.Title:
+                                            </label>
+                                            <input type="hidden" name="PropertyDtos[@i].PropertyId" value="@prop.Id" />
+                                            <input class="form-control" name="PropertyDtos[@i].PropertyName" />
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>

@@ -16258,7 +16258,7 @@ html {
             transition: .3s ease all;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            min-height: calc(100% - 3.2rem)
+            min-height: calc(100% - 7rem)
         }
 
             html body .content.app-content.show-overlay .content-overlay {
