@@ -5,6 +5,16 @@
     Layout = "~/Areas/Admin/Views/Shared/_Adminlayout.cshtml";
 }
 
+@section roadMap{
+    <div class="d-flex align-items-center main-roadmap">
+        <a href="~/Admin/home/dashboard">پنل مدیریت</a>
+        <i class="la la-location-arrow"></i>
+        <a href="~/admin/categories/index">مدیریت گروه محصول</a>
+        <i class="la la-location-arrow"></i>
+        <h6>ویرایش گروه محصول: @Model.Name</h6>
+    </div>
+}
+
 <section class="basic-elements">
     <div class="row">
         <div class="col-md-12">
@@ -13,11 +23,11 @@
                     <div class="card-title-wrap bar-success">
                         @if (ViewBag.parentId != null)
                         {
-                            <h4 class="card-title mb-0">افزودن زیرگروه محصول</h4>
+                            <h4 class="card-title mb-0">ویرایش زیرگروه محصول</h4>
                         }
                         else
                         {
-                            <h4 class="card-title mb-0">افزودن گروه محصول</h4>
+                    <h4 class="card-title mb-0">ویرایش گروه محصول</h4>
                         }
                     </div>
                 </div>

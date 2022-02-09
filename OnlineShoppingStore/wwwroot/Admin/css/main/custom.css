@@ -30,7 +30,12 @@
         padding: 0px 10px;
         margin-bottom: 0px !important;
         font-weight: bold;
+        color: var(--black);
     }
+    .main-roadmap h6:hover {
+        color: var(--white);
+    }
+
 
 /*#endregion */
 
