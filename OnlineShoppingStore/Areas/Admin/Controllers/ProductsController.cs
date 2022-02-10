@@ -32,7 +32,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(RequestAddNewProductDto request)
+        public IActionResult Create(RequestCreateProductDto request)
         {
             List<IFormFile> images = new();
             for (int i = 0; i < Request.Form.Files.Count; i++)

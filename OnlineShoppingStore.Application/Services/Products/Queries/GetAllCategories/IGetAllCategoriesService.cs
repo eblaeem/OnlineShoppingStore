@@ -5,6 +5,6 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllCatego
 {
     public interface IGetAllCategoriesService
     {
-        ResultDto<ICollection<AllCategoriesDto>> ExecuteGetAllCategories();
+        ResultDto<ICollection<ResultGetAllCategoriesDto>> ExecuteGetAllCategories();
     }
 }

@@ -23,13 +23,13 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
             _environment = environment;
         }
 
-        private GetCategoryById _getCategoryById;
+        private GetCategoryByIdService _getCategoryById;
         private CreateCategoryService _createCategorytService;
         private GetCategoriesService _getCategoriesService;
         private DeleteCategoryService _deleteCategoryService;
         private EditCategoryService _editCategoryService;
         private GetCategoriesCountService _getCategoriesCount;
-        private AddNewProduct _addNewProduct;
+        private CreateProductService _addNewProduct;
         private GetAllCategoriesService _getAllCategoriesService;
         private GetAllProductService _getAllProductService;
         private GetAllPropertiesService _getAllPropertiesService;
@@ -54,18 +54,18 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
             get { return _editCategoryService ??= new EditCategoryService(_db); }
         }
 
-        public GetCategoryById GetGetCategoryById
+        public GetCategoryByIdService GetGetCategoryById
         {
-            get { return _getCategoryById ??= new GetCategoryById(_db); }
+            get { return _getCategoryById ??= new GetCategoryByIdService(_db); }
         }
 
         public GetCategoriesCountService GetCategoriesCount
         {
             get { return _getCategoriesCount ??= new GetCategoriesCountService(_db); }
         }
-        public AddNewProduct AddNewProduct
+        public CreateProductService AddNewProduct
         {
-            get { return _addNewProduct ?? new AddNewProduct(_db, _environment); }
+            get { return _addNewProduct ?? new CreateProductService(_db, _environment); }
         }
 
         public GetAllCategoriesService GetAllCategoriesService

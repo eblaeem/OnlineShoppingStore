@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
 {
-    public class RequestAddNewProductDto
+    public class RequestCreateProductDto
     {
         public long CategoryId { get; set; }
         public string Name { get; set; }

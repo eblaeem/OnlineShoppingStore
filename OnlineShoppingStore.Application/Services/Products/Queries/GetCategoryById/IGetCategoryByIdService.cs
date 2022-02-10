@@ -4,6 +4,6 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryB
 {
     public interface IGetCategoryByIdService
     {
-        ResultDto<ResultCategoryDto> ExecuteGetCategoryById(long id);
+        ResultDto<ResultGetCategoryByIdDto> ExecuteGetCategoryById(long id);
     }
 }

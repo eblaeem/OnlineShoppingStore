@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService;
 using OnlineShoppingStore.Application.Services.Products.FacadDesignPattern;
 using OnlineShoppingStore.Areas.Admin.Models.CategoriesViewModel;
 using OnlineShoppingStore.Areas.Admin.Models.EditCategoryViewModel;
 using System.Threading.Tasks;
-using static OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService.EditCategoryService;
 
 namespace OnlineShoppingStore.Areas.Admin.Controllers
 {
@@ -61,7 +61,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditViewModel model)
         {
-            var result = _facad.EditCategoryService.ExecuteEditCategory(new RequestEditDto
+            var result = _facad.EditCategoryService.ExecuteEditCategory(new RequestEditCategoryDto
             {
                 Id = model.Id,
                 Name = model.Name,

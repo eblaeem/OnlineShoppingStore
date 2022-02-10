@@ -10,18 +10,18 @@ using System.IO;
 
 namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
 {
-    public class AddNewProduct : IAddNewProduct
+    public class CreateProductService : ICreateProductService
     {
         private readonly IDataBaseContext _db;
         private readonly IHostingEnvironment _environment;
 
-        public AddNewProduct(IDataBaseContext db, IHostingEnvironment environment)
+        public CreateProductService(IDataBaseContext db, IHostingEnvironment environment)
         {
             _db = db;
             _environment = environment;
         }
 
-        public ResultDto ExecuteAddNewProduct(RequestAddNewProductDto request)
+        public ResultDto ExecuteAddNewProduct(RequestCreateProductDto request)
         {
             try
             {

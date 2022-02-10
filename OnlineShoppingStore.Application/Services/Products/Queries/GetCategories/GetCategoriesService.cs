@@ -18,7 +18,9 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategorie
 
         public ResultDto<ICollection<CategoriesDto>> ExecuteIGetCategoriesService(long? parentId)
         {
-            var categories = _db.Categories
+            try
+            {
+                var categories = _db.Categories
                 .Include(c => c.ParentCategory)
                 .Include(c => c.SubCategories)
                 .Where(c => c.ParentCategoryId == parentId && c.IsDeleted == false)
@@ -33,18 +35,26 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategorie
                         Id = c.ParentCategory.Id,
                         Name = c.ParentCategory.Name,
                     }
-                    :null,
+                    : null,
                     HasChild = c.SubCategories.Count() > 0 ? true : false,
                     CreateDate = c.InsertTime.ToshamsiDate()
                 }).ToList();
 
-
-            return new ResultDto<ICollection<CategoriesDto>>()
+                return new ResultDto<ICollection<CategoriesDto>>()
+                {
+                    IsSuccess = true,
+                    Message = "لیست با موفقیت برگشت داده شد.",
+                    Result = categories
+                };
+            }
+            catch (System.Exception)
             {
-                IsSuccess = true,
-                Message = "لیست با موفقیت برگشت داده شد.",
-                Result = categories
-            };
+                return new ResultDto<ICollection<CategoriesDto>>()
+                {
+                    IsSuccess = false,
+                    Message = "نمایش لیست با خطا مواجه شد."
+                };
+            }
         }
     }
 }

@@ -2,22 +2,21 @@
 using OnlineShoppingStore.Common.ResultDto;
 using System;
 
-namespace OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService
+namespace OnlineShoppingStore.Application.Services.Products.Commands.DeleteCategoryService
 {
-    public partial class EditCategoryService : IEditCategoryService
+    public class DeleteCategoryService : IDeleteCategoryService
     {
         private readonly IDataBaseContext _db;
 
-        public EditCategoryService(IDataBaseContext db)
+        public DeleteCategoryService(IDataBaseContext db)
         {
             _db = db;
         }
-
-        public ResultDto ExecuteEditCategory(RequestEditDto requestEditDto)
+        public ResultDto ExecuteDeleteCategory(long id)
         {
             try
             {
-                var cat = _db.Categories.Find(requestEditDto.Id);
+                var cat = _db.Categories.Find(id);
                 if (cat == null)
                 {
                     return new ResultDto
@@ -26,23 +25,23 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.EditCategor
                         Message = "چنین گروه محصولی یافت نشد."
                     };
                 }
-                cat.UpdateTime = DateTime.Now;
-                cat.Name = requestEditDto.Name;
+                cat.DeletedTime = DateTime.Now;
+                cat.IsDeleted = true;
                 _db.SaveChanges();
-                return new ResultDto
+                return new ResultDto()
                 {
                     IsSuccess = true,
-                    Message = "گروه محصول با موفقیت ویرایش شد"
+                    Message = "گروه محصول با موفقیت حذف شد."
                 };
             }
             catch (Exception)
             {
-                return new ResultDto
+                return new ResultDto()
                 {
                     IsSuccess = false,
-                    Message = "ویرایش گروه محصول با خطا مواجه شد."
+                    Message = "حذف گروه محصول با خطا مواجه شد."
                 };
-            }   
+            }
         }
     }
 }
