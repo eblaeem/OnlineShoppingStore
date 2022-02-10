@@ -18,7 +18,7 @@
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 type: "POST",
-                url: "Users/Delete",
+                url: "delete",
                 data: postData,
                 success: function (data) {
                     if (data.isSuccess == true) {
@@ -33,20 +33,17 @@
                     else {
 
                         swal.fire(
-                            'هشدار!',
+                            '!هشدار',
                             data.message,
                             'warning'
                         );
-
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     swal.hideLoading();
                     swal.fire("!هشدار ", "عملیات با خطا مواجه شد", "خطا");
                 }
-
             });
-
         }
     })
 }
@@ -72,7 +69,7 @@ function ChangeUserState(userId,fullName) {
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 type: "POST",
-                url: "Users/ChangeUserState",
+                url: "ChangeUserState",
                 data: postData,
                 success: function (data) {
                     if (data.isSuccess == true) {
@@ -91,7 +88,6 @@ function ChangeUserState(userId,fullName) {
                             data.message,
                             'warning'
                         );
-
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -99,7 +95,6 @@ function ChangeUserState(userId,fullName) {
                     swal.fire("!هشدار ", "عملیات با خطا مواجه شد", "خطا");
                 }
             });
-
         }
     })
 }

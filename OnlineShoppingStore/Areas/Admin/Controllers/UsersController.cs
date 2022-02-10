@@ -9,7 +9,6 @@ using OnlineShoppingStore.Application.Services.Users.Queries.GetUserById;
 using OnlineShoppingStore.Application.Services.Users.Queries.GetUsers;
 using OnlineShoppingStore.Areas.Admin.Models;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -88,7 +87,6 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
             TempData["Message"] = result.Message;
 
             return View(model);
-
         }
 
         [HttpGet]
