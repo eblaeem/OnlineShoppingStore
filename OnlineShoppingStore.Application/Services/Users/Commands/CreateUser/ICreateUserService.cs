@@ -1,5 +1,4 @@
 ﻿using OnlineShoppingStore.Common.ResultDto;
-using System.Threading;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
 {

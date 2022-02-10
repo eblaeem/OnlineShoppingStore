@@ -1,7 +1,4 @@
-﻿using OnlineShoppingStore.Domain.Entities.User;
-using System.Collections.Generic;
-
-namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUserById
+﻿namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUserById
 {
     public class ResultGetUserByIdDto
     {

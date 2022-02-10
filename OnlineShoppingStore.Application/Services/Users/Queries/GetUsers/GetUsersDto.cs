@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUsers
+﻿namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUsers
 {
     public class GetUsersDto
     {

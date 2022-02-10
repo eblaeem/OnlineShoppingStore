@@ -2,7 +2,6 @@
 using OnlineShoppingStore.Common.ResultDto;
 using OnlineShoppingStore.Domain.Entities.User;
 using System;
-using System.Threading;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using OnlineShoppingStore.Common;

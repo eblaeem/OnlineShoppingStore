@@ -15,29 +15,40 @@ namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUserById
         }
         public ResultDto<ResultGetUserByIdDto> ExecuteGetUserById(long userId)
         {
-            var user = _db.Users.Include(e => e.UserRoles).FirstOrDefault(e => e.Id == userId);
-            if (user == null)
+            try
+            {
+                var user = _db.Users.Include(e => e.UserRoles).FirstOrDefault(e => e.Id == userId);
+                if (user == null)
+                {
+                    return new ResultDto<ResultGetUserByIdDto>
+                    {
+                        IsSuccess = false,
+                        Message = "کاربری با چنین مشخصات یافت نشد."
+                    };
+                }
+
+                return new ResultDto<ResultGetUserByIdDto>
+                {
+                    IsSuccess = true,
+                    Message = "",
+                    Result = new ResultGetUserByIdDto
+                    {
+                        FullName = user.FullName,
+                        Email = user.Email,
+                        Passwrod = user.Password,
+                        RePasswrod = user.Password,
+                        RoleId = user.UserRoles.FirstOrDefault().RoleId,
+                    }
+                };
+            }
+            catch (System.Exception)
             {
                 return new ResultDto<ResultGetUserByIdDto>
                 {
                     IsSuccess = false,
-                    Message = "کاربری با چنین مشخصات یافت نشد."
+                    Message = "عملیات با خطا مواجه شد."
                 };
             }
-
-            return new ResultDto<ResultGetUserByIdDto>
-            {
-                IsSuccess = true,
-                Message = "",
-                Result = new ResultGetUserByIdDto
-                {
-                    FullName = user.FullName,
-                    Email = user.Email,
-                    Passwrod = user.Password,
-                    RePasswrod = user.Password,
-                    RoleId = user.UserRoles.FirstOrDefault().RoleId,
-                }
-            };
         }
     }
 }
