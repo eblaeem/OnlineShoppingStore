@@ -38,7 +38,7 @@ namespace OnlineShoppingStore.Application
             services.AddScoped<IDeleteUserService, DeleteUserService>();
             services.AddScoped<IChangeUserStateService, ChangeUserStateSerive>();
             services.AddScoped<IEditUserService, EditUserService>();
-            services.AddScoped<IGetUserCount, GetUserCount>();
+            services.AddScoped<IGetUserCountService, GetUserCountService>();
             services.AddScoped<IUserLoginService, UserLoginService>();
         }
     }

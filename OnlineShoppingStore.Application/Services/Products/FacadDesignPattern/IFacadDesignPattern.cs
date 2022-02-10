@@ -13,7 +13,7 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
     public interface IFacadDesignPattern
     {
         GetCategoryById GetGetCategoryById { get; }
-        GetCategoriesCount GetCategoriesCount { get; }
+        GetCategoriesCountService GetCategoriesCount { get; }
         CreateCategoryService CreateCategoryService { get; }
         GetCategoriesService GetCategoriesService { get; }
         DeleteCategoryService DeleteCategoryService { get; }

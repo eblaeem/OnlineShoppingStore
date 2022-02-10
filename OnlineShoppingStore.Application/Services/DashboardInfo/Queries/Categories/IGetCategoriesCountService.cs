@@ -1,6 +1,6 @@
 ﻿namespace OnlineShoppingStore.Application.Services.DashboardInfo.Queries.Categories
 {
-    public interface IGetCategoriesCount
+    public interface IGetCategoriesCountService
     {
         CatCountResultDto ExecuteGetCategoriesCount();
     }

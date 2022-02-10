@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace OnlineShoppingStore.Application.Services.DashboardInfo.Queries.Categories
 {
-    public class GetCategoriesCount : IGetCategoriesCount
+    public class GetCategoriesCountService : IGetCategoriesCountService
     {
         private readonly IDataBaseContext _db;
 
-        public GetCategoriesCount(IDataBaseContext db)
+        public GetCategoriesCountService(IDataBaseContext db)
         {
             _db = db;
         }

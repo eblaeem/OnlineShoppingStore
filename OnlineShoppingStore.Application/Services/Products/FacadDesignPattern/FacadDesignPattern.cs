@@ -28,7 +28,7 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
         private GetCategoriesService _getCategoriesService;
         private DeleteCategoryService _deleteCategoryService;
         private EditCategoryService _editCategoryService;
-        private GetCategoriesCount _getCategoriesCount;
+        private GetCategoriesCountService _getCategoriesCount;
         private AddNewProduct _addNewProduct;
         private GetAllCategoriesService _getAllCategoriesService;
         private GetAllProductService _getAllProductService;
@@ -59,9 +59,9 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
             get { return _getCategoryById ??= new GetCategoryById(_db); }
         }
 
-        public GetCategoriesCount GetCategoriesCount
+        public GetCategoriesCountService GetCategoriesCount
         {
-            get { return _getCategoriesCount ??= new GetCategoriesCount(_db); }
+            get { return _getCategoriesCount ??= new GetCategoriesCountService(_db); }
         }
         public AddNewProduct AddNewProduct
         {

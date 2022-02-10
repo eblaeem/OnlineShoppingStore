@@ -6,9 +6,9 @@ namespace OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetUsersCount
 {
     public class GetUsersCount : ViewComponent
     {
-        private readonly IGetUserCount _getCustomerCount;
+        private readonly IGetUserCountService _getCustomerCount;
 
-        public GetUsersCount(IGetUserCount getCustomerCount)
+        public GetUsersCount(IGetUserCountService getCustomerCount)
         {
             _getCustomerCount = getCustomerCount;
         }
