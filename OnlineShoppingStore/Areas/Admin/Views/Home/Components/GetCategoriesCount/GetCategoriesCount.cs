@@ -14,7 +14,7 @@ namespace OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetCategoriesCou
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(_facad.GetCategoriesCount.ExecuteGetCategoriesCount());
+            return await Task.Run(() => View(_facad.GetCategoriesCount.ExecuteGetCategoriesCount()));
         }
     }
 }

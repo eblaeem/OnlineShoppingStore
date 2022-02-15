@@ -1,4 +1,6 @@
-﻿namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUsers
+﻿using System.Threading.Tasks;
+
+namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUsers
 {
     public interface IGetUsersService/*: IService*/
     {
