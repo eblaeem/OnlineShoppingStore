@@ -18,7 +18,7 @@
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 type: "POST",
-                url: "Categories/Delete",
+                url: "categories/delete",
                 data: postData,
                 success: function (data) {
                     if (data.isSuccess == true) {
@@ -30,19 +30,18 @@
                             location.reload();
                         });
                     }
-                    else {
-
+                    else
+                    {
                         swal.fire(
                             'هشدار!',
                             data.message,
                             'warning'
                         );
-
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     swal.hideLoading();
-                    swal.fire("هشدار!", "عملیات با خطا مواجه شد");
+                    swal.fire("هشدار!", "عملیات با خطا مواجه شد","error");
                 }
 
             });

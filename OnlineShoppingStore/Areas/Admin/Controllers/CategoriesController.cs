@@ -58,10 +58,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Message = result == true ? "حذف گروه محصول با موفقیت انجام شد." : "حذف گروه محصول با خطا مواجه شد."
             };
 
-            TempData["Message"] = response.Message;
-            TempData["IsSuccess"] = response.IsSuccess;
-
-            return Ok(result);
+            return Ok(response);
         }
 
         [HttpGet]
