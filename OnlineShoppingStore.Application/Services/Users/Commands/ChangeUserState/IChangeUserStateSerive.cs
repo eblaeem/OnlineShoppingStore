@@ -5,9 +5,9 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.ChangeUserStat
 {
     public interface IChangeUserStateService
     {
-        Task<bool> ExecuteChangeUserStateService(long userId);
+        System.Threading.Tasks.Task<bool> ExecuteChangeUserStateService(long userId);
 
-        Task<UserStateEnum> Execute(long userId);
+        System.Threading.Tasks.Task<UserStateEnum> Execute(long userId);
     }
     public enum UserStateEnum
     {

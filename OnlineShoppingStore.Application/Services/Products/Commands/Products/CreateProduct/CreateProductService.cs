@@ -1,12 +1,11 @@
-﻿
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Common.ResultDto;
 using OnlineShoppingStore.Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
 {
@@ -21,70 +20,54 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
             _environment = environment;
         }
 
-        public ResultDto ExecuteAddNewProduct(RequestCreateProductDto request)
+        public async Task<bool> Execute(RequestCreateProductDto request)
         {
-            try
+            var cat =await _db.Categories.FindAsync(request.CategoryId);
+
+            Product product = new()
             {
-                var cat = _db.Categories.Find(request.CategoryId);
+                Name = request.Name,
+                Quantity = request.Quantity,
+                Displayed = request.Displayed,
+                BasePrice = request.BasePrice,
+                InsertTime = DateTime.Now
+            };
+            //product.ProductProperties = request.ProductProperties;
+            _db.Products.Add(product);
 
-                Product product = new()
-                {
-                    Name = request.Name,
-                    Quantity = request.Quantity,
-                    Displayed = request.Displayed,
-                    BasePrice = request.BasePrice,
-                    InsertTime = DateTime.Now
-                };
-                //product.ProductProperties = request.ProductProperties;
-                _db.Products.Add(product);
-
-                Cost cost = new()
-                {
-                    //Price = request.BasePrice + PropPrice,
-                    Product = product
-                };
-                _db.Costs.Add(cost);
-
-                List<Image> images = new();
-                foreach (var item in request.Images)
-                {
-                    var uploadResult = UploadFile(item);
-                    images.Add(new Image
-                    {
-                        Product = product,
-                        Src = uploadResult.FileNameAddress
-                    });
-                }
-                _db.Images.AddRange(images);
-
-                //List<ProductProperty> properties = new();
-                //foreach (var item in request.ProductProperties)
-                //{
-                //    properties.Add(new ProductProperty
-                //    {
-                //        Product = product,
-                //        Value = item.Value
-                //    });
-                //}
-                //_db.ProductProperties.AddRange(properties);
-
-                _db.SaveChanges();
-
-                return new ResultDto
-                {
-                    IsSuccess = true,
-                    Message = "افزودن محصول با موفقیت انجام شد."
-                };
-                
-            }
-            catch (System.Exception)
+            Cost cost = new()
             {
-                return new ResultDto
+                //Price = request.BasePrice + PropPrice,
+                Product = product
+            };
+            _db.Costs.Add(cost);
+
+            List<Image> images = new();
+            foreach (var item in request.Images)
+            {
+                var uploadResult = UploadFile(item);
+                images.Add(new Image
                 {
-                    IsSuccess = false,
-                    Message = "در افزودن محصول خطایی رخ داده است."
-                };
+                    Product = product,
+                    Src = uploadResult.FileNameAddress
+                });
             }
+            _db.Images.AddRange(images);
+
+            //List<ProductProperty> properties = new();
+            //foreach (var item in request.ProductProperties)
+            //{
+            //    properties.Add(new ProductProperty
+            //    {
+            //        Product = product,
+            //        Value = item.Value
+            //    });
+            //}
+            //_db.ProductProperties.AddRange(properties);
+
+            await _db.SaveChangesAsync();
+            return true;
+           
         }
 
         private UploadDto UploadFile(IFormFile file)

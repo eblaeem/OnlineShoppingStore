@@ -14,7 +14,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUserById
         {
             _db = db;
         }
-        public async Task<ResultGetUserByIdDto> ExecuteGetUserById(long userId)
+        public async System.Threading.Tasks.Task<ResultGetUserByIdDto> ExecuteGetUserById(long userId)
         {
             var user = await _db.Users.Include(e => e.UserRoles).FirstOrDefaultAsync(e => e.Id == userId);
             return new ResultGetUserByIdDto

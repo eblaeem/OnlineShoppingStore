@@ -1,5 +1,4 @@
-﻿using OnlineShoppingStore.Common.ResultDto;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
 {

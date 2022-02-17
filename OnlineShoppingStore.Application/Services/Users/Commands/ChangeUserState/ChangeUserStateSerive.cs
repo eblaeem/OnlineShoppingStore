@@ -13,7 +13,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.ChangeUserStat
             _db = db;
         }
 
-        public async Task<UserStateEnum> Execute(long userId)
+        public async System.Threading.Tasks.Task<UserStateEnum> Execute(long userId)
         {
             var user = await _db.Users.FindAsync(userId);
             if (user == null)
@@ -32,7 +32,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.ChangeUserStat
             return UserStateEnum.Active;
         }
 
-        public async Task<bool> ExecuteChangeUserStateService(long userId)
+        public async System.Threading.Tasks.Task<bool> ExecuteChangeUserStateService(long userId)
         {
             var user = await _db.Users.FindAsync(userId);
             if (user == null)

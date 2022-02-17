@@ -51,7 +51,11 @@ namespace OnlineShoppingStore.Controllers
                     }
                 }
             });
-            var response = new ResultDto<ResultCreateUserDto>();
+            var response = new ResultDto()
+            {
+                IsSuccess = signUpResult.Result,
+                Message = signUpResult.Result == true ? "" : ""
+            };
             //TO DO: hatman ba previous version check beshe;
 
             if (response.IsSuccess)
@@ -89,22 +93,24 @@ namespace OnlineShoppingStore.Controllers
             {
                 return View(model);
             }
-            var signInResult = _userLoginService.ExecuteUserLogin(new RequsetloginDto
+            var signInResult =await _userLoginService.ExecuteUserLogin(new RequsetloginDto
             {
                 Password = model.Password,
                 UserName = model.Email
             });
-            if (!signInResult.IsSuccess)
-            {
-                ViewBag.ErrorMessage = signInResult.Message;
-                return View();
-            }
+
+
+            //if (!signInResult.IsSuccess)
+            //{
+            //    ViewBag.ErrorMessage = signInResult.Message;
+            //    return View();
+            //}
             var claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.NameIdentifier, signInResult.Result.UserId.ToString()),
-                    new Claim(ClaimTypes.Name, signInResult.Result.FullName),
+                    new Claim(ClaimTypes.NameIdentifier, signInResult.UserId.ToString()),
+                    new Claim(ClaimTypes.Name, signInResult.FullName),
                     new Claim(ClaimTypes.Email, model.Email),
-                    new Claim(ClaimTypes.Role, signInResult.Result.Roles)
+                    new Claim(ClaimTypes.Role, signInResult.Roles)
                 };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);

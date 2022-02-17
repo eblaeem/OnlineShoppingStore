@@ -1,7 +1,9 @@
-﻿using OnlineShoppingStore.Application.Interfaces.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Common.ResultDto;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllPropertiesService
 {
@@ -14,31 +16,14 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllProper
             _db = db;
         }
 
-        public ResultDto<ICollection<RequestGetAllPropertiesDto>> ExecuteGetAllProperties()
+        public async Task<ICollection<RequestGetAllPropertiesDto>> Execute()
         {
-            try
+            var prop =await _db.Properties.Select(p => new RequestGetAllPropertiesDto
             {
-
-                var prop = _db.Properties.ToList().Select(p => new RequestGetAllPropertiesDto
-                {
-                    Id = p.Id,
-                    Title = p.Title,
-                }).ToList();
-                return new ResultDto<ICollection<RequestGetAllPropertiesDto>>
-                {
-                    IsSuccess = true,
-                    Message = "لیست ویژگی ها با موفقیت نمایش داده شد.",
-                    Result = prop
-                };
-            }
-            catch (System.Exception)
-            {
-                return new ResultDto<ICollection<RequestGetAllPropertiesDto>>
-                {
-                    IsSuccess = false,
-                    Message = "نمایش لیست ویژگی ها با خطا مواجه شد."
-                };
-            }
+                Id = p.Id,
+                Title = p.Title,
+            }).ToListAsync();
+            return prop;
         }
     }
 }

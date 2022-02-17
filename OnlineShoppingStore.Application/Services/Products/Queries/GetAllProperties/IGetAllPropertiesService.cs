@@ -1,10 +1,10 @@
-﻿using OnlineShoppingStore.Common.ResultDto;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllPropertiesService
 {
     public interface IGetAllPropertiesService
     {
-        ResultDto<ICollection<RequestGetAllPropertiesDto>> ExecuteGetAllProperties();
+        Task<ICollection<RequestGetAllPropertiesDto>> Execute();
     }
 }

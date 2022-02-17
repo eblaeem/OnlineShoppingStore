@@ -1,10 +1,10 @@
-﻿using OnlineShoppingStore.Common.ResultDto;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllCategoriesService
 {
     public interface IGetAllCategoriesService
     {
-        ResultDto<ICollection<ResultGetAllCategoriesDto>> ExecuteGetAllCategories();
+        Task<ICollection<ResultGetAllCategoriesDto>> Execute();
     }
 }

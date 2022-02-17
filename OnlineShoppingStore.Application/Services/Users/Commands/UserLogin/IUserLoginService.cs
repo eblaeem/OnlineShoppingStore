@@ -1,9 +1,9 @@
-﻿using OnlineShoppingStore.Common.ResultDto;
+﻿using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.UserLogin
 {
     public interface IUserLoginService
     {
-        ResultDto<ResultUserLoginDto> ExecuteUserLogin(RequsetloginDto request);
+        Task<ResultUserLoginDto> ExecuteUserLogin(RequsetloginDto request);
     }
 }

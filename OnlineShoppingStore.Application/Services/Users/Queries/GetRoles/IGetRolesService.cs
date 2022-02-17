@@ -6,6 +6,6 @@ namespace OnlineShoppingStore.Application.Services.Users.Queries.GetRoles
 {
     public interface IGetRolesService
     {
-        Task<ICollection<GetRolesDto>> ExecuteGetRole();
+        System.Threading.Tasks.Task<ICollection<GetRolesDto>> ExecuteGetRole();
     }
 }

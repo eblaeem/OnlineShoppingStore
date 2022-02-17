@@ -1,8 +1,9 @@
-﻿using OnlineShoppingStore.Application.Interfaces.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Common;
-using OnlineShoppingStore.Common.ResultDto;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService
 {
@@ -14,39 +15,22 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllProduc
         {
             _db = db;
         }
-        public ResultDto<ICollection<GetAllProductDto>> ExecuteGetAllProductService()
+        public async Task<ICollection<GetAllProductDto>> Execute()
         {
-            try
-            {
-                var product = (from c in _db.Categories
-                               join ca in _db.Categories on c.Id equals ca.ParentCategoryId
-                               join p in _db.Products on c.Id equals p.Id
-                               select new GetAllProductDto
-                               {
-                                   Id = p.Id,
-                                   Name = p.Name,
-                                   CatName = c.Name,
-                                   SubCatName = ca.Name,
-                                   Displayed = p.Displayed,
-                                   BasePrice = p.BasePrice,
-                                   CreatedDate = p.InsertTime.ToshamsiDate()
-                               }).ToList();
-
-                return new ResultDto<ICollection<GetAllProductDto>>()
-                {
-                    Result = product,
-                    IsSuccess = true,
-                    Message = "لیست محصولات با موفقیت برگشت داده شد."
-                };
-            }
-            catch (System.Exception)
-            {
-                return new ResultDto<ICollection<GetAllProductDto>>()
-                {
-                    IsSuccess = false,
-                    Message = "نمایش لیست محصولات با خطا مواجه شد."
-                };
-            }
+            var product = await (from c in _db.Categories
+                                 join ca in _db.Categories on c.Id equals ca.ParentCategoryId
+                                 join p in _db.Products on c.Id equals p.Id
+                                 select new GetAllProductDto
+                                 {
+                                     Id = p.Id,
+                                     Name = p.Name,
+                                     CatName = c.Name,
+                                     SubCatName = ca.Name,
+                                     Displayed = p.Displayed,
+                                     BasePrice = p.BasePrice,
+                                     CreatedDate = p.InsertTime.ToshamsiDate()
+                                 }).ToListAsync();
+            return product;
         }
     }
 }

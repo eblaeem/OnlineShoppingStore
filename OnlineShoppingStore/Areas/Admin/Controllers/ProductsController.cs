@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShoppingStore.Application.Services.Products.Commands.Products;
 using OnlineShoppingStore.Application.Services.Products.FacadDesignPattern;
+using OnlineShoppingStore.Common.ResultDto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,22 +18,22 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         {
             _facad = facad;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var model = _facad.GetAllProductService.ExecuteGetAllProductService().Result;
+            var model =await _facad.GetAllProductService.Execute();
             return View(model);
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.GetAllCat = new SelectList(_facad.GetAllCategoriesService.ExecuteGetAllCategories().Result, "Id", "Name");
-            ViewBag.GetAllProp = _facad.GetAllPropertiesService.ExecuteGetAllProperties().Result;
+            ViewBag.GetAllCat = new SelectList(await _facad.GetAllCategoriesService.Execute(), "Id", "Name");
+            ViewBag.GetAllProp =await _facad.GetAllPropertiesService.Execute();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(RequestCreateProductDto request)
+        public async Task<IActionResult> Create(RequestCreateProductDto request)
         {
             List<IFormFile> images = new();
             for (int i = 0; i < Request.Form.Files.Count; i++)
@@ -41,7 +42,16 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 images.Add(file);
             }
             request.Images = images;
-            return Json(_facad.AddNewProduct.ExecuteAddNewProduct(request));
+
+            var result = await _facad.AddNewProduct.Execute(request);
+
+            var response = new ResultDto()
+            {
+                IsSuccess = result,
+                Message = result == true ? "ثبت محصول با موفقیت انجام شد." : "ثبت محصول با خطا انجام شد."
+            };
+
+            return Ok(response);
         }
     }
 }

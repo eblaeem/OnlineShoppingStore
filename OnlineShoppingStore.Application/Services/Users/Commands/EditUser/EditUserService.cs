@@ -17,7 +17,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.EditUser
             _db = db;
         }
 
-        public async Task<bool> ExecuteEditUser(RequestEditDto request, CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<bool> ExecuteEditUser(RequestEditDto request, CancellationToken cancellationToken)
         {
             var user = await _db.Users.FindAsync(request.Id);
             if (user == null)

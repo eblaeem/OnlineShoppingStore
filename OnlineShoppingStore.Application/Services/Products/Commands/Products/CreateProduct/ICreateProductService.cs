@@ -1,9 +1,9 @@
-﻿using OnlineShoppingStore.Common.ResultDto;
+﻿using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
 {
     public interface ICreateProductService
     {
-        ResultDto ExecuteAddNewProduct(RequestCreateProductDto request);
+        Task<bool> Execute(RequestCreateProductDto request);
     }
 }
