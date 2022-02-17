@@ -5,9 +5,9 @@ namespace OnlineShoppingStore.Areas.Admin.Views.Shared.Components.Footer
 {
     public class Footer:ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync()
+        public Task<IViewComponentResult> InvokeAsync()
         {
-            return View("Default");
+            return Task.FromResult<IViewComponentResult>(View("Default"));
         }
     }
 }

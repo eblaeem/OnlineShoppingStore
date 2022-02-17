@@ -43,7 +43,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
             }
             request.Images = images;
 
-            var result = await _facad.AddNewProduct.Execute(request);
+            var result = await _facad.CreateProduct.Execute(request);
 
             var response = new ResultDto()
             {

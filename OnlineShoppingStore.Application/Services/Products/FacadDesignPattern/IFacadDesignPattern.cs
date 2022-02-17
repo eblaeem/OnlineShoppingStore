@@ -18,7 +18,7 @@ namespace OnlineShoppingStore.Application.Services.Products.FacadDesignPattern
         GetCategoriesService GetCategoriesService { get; }
         DeleteCategoryService DeleteCategoryService { get; }
         EditCategoryService EditCategoryService { get; }
-        CreateProductService AddNewProduct { get; }
+        CreateProductService CreateProduct { get; }
         GetAllCategoriesService GetAllCategoriesService { get; }
         GetAllProductService GetAllProductService { get; }
         GetAllPropertiesService GetAllPropertiesService { get; }
