@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Common;
-using OnlineShoppingStore.Common.ResultDto;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategories
 {
@@ -16,15 +16,12 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategorie
             _db = db;
         }
 
-        public ResultDto<ICollection<CategoriesDto>> ExecuteIGetCategoriesService(long? parentId)
+        public async Task<ICollection<CategoriesDto>> ExecuteGetCategories(long? parentId)
         {
-            try
-            {
-                var categories = _db.Categories
+            var categories =await _db.Categories
                 .Include(c => c.ParentCategory)
                 .Include(c => c.SubCategories)
                 .Where(c => c.ParentCategoryId == parentId && c.IsDeleted == false)
-                .ToList()
                 .Select(c => new CategoriesDto
                 {
                     Id = c.Id,
@@ -38,23 +35,9 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategorie
                     : null,
                     HasChild = c.SubCategories.Count() > 0 ? true : false,
                     CreateDate = c.InsertTime.ToshamsiDate()
-                }).ToList();
+                }).ToListAsync();
 
-                return new ResultDto<ICollection<CategoriesDto>>()
-                {
-                    IsSuccess = true,
-                    Message = "لیست با موفقیت برگشت داده شد.",
-                    Result = categories
-                };
-            }
-            catch (System.Exception)
-            {
-                return new ResultDto<ICollection<CategoriesDto>>()
-                {
-                    IsSuccess = false,
-                    Message = "نمایش لیست با خطا مواجه شد."
-                };
-            }
+           return categories;
         }
     }
 }

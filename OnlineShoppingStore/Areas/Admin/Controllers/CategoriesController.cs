@@ -3,6 +3,7 @@ using OnlineShoppingStore.Application.Services.Products.Commands.EditCategorySer
 using OnlineShoppingStore.Application.Services.Products.FacadDesignPattern;
 using OnlineShoppingStore.Areas.Admin.Models.CategoriesViewModel;
 using OnlineShoppingStore.Areas.Admin.Models.EditCategoryViewModel;
+using OnlineShoppingStore.Common.ResultDto;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Areas.Admin.Controllers
@@ -19,11 +20,11 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(long? parentId)
         {
-            return View(_facad.GetCategoriesService.ExecuteIGetCategoriesService(parentId).Result);
+            return View(await _facad.GetCategoriesService.ExecuteGetCategories(parentId));
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create(long? parentId)
+        public IActionResult Create(long? parentId)
         {
             ViewBag.ParentId = parentId;
             return View();
@@ -32,28 +33,45 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateViewModel model)
         {
-            var result = _facad.CreateCategoryService.ExecuteCreateCategory(model.parentId, model.Name);
+            var result = await _facad.CreateCategoryService.ExecuteCreateCategory(model.parentId, model.Name);
 
-            TempData["Message"] = result.Message;
-            TempData["IsSuccess"] = result.IsSuccess;
+            var response = new ResultDto()
+            {
+                IsSuccess = result,
+                Message = result == true ? "ثبت گروه محصول با موفقیت انجام شد." : "ثبت گروه محصول با خطا مواجه شد."
+            };
+
+            TempData["Message"] = response.Message;
+            TempData["IsSuccess"] = response.IsSuccess;
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
-            return Json(_facad.DeleteCategoryService.ExecuteDeleteCategory(id));
+            var result = await _facad.DeleteCategoryService.ExecuteDeleteCategory(id);
+
+            var response = new ResultDto()
+            {
+                IsSuccess = result,
+                Message = result == true ? "حذف گروه محصول با موفقیت انجام شد." : "حذف گروه محصول با خطا مواجه شد."
+            };
+
+            TempData["Message"] = response.Message;
+            TempData["IsSuccess"] = response.IsSuccess;
+
+            return Ok(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(long id)
         {
-            var cat = _facad.GetGetCategoryById.ExecuteGetCategoryById(id);
+            var cat = await _facad.GetGetCategoryById.ExecuteGetCategoryById(id);
             var model = new EditViewModel
             {
                 Id = id,
-                Name = cat.Result.Name,
+                Name = cat.Name,
             };
             return View(model);
         }
@@ -61,14 +79,19 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditViewModel model)
         {
-            var result = _facad.EditCategoryService.ExecuteEditCategory(new RequestEditCategoryDto
+            var result =await _facad.EditCategoryService.ExecuteEditCategory(new RequestEditCategoryDto
             {
                 Id = model.Id,
                 Name = model.Name,
             });
+            var response = new ResultDto()
+            {
+                IsSuccess = result,
+                Message = result == true ? "ویرایش گروه محصول با موفقیت انجام شد." : "ویرایش گروه محصول با خطا مواجه شد."
+            };
 
-            TempData["Message"] = result.Message;
-            TempData["IsSuccess"] = result.IsSuccess;
+            TempData["Message"] = response.Message;
+            TempData["IsSuccess"] = response.IsSuccess;
 
             return View(model);
         }

@@ -1,9 +1,9 @@
-﻿using OnlineShoppingStore.Common.ResultDto;
+﻿using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Commands.DeleteCategoryService
 {
     public interface IDeleteCategoryService
     {
-        ResultDto ExecuteDeleteCategory(long id);
+        Task<bool> ExecuteDeleteCategory(long id);
     }
 }

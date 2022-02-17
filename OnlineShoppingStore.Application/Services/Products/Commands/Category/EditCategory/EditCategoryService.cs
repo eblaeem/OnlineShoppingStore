@@ -1,6 +1,6 @@
 ﻿using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Common.ResultDto;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService
 {
@@ -13,36 +13,17 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.EditCategor
             _db = db;
         }
 
-        public ResultDto ExecuteEditCategory(RequestEditCategoryDto requestEditCategoryDto)
+        public async Task<bool> ExecuteEditCategory(RequestEditCategoryDto requestEditCategoryDto)
         {
-            try
+            var cat =await _db.Categories.FindAsync(requestEditCategoryDto.Id);
+            if (cat == null)
             {
-                var cat = _db.Categories.Find(requestEditCategoryDto.Id);
-                if (cat == null)
-                {
-                    return new ResultDto
-                    {
-                        IsSuccess = false,
-                        Message = "چنین گروه محصولی یافت نشد."
-                    };
-                }
-                cat.UpdateTime = DateTime.Now;
-                cat.Name = requestEditCategoryDto.Name;
-                _db.SaveChanges();
-                return new ResultDto
-                {
-                    IsSuccess = true,
-                    Message = "گروه محصول با موفقیت ویرایش شد"
-                };
+                throw new Exception("");
             }
-            catch (Exception)
-            {
-                return new ResultDto
-                {
-                    IsSuccess = false,
-                    Message = "ویرایش گروه محصول با خطا مواجه شد."
-                };
-            }
+            cat.UpdateTime = DateTime.Now;
+            cat.Name = requestEditCategoryDto.Name;
+            await _db.SaveChangesAsync();
+            return true;
         }
     }
 }

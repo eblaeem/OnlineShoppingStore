@@ -1,5 +1,6 @@
 ﻿using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Common.ResultDto;
+using System;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryByIdService
 {
@@ -12,26 +13,17 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryB
             _db = db;
         }
 
-        public ResultDto<ResultGetCategoryByIdDto> ExecuteGetCategoryById(long id)
+        public async Task<ResultGetCategoryByIdDto> ExecuteGetCategoryById(long id)
         {
-            var cat = _db.Categories.Find(id);
+            var cat =await _db.Categories.FindAsync(id);
             if (cat == null)
             {
-                return new ResultDto<ResultGetCategoryByIdDto>
-                {
-                    IsSuccess = false,
-                    Message = "چنین گروه محصولی یافت نشد."
-                };
+                throw new Exception("عملیات با خطا مواجه شد.");
             }
-            return new ResultDto<ResultGetCategoryByIdDto>
+            return new ResultGetCategoryByIdDto
             {
-                IsSuccess = true,
-                Message = "گروه محصول با موفقیت یافت شد.",
-                Result = new ResultGetCategoryByIdDto
-                {
-                   Name = cat.Name,
-                   Id = cat.Id
-                }
+                Id = cat.Id,
+                Name = cat.Name,
             };
         }
     }

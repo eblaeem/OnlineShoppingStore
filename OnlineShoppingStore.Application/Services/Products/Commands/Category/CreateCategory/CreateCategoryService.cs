@@ -1,6 +1,6 @@
 ﻿using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Common.ResultDto;
 using OnlineShoppingStore.Domain.Entities.Products;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products
 {
@@ -12,40 +12,17 @@ namespace OnlineShoppingStore.Application.Services.Products
         {
             _db = db;
         }
-        public ResultDto ExecuteCreateCategory(long? ParentId, string Name)
+        public async Task<bool> ExecuteCreateCategory(long? ParentId, string Name)
         {
-            try
+            Category category = new()
             {
-                if (string.IsNullOrEmpty(Name))
-                {
-                    return new ResultDto()
-                    {
-                        IsSuccess = false,
-                        Message = "نام گروه محصول را وارد نمایید",
-                    };
-                }
-                Category category = new()
-                {
-                    Name = Name,
-                    ParentCategory = GetParent(ParentId)
-                };
+                Name = Name,
+                ParentCategory = GetParent(ParentId)
+            };
 
-                _db.Categories.Add(category);
-                _db.SaveChanges();
-                return new ResultDto()
-                {
-                    IsSuccess = true,
-                    Message = "گروه محصول با موفقیت اضافه شد",
-                };
-            }
-            catch (System.Exception)
-            {
-                return new ResultDto()
-                {
-                    IsSuccess = false,
-                    Message = "در افزدون گروه محصول خطایی رخ داده است."
-                };
-            }
+            _db.Categories.Add(category);
+            await _db.SaveChangesAsync();
+            return true;
         }
 
         private Category GetParent(long? ParentId)

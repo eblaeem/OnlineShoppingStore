@@ -1,9 +1,9 @@
-﻿using OnlineShoppingStore.Common.ResultDto;
+﻿using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products
 {
     public interface ICreateCategoryService
     {
-        ResultDto ExecuteCreateCategory(long? ParentId, string Name);
+        Task<bool> ExecuteCreateCategory(long? ParentId, string Name);
     }
 }
