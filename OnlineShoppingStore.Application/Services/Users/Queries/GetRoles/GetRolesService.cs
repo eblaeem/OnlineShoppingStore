@@ -1,7 +1,8 @@
-﻿using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Common.ResultDto;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShoppingStore.Application.Interfaces.Context;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Users.Queries.GetRoles
 {
@@ -13,31 +14,14 @@ namespace OnlineShoppingStore.Application.Services.Users.Queries.GetRoles
         {
             _db = db;
         }
-        public ResultDto<ICollection<GetRolesDto>> ExecuteGetRole()
+        public async Task<ICollection<GetRolesDto>> ExecuteGetRole()
         {
-            try
+            var roles = await _db.Roles.Select(r => new GetRolesDto
             {
-                var roles = _db.Roles.ToList().Select(r => new GetRolesDto
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                }).ToList();
-
-                return new ResultDto<ICollection<GetRolesDto>>()
-                {
-                    Result = roles,
-                    IsSuccess = true,
-                    Message = "عملیات با موفقیت انجام شد."
-                };
-            }
-            catch (System.Exception)
-            {
-                return new ResultDto<ICollection<GetRolesDto>>()
-                {
-                    IsSuccess = false,
-                    Message = "عملیات با خطا مواجه شد."
-                };
-            }
+                Id = r.Id,
+                Name = r.Name,
+            }).ToListAsync();
+            return roles;
         }
     }
 }

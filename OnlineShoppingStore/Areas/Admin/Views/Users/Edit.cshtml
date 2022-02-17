@@ -16,13 +16,12 @@
 }
 
 <section class="basic-elements">
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title-wrap bar-success">
-                        <h4 class="card-title mb-0">فرم ویرایش کاربر</h4>
+                        <h4 class="card-title mb-0">ویرایش کاربر</h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -98,3 +97,12 @@
     </div>
 </section>
 
+@section scripts
+{
+    @if (TempData["Message"] != null)
+    {
+        <partial name="_SweetAlert" />
+        TempData["IsSuccess"] = null;
+        TempData["Message"] = null;
+    }
+}

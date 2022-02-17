@@ -18,7 +18,7 @@
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 type: "POST",
-                url: "delete",
+                url: "/admin/users/delete",
                 data: postData,
                 success: function (data) {
                     if (data.isSuccess == true) {
@@ -41,7 +41,7 @@
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     swal.hideLoading();
-                    swal.fire("!هشدار ", "عملیات با خطا مواجه شد", "خطا");
+                    swal.fire("هشدار!", "عملیات با خطا مواجه شد", 'error');
                 }
             });
         }
@@ -69,7 +69,7 @@ function ChangeUserState(userId,fullName) {
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
                 type: "POST",
-                url: "ChangeUserState",
+                url: "/admin/users/ChangeUserState",
                 data: postData,
                 success: function (data) {
                     if (data.isSuccess == true) {

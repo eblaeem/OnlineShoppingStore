@@ -3,5 +3,6 @@
     public class ResultCreateUserDto
     {
         public long UserId { get; set; }
+        public bool Result { get; set; }
     }
 }

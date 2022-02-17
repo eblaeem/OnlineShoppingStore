@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShoppingStore.Application.Services.Users.Commands.CreateUser;
 using OnlineShoppingStore.Application.Services.Users.Commands.UserLogin;
+using OnlineShoppingStore.Common.ResultDto;
 using OnlineShoppingStore.Common.RoleName;
 using OnlineShoppingStore.Models.ViewModels.AuthenticationViewModel;
 using System;
@@ -36,7 +37,7 @@ namespace OnlineShoppingStore.Controllers
             {
                 return View(model);
             }
-            var signUpResult = _createUserService.ExecuteCreateUser(new RequsetCreateUserDto
+            var signUpResult = await _createUserService.ExecuteCreateUser(new RequestCreateUserDto
             {
                 FullName = model.FullName,
                 Email = model.Email,
@@ -50,12 +51,15 @@ namespace OnlineShoppingStore.Controllers
                     }
                 }
             });
+            var response = new ResultDto<ResultCreateUserDto>();
+            //TO DO: hatman ba previous version check beshe;
 
-            if (signUpResult.IsSuccess)
+            if (response.IsSuccess)
             {
+
                 var claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.NameIdentifier, signUpResult.Result.UserId.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, signUpResult.UserId.ToString()),
                     new Claim(ClaimTypes.Name, model.FullName),
                     new Claim(ClaimTypes.Email, model.Email),
                     new Claim(ClaimTypes.Role, RoleName.Customer),
@@ -67,6 +71,7 @@ namespace OnlineShoppingStore.Controllers
                     IsPersistent = true,
                 };
                 await HttpContext.SignInAsync(principle, properties);
+
             }
             return View();
         }
@@ -119,6 +124,6 @@ namespace OnlineShoppingStore.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-     
+
     }
 }

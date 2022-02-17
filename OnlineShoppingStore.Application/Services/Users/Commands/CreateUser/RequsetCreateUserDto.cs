@@ -2,7 +2,7 @@
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.CreateUser
 {
-    public class RequsetCreateUserDto
+    public class RequestCreateUserDto
     {
         public string FullName { get; set; }
         public string Email { get; set; }

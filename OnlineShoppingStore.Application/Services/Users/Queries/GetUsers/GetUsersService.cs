@@ -13,37 +13,31 @@ namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUsers
         {
             _db = db;
         }
-        public ResultGetUserDto ExecuteGetUsersDtos(RequstGetUserDto requst)
+        public ResultGetUserDto ExecuteGetUsers(RequstGetUserDto requst)
         {
-            try
+            var users =_db.Users.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(requst.SearchKey))
             {
-                var users = _db.Users.AsQueryable();
-                if (!string.IsNullOrWhiteSpace(requst.SearchKey))
-                {
-                    users = users.Where(
-                        p => p.FullName.Contains(requst.SearchKey) &&
-                        p.Email.Contains(requst.SearchKey));
-                }
-                var userList = users.ToPaged(requst.Page, 20, out int rowsCount)
-                                    .Where(p => !p.IsDeleted)
-                                    .Select(p => new GetUsersDto
-                                    {
-                                        CreateDate = p.InsertTime.ToshamsiDate(),
-                                        FullName = p.FullName,
-                                        Email = p.Email,
-                                        Id = p.Id,
-                                        IsActive = p.IsActive,
-                                    }).ToList();
-                return new ResultGetUserDto
-                {
-                    Rows = rowsCount,
-                    Users = userList,
-                };
+                users = users.Where(
+                    p => p.FullName.Contains(requst.SearchKey) &&
+                    p.Email.Contains(requst.SearchKey));
             }
-            catch (System.Exception)
+            var userList =users.ToPaged(requst.Page, 20, out int rowsCount)
+                                .Where(p => !p.IsDeleted)
+                                .Select(p => new GetUsersDto
+                                {
+                                    CreateDate = p.InsertTime.ToshamsiDate(),
+                                    FullName = p.FullName,
+                                    Email = p.Email,
+                                    Id = p.Id,
+                                    IsActive = p.IsActive,
+                                }).ToList();
+            return new ResultGetUserDto()
             {
-                throw;
-            }
+                Rows = rowsCount,
+                Users = userList,
+            };
         }
     }
 }

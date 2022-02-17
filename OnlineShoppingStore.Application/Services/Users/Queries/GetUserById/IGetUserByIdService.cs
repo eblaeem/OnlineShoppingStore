@@ -1,10 +1,9 @@
-﻿using OnlineShoppingStore.Common.ResultDto;
+﻿using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUserById
 {
-    public  interface IGetUserByIdService
+    public interface IGetUserByIdService
     {
-        ResultDto<ResultGetUserByIdDto> ExecuteGetUserById(long userId);
+        Task<ResultGetUserByIdDto> ExecuteGetUserById(long userId);
     }
-
 }

@@ -1,7 +1,6 @@
 ﻿using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Common.ResultDto;
 using System;
-
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.DeleteUser
 {
@@ -13,25 +12,17 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.DeleteUser
         {
             _db = db;
         }
-        ResultDto IDeleteUserService.ExecuteDeleteUser(long userId)
+        public async Task<bool> ExecuteDeleteUser(long userId)
         {
-            var user = _db.Users.Find(userId);
+            var user =await _db.Users.FindAsync(userId);
             if (user == null)
             {
-                return new ResultDto
-                {
-                    IsSuccess = false,
-                    Message = "کاربری با چنین مشخصات یافت نشد."
-                };
+               return false;
             }
             user.DeletedTime = DateTime.Now;
             user.IsDeleted = true;
             _db.SaveChanges();
-            return new ResultDto
-            {
-                Message = "کاربر با موفقیت حذف شد.",
-                IsSuccess = true
-            };
+            return true;
         }
     }
 

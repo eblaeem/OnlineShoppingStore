@@ -4,6 +4,7 @@ using OnlineShoppingStore.Domain.Entities.User;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.EditUser
 {
@@ -16,52 +17,33 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.EditUser
             _db = db;
         }
 
-        public ResultDto ExecuteEditUser(RequestEditDto request, CancellationToken cancellationToken)
+        public async Task<bool> ExecuteEditUser(RequestEditDto request, CancellationToken cancellationToken)
         {
-            try
+            var user = await _db.Users.FindAsync(request.Id);
+            if (user == null)
             {
-                var user = _db.Users.Find(request.Id);
-                if (user == null)
-                {
-                    return new ResultDto
-                    {
-                        IsSuccess = false,
-                        Message = "کاربری با چنین مشخصات یافت نشد."
-                    };
-                }
-                user.FullName = request.FullName;
-                user.Email = request.Email;
-                
-                List<UserRole> userRoles = new List<UserRole>();
-
-                foreach (var item in request.Roles)
-                {
-                    var roles = _db.Roles.Find(item.Id);
-                    userRoles.Add(new UserRole
-                    {
-                        Role = roles,
-                        RoleId = roles.Id,
-                        User = user,
-                        UserId = user.Id
-                    });
-                }
-                user.UserRoles = userRoles;
-
-                _db.SaveChanges();
-                return new ResultDto
-                {
-                    IsSuccess = true,
-                    Message = "کاربر با موفقیت ویرایش شد."
-                };
+                return false;
             }
-            catch (Exception)
+            user.FullName = request.FullName;
+            user.Email = request.Email;
+
+            List<UserRole> userRoles = new List<UserRole>();
+
+            foreach (var item in request.Roles)
             {
-                return new ResultDto
+                var roles = _db.Roles.Find(item.Id);
+                userRoles.Add(new UserRole
                 {
-                    IsSuccess = false,
-                    Message = "ویرایش کاربر با خطا مواجه شد."
-                };
+                    Role = roles,
+                    RoleId = roles.Id,
+                    User = user,
+                    UserId = user.Id
+                });
             }
+            user.UserRoles = userRoles;
+
+            await _db.SaveChangesAsync();
+            return true;
         }
     }
 }
