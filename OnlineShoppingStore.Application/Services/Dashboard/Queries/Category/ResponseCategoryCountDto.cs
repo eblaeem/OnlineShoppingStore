@@ -1,4 +1,4 @@
-﻿namespace OnlineShoppingStore.Application.Services.DashboardInfo.Queries.Categories
+﻿namespace OnlineShoppingStore.Application.Services.Dashboard.Queries.Categories
 {
     public class ResponseCategoryCountDto
     {

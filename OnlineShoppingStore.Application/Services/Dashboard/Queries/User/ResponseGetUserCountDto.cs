@@ -1,4 +1,4 @@
-﻿namespace OnlineShoppingStore.Application.Services.DashboardInfo.Queries
+﻿namespace OnlineShoppingStore.Application.Services.Dashboard.Queries
 {
     public  class ResponseGetUserCountDto
     {

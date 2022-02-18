@@ -1,8 +1,9 @@
 ﻿using MediatR;
 
-namespace OnlineShoppingStore.Application.Services.DashboardInfo.Queries
+namespace OnlineShoppingStore.Application.Services.Dashboard.Queries
 {
     public class RequestGetUserCountDto : IRequest<ResponseGetUserCountDto>
     {
+        public static readonly RequestGetUserCountDto Instance = new();
     }
 }

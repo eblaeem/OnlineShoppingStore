@@ -1,10 +1,11 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using OnlineShoppingStore.Application.Interfaces.Context;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Application.Services.DashboardInfo.Queries.Categories
+namespace OnlineShoppingStore.Application.Services.Dashboard.Queries.Categories
 {
     public class GetCategoriesCountQuery : IRequestHandler<RequestCategoryCountDto, ResponseCategoryCountDto>
     {
@@ -17,7 +18,7 @@ namespace OnlineShoppingStore.Application.Services.DashboardInfo.Queries.Categor
 
         public async Task<ResponseCategoryCountDto> Handle(RequestCategoryCountDto request, CancellationToken cancellationToken)
         {
-            var catCount = _db.Categories.Where(c => c.IsDeleted == false && c.ParentCategoryId == null).Count();
+            var catCount =await _db.Categories.Where(c => c.IsDeleted == false && c.ParentCategoryId == null).CountAsync();
             return new ResponseCategoryCountDto
             {
                 CatCount = catCount

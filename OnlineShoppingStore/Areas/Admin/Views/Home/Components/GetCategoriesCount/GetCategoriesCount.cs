@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShoppingStore.Application.Services.DashboardInfo.Queries.Categories;
+using OnlineShoppingStore.Application.Services.Dashboard.Queries.Categories;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetCategoriesCount
@@ -15,7 +15,8 @@ namespace OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetCategoriesCou
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return await Task.Run(() => View(_mediator.Send(new RequestCategoryCountDto())));
+            var result = await _mediator.Send(RequestCategoryCountDto.Instance);
+            return View(result);
         }
     }
 }
