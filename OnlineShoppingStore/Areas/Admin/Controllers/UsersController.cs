@@ -65,7 +65,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 }
             });
             
-            var response = new ResultDto()
+            var response = new ApiResult()
             {
                 IsSuccess = result.Result,
                 Message = (result.Result == true ? "ثبت نام کاربر با موفقیت انجام شد." : "ثبت نام کاربر با خطا مواجه شد.")
@@ -116,7 +116,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 },
             });
 
-            var response = new ResultDto()
+            var response = new ApiResult()
             {
                 IsSuccess = result,
                 Message = (result == true ? "ویرایش کاربر با موفقیت انجام شد." : "ویرایش کاربر با خطا مواجه شد."),
@@ -134,7 +134,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         {
             var result = await _mediator.Send(new RequestDeleteUserDto { UserId = userId });
 
-            var response = new ResultDto()
+            var response = new ApiResult()
             {
                 IsSuccess = result,
                 Message = (result == true ? "کاربر با موفقیت حذف شد." : "حذف کاربر با خطا مواجه شد.")
@@ -148,7 +148,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
             var result = await _mediator.Send(new RequestChangeUserStateDto { UserId = userId });
 
             var state = result == UserStateEnum.Active ? "فعال" : result == UserStateEnum.Deactive ? "غیرفعال" : "وجود ندارد";
-            var response = new ResultDto()
+            var response = new ApiResult()
             {
                 IsSuccess = result == UserStateEnum.NotFound ? false : true,
                 Message = (result != UserStateEnum.NotFound ? $"کاربر با موفقیت {state} شد." : "تغییر وضعیت کاربر با خطا مواجه شد.")

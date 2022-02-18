@@ -50,7 +50,7 @@ namespace OnlineShoppingStore.Controllers
                     }
                 }
             });
-            var response = new ResultDto()
+            var response = new ApiResult()
             {
                 IsSuccess = signUpResult.Result,
                 Message = signUpResult.Result == true ? "" : ""

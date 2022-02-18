@@ -55,7 +55,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Quantity = request.Quantity,
             });
 
-            var response = new ResultDto()
+            var response = new ApiResult()
             {
                 IsSuccess = result,
                 Message = result == true ? "ثبت محصول با موفقیت انجام شد." : "ثبت محصول با خطا انجام شد."

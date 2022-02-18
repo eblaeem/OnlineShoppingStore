@@ -44,7 +44,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 ParentId = model.parentId
             });
 
-            var response = new ResultDto()
+            var response = new ApiResult()
             {
                 IsSuccess = result,
                 Message = result == true ? "ثبت گروه محصول با موفقیت انجام شد." : "ثبت گروه محصول با خطا مواجه شد."
@@ -61,7 +61,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         {
             var result = await _mediator.Send(new RequestDeleteCategoryDto { Id = id});
             
-            var response = new ResultDto()
+            var response = new ApiResult()
             {
                 IsSuccess = result,
                 Message = result == true ? "حذف گروه محصول با موفقیت انجام شد." : "حذف گروه محصول با خطا مواجه شد."
@@ -95,7 +95,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Name = model.Name,
             });
 
-            var response = new ResultDto()
+            var response = new ApiResult()
             {
                 IsSuccess = result,
                 Message = result == true ? "ویرایش گروه محصول با موفقیت انجام شد." : "ویرایش گروه محصول با خطا مواجه شد."
