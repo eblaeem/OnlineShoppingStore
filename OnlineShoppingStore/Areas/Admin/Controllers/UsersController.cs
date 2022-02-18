@@ -32,7 +32,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 SearchKey = searchKey,
                 Page = page
             });
-            return Ok(result);
+            return View(result);
         }
 
         [HttpGet]
