@@ -11,10 +11,10 @@ using OnlineShoppingStore.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using System;
-using OnlineShoppingStore.Application;
 using System.Text.Unicode;
 using System.Text.Encodings.Web;
 using MediatR;
+using OnlineShoppingStore.Application;
 
 namespace OnlineShoppingStore
 {
@@ -31,10 +31,7 @@ namespace OnlineShoppingStore
         public void ConfigureServices(IServiceCollection services)
         {
             // Register MediatR services
-            services.AddMediatR(typeof(Startup));
-
-            //Add Services With Startup ExentionMethod 
-            services.ConfigureAppServices(Configuration);
+            services.AddMediatR(typeof(ApplicationMarker));
 
             services.AddAuthentication(options =>
             {
