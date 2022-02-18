@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShoppingStore.Application.Services.Users.Commands.ChangeUserState;
 using OnlineShoppingStore.Application.Services.Users.Commands.CreateUser;
@@ -10,54 +11,34 @@ using OnlineShoppingStore.Application.Services.Users.Queries.GetUsers;
 using OnlineShoppingStore.Areas.Admin.Models;
 using OnlineShoppingStore.Common.ResultDto;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Areas.Admin.Controllers
 {
-
     [Area("Admin")]
     public class UsersController : Controller
     {
-        private readonly IGetUsersService _getUsersService;
-        private readonly ICreateUserService _createUserService;
-        private readonly IGetRolesService _getRolesService;
-        private readonly IDeleteUserService _deleteUserService;
-        private readonly IChangeUserStateService _changeUserStateService;
-        private readonly IEditUserService _editUserService;
-        private readonly IGetUserByIdService _getUserByIdService;
+        private readonly IMediator _mediator;
 
-        public UsersController(IGetUsersService getUsersService,
-            ICreateUserService createUserService,
-            IGetRolesService getRolesService,
-            IDeleteUserService deleteUserService,
-            IChangeUserStateService changeUserStateService,
-            IEditUserService editUserService,
-            IGetUserByIdService getUserByIdService)
+        public UsersController(IMediator mediator)
         {
-            _getUsersService = getUsersService;
-            _createUserService = createUserService;
-            _getRolesService = getRolesService;
-            _deleteUserService = deleteUserService;
-            _changeUserStateService = changeUserStateService;
-            _editUserService = editUserService;
-            _getUserByIdService = getUserByIdService;
+            _mediator = mediator;
         }
 
-        public IActionResult Index(string searchKey, int page = 1)
+        public async Task<IActionResult> Index(string searchKey, int page = 1)
         {
-            return View(_getUsersService.ExecuteGetUsers(
-                new RequstGetUserDto
-                {
-                    SearchKey = searchKey,
-                    Page = page
-                }));
+            var result = await _mediator.Send(new RequstGetUserDto
+            {
+                SearchKey = searchKey,
+                Page = page
+            });
+            return Ok(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.RoleNameSelectList = new SelectList(await _getRolesService.ExecuteGetRole(), "Id", "Name");
+            ViewBag.RoleNameSelectList = new SelectList(await _mediator.Send(new RequestGetRolesDto()),"Id","Name");
             return View();
         }
 
@@ -69,7 +50,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 return View(model);
             }
 
-            var result = await _createUserService.ExecuteCreateUser(new RequestCreateUserDto
+            var result = await _mediator.Send(new RequestCreateUserDto
             {
                 FullName = model.FullName,
                 Email = model.Email,
@@ -83,6 +64,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                     }
                 }
             });
+            
             var response = new ResultDto()
             {
                 IsSuccess = result.Result,
@@ -98,9 +80,9 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(long id)
         {
-            ViewBag.RoleNameSelectList = new SelectList(await _getRolesService.ExecuteGetRole(), "Id", "Name");
+            ViewBag.RoleNameSelectList = new SelectList(await _mediator.Send(new RequestGetRolesDto()), "Id", "Name");
 
-            var user = await _getUserByIdService.ExecuteGetUserById(id);
+            var user = await _mediator.Send(new RequestGetUserByIdDto { UserId = id });
 
             var result = new EditViewModel()
             {
@@ -112,14 +94,13 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditViewModel model, CancellationToken cancellationToken)
+        public async Task<IActionResult> Edit(EditViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-
-            var result = await _editUserService.ExecuteEditUser(new RequestEditDto
+            var result = await _mediator.Send(new RequestEditDto
             {
                 Id = model.Id,
                 FullName = model.FullName,
@@ -133,7 +114,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                         Id=model.RoleId
                     }
                 },
-            }, cancellationToken);
+            });
 
             var response = new ResultDto()
             {
@@ -151,7 +132,8 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(long userId)
         {
-            var result = await (_deleteUserService.ExecuteDeleteUser(userId));
+            var result = await _mediator.Send(new RequestDeleteUserDto { UserId = userId });
+
             var response = new ResultDto()
             {
                 IsSuccess = result,
@@ -163,7 +145,8 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangeUserState(long userId)
         {
-            var result = await _changeUserStateService.Execute(userId);
+            var result = await _mediator.Send(new RequestChangeUserStateDto { UserId = userId });
+
             var state = result == UserStateEnum.Active ? "فعال" : result == UserStateEnum.Deactive ? "غیرفعال" : "وجود ندارد";
             var response = new ResultDto()
             {

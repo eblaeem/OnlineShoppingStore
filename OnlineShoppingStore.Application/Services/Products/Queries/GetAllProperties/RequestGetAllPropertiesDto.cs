@@ -1,8 +1,9 @@
-﻿namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllPropertiesService
+﻿using MediatR;
+using System.Collections.Generic;
+
+namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllPropertiesService
 {
-    public class RequestGetAllPropertiesDto
+    public class RequestGetAllPropertiesDto: IRequest<ICollection<ResponseGetAllPropertiesDto>>
     {
-        public long Id { get; set; }
-        public string Title { get; set; }
     }
 }

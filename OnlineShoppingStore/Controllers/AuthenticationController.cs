@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShoppingStore.Application.Services.Users.Commands.CreateUser;
@@ -15,13 +16,11 @@ namespace OnlineShoppingStore.Controllers
 {
     public class AuthenticationController : Controller
     {
-        private readonly ICreateUserService _createUserService;
-        private readonly IUserLoginService _userLoginService;
+        private readonly IMediator _mediator;
 
-        public AuthenticationController(ICreateUserService createUserService, IUserLoginService userLoginService)
+        public AuthenticationController(IMediator mediator)
         {
-            _createUserService = createUserService;
-            _userLoginService = userLoginService;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -37,7 +36,7 @@ namespace OnlineShoppingStore.Controllers
             {
                 return View(model);
             }
-            var signUpResult = await _createUserService.ExecuteCreateUser(new RequestCreateUserDto
+            var signUpResult = await _mediator.Send(new RequestCreateUserDto
             {
                 FullName = model.FullName,
                 Email = model.Email,
@@ -93,12 +92,11 @@ namespace OnlineShoppingStore.Controllers
             {
                 return View(model);
             }
-            var signInResult =await _userLoginService.ExecuteUserLogin(new RequsetloginDto
+            var loginResult = await _mediator.Send(new RequestUserloginDto
             {
                 Password = model.Password,
                 UserName = model.Email
             });
-
 
             //if (!signInResult.IsSuccess)
             //{
@@ -107,10 +105,10 @@ namespace OnlineShoppingStore.Controllers
             //}
             var claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.NameIdentifier, signInResult.UserId.ToString()),
-                    new Claim(ClaimTypes.Name, signInResult.FullName),
+                    new Claim(ClaimTypes.NameIdentifier, loginResult.UserId.ToString()),
+                    new Claim(ClaimTypes.Name, loginResult.FullName),
                     new Claim(ClaimTypes.Email, model.Email),
-                    new Claim(ClaimTypes.Role, signInResult.Roles)
+                    new Claim(ClaimTypes.Role, loginResult.Roles)
                 };
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);

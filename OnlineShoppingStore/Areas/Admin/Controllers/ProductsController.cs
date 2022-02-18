@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShoppingStore.Application.Services.Products.Commands.Products;
-using OnlineShoppingStore.Application.Services.Products.FacadDesignPattern;
+using OnlineShoppingStore.Application.Services.Products.Queries.GetAllCategoriesService;
+using OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService;
+using OnlineShoppingStore.Application.Services.Products.Queries.GetAllPropertiesService;
 using OnlineShoppingStore.Common.ResultDto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,23 +15,23 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
     [Area("Admin")]
     public class ProductsController : Controller
     {
-        private readonly IFacadDesignPattern _facad;
+        private readonly IMediator _mediator;
 
-        public ProductsController(IFacadDesignPattern facad)
+        public ProductsController(IMediator mediator)
         {
-            _facad = facad;
+            _mediator = mediator;
         }
         public async Task<IActionResult> Index()
         {
-            var model =await _facad.GetAllProductService.Execute();
-            return View(model);
+            var result = await _mediator.Send(new RequestGetAllProductDto());
+            return View(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.GetAllCat = new SelectList(await _facad.GetAllCategoriesService.Execute(), "Id", "Name");
-            ViewBag.GetAllProp =await _facad.GetAllPropertiesService.Execute();
+            ViewBag.GetAllCat = new SelectList(await _mediator.Send(new RequestGetAllCategoriesDto()), "Id", "Name");
+            ViewBag.GetAllProp = await _mediator.Send(new RequestGetAllPropertiesDto());
             return View();
         }
 
@@ -43,7 +46,14 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
             }
             request.Images = images;
 
-            var result = await _facad.CreateProduct.Execute(request);
+            var result = await _mediator.Send(new RequestCreateProductDto
+            {
+                BasePrice = request.BasePrice,
+                CategoryId = request.CategoryId,
+                Displayed = request.Displayed,
+                Name = request.Name,
+                Quantity = request.Quantity,
+            });
 
             var response = new ResultDto()
             {

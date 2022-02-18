@@ -12,9 +12,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using System;
 using OnlineShoppingStore.Application;
-using OnlineShoppingStore.Application.Services.Products.FacadDesignPattern;
 using System.Text.Unicode;
 using System.Text.Encodings.Web;
+using MediatR;
 
 namespace OnlineShoppingStore
 {
@@ -30,11 +30,11 @@ namespace OnlineShoppingStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Register MediatR services
+            services.AddMediatR(typeof(Startup));
+
             //Add Services With Startup ExentionMethod 
             services.ConfigureAppServices(Configuration);
-
-            //Add Services With FacadeDesignPattern, FacadeInjection
-            services.AddScoped<IFacadDesignPattern, FacadDesignPattern>();
 
             services.AddAuthentication(options =>
             {

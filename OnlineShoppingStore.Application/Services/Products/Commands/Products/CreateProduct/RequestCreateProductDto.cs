@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 
 namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
 {
-    public class RequestCreateProductDto
+    public class RequestCreateProductDto : IRequest<bool>
     {
         public long CategoryId { get; set; }
         public string Name { get; set; }

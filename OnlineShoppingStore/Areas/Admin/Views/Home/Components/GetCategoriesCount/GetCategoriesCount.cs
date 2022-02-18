@@ -1,20 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShoppingStore.Application.Services.Products.FacadDesignPattern;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShoppingStore.Application.Services.DashboardInfo.Queries.Categories;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetCategoriesCount
 {
-    public class GetCategoriesCount:ViewComponent
+    public class GetCategoriesCount : ViewComponent
     {
-        private readonly IFacadDesignPattern _facad;
+        private readonly IMediator _mediator;
 
-        public GetCategoriesCount(IFacadDesignPattern facad)
+        public GetCategoriesCount(IMediator mediator)
         {
-            _facad = facad;
+            _mediator = mediator;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return await Task.Run(() => View(_facad.GetCategoriesCount.ExecuteGetCategoriesCount()));
+            return await Task.Run(() => View(_mediator.Send(new RequestCategoryCountDto())));
         }
     }
 }

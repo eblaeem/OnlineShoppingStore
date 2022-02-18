@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShoppingStore.Application.Services.Products;
+using OnlineShoppingStore.Application.Services.Products.Commands.DeleteCategoryService;
 using OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService;
-using OnlineShoppingStore.Application.Services.Products.FacadDesignPattern;
+using OnlineShoppingStore.Application.Services.Products.Queries.GetCategories;
+using OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryByIdService;
 using OnlineShoppingStore.Areas.Admin.Models.CategoriesViewModel;
 using OnlineShoppingStore.Areas.Admin.Models.EditCategoryViewModel;
 using OnlineShoppingStore.Common.ResultDto;
@@ -11,20 +15,21 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
     [Area("Admin")]
     public class CategoriesController : Controller
     {
-        private readonly IFacadDesignPattern _facad;
+        private readonly IMediator _mediator;
 
-        public CategoriesController(IFacadDesignPattern facad)
+        public CategoriesController(IMediator mediator)
         {
-            _facad = facad;
+            _mediator = mediator;
         }
 
         public async Task<IActionResult> Index(long? parentId)
         {
-            return View(await _facad.GetCategoriesService.ExecuteGetCategories(parentId));
+            var result = await _mediator.Send(new RequestGetCategoryDto { ParentId = parentId });
+            return Ok(result);
         }
 
         [HttpGet]
-        public IActionResult Create(long? parentId)
+        public async Task<IActionResult> Create(long? parentId)
         {
             ViewBag.ParentId = parentId;
             return View();
@@ -33,7 +38,11 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateViewModel model)
         {
-            var result = await _facad.CreateCategoryService.ExecuteCreateCategory(model.parentId, model.Name);
+            var result = await _mediator.Send(new RequestCreateCategoryDto
+            {
+                Name = model.Name,
+                ParentId = model.parentId
+            });
 
             var response = new ResultDto()
             {
@@ -50,8 +59,8 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(long id)
         {
-            var result = await _facad.DeleteCategoryService.ExecuteDeleteCategory(id);
-
+            var result = await _mediator.Send(new RequestDeleteCategoryDto { Id = id});
+            
             var response = new ResultDto()
             {
                 IsSuccess = result,
@@ -64,11 +73,15 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(long id)
         {
-            var cat = await _facad.GetGetCategoryById.ExecuteGetCategoryById(id);
+            var category = await _mediator.Send(new RequestGetCategoryByIdDto
+            {
+                Id = id
+            });
+
             var model = new EditViewModel
             {
                 Id = id,
-                Name = cat.Name,
+                Name = category.Name,
             };
             return View(model);
         }
@@ -76,11 +89,12 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditViewModel model)
         {
-            var result =await _facad.EditCategoryService.ExecuteEditCategory(new RequestEditCategoryDto
+            var result = await _mediator.Send(new RequestEditCategoryDto
             {
                 Id = model.Id,
                 Name = model.Name,
             });
+
             var response = new ResultDto()
             {
                 IsSuccess = result,

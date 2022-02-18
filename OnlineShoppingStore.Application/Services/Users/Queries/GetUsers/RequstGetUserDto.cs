@@ -1,6 +1,8 @@
-﻿namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUsers
+﻿using MediatR;
+
+namespace OnlineShoppingStore.Application.Services.Users.Queries.GetUsers
 {
-    public class RequstGetUserDto
+    public class RequstGetUserDto : IRequest<ResultGetUserDto>
     {
         public string SearchKey { get; set; }
         public int Page { get; set; }
