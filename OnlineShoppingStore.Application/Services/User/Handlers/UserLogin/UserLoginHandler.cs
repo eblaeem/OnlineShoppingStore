@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Users.Commands.UserLogin
 {
-    public class UserLoginHandler : IRequestHandler<RequestUserloginDto, ResponsetUserLoginDto>
+    public class UserLoginHandler : IRequestHandler<RequestUserloginDto, ResponseUserLoginDto>
     {
         private readonly IDataBaseContext _db;
 
@@ -17,7 +17,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.UserLogin
             _db = db;
         }
 
-        public async Task<ResponsetUserLoginDto> Handle(RequestUserloginDto request, CancellationToken cancellationToken)
+        public async Task<ResponseUserLoginDto> Handle(RequestUserloginDto request, CancellationToken cancellationToken)
         {
             var user = await _db.Users.Include(u => u.UserRoles)
                .ThenInclude(u => u.Role)
@@ -33,7 +33,7 @@ namespace OnlineShoppingStore.Application.Services.Users.Commands.UserLogin
                 roles += $"{item.Role.Name}";
             }
 
-            return new ResponsetUserLoginDto
+            return new ResponseUserLoginDto
             {
                 Roles = roles,
                 UserId = user.Id,

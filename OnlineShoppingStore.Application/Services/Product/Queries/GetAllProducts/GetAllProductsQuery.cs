@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService
 {
-    public class GetAllProductQuery : IRequestHandler<RequestGetAllProductDto, ICollection<ResponseGetAllProductDto>>
+    public class GetAllProductsQuery : IRequestHandler<RequestGetAllProductsDto, ICollection<ResponseGetAllProductsDto>>
     {
         private readonly IDataBaseContext _db;
 
-        public GetAllProductQuery(IDataBaseContext db)
+        public GetAllProductsQuery(IDataBaseContext db)
         {
             _db = db;
         }
 
-        public async Task<ICollection<ResponseGetAllProductDto>> Handle(RequestGetAllProductDto request, CancellationToken cancellationToken)
+        public async Task<ICollection<ResponseGetAllProductsDto>> Handle(RequestGetAllProductsDto request, CancellationToken cancellationToken)
         {
             var product = await (from c in _db.Categories
                                  join ca in _db.Categories on c.Id equals ca.ParentCategoryId
                                  join p in _db.Products on c.Id equals p.Id
-                                 select new ResponseGetAllProductDto
+                                 select new ResponseGetAllProductsDto
                                  {
                                      Id = p.Id,
                                      Name = p.Name,

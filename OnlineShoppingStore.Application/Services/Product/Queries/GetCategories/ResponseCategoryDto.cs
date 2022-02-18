@@ -1,6 +1,6 @@
 ﻿namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategories
 {
-    public class ResponseCategoriesDto
+    public class ResponseCategoryDto
     {
         public long Id { get; set; }
         public string Name { get; set; }

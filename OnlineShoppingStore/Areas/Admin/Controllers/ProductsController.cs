@@ -23,7 +23,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _mediator.Send(new RequestGetAllProductDto());
+            var result = await _mediator.Send(new RequestGetAllProductsDto());
             return View(result);
         }
 

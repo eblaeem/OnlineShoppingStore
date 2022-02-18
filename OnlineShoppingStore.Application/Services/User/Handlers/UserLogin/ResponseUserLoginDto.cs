@@ -1,6 +1,6 @@
 ﻿namespace OnlineShoppingStore.Application.Services.Users.Commands.UserLogin
 {
-    public class ResponsetUserLoginDto
+    public class ResponseUserLoginDto
     {
         public long UserId { get; set; }
         public string Roles { get; set; }

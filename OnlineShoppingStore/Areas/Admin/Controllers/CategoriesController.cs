@@ -25,7 +25,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         public async Task<IActionResult> Index(long? parentId)
         {
             var result = await _mediator.Send(new RequestGetCategoryDto { ParentId = parentId });
-            return Ok(result);
+            return View(result);
         }
 
         [HttpGet]

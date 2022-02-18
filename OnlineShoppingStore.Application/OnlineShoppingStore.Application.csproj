@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\DashboardInfo\Commands\" />
+    <Folder Include="Services\Dashboard\Handlers\" />
   </ItemGroup>
 
 </Project>

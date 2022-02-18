@@ -1,6 +1,6 @@
 ﻿namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService
 {
-    public class ResponseGetAllProductDto
+    public class ResponseGetAllProductsDto
     {
         public long Id { get; set; }
         public string Name { get; set; }

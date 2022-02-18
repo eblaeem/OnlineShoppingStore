@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService
 {
-    public class RequestGetAllProductDto : IRequest<ICollection<ResponseGetAllProductDto>>
+    public class RequestGetAllProductsDto : IRequest<ICollection<ResponseGetAllProductsDto>>
     {
     }
 }

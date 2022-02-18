@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Users.Queries.GetRoles
 {
-    public class GetRolesQuery : IRequestHandler<RequestGetRolesDto, ICollection<GetRolesDto>>
+    public class GetRolesQuery : IRequestHandler<RequestGetRolesDto, ICollection<ResponseGetRolesDto>>
     {
         private readonly IDataBaseContext _db;
 
@@ -17,9 +17,9 @@ namespace OnlineShoppingStore.Application.Services.Users.Queries.GetRoles
             _db = db;
         }
 
-        public async Task<ICollection<GetRolesDto>> Handle(RequestGetRolesDto request, CancellationToken cancellationToken)
+        public async Task<ICollection<ResponseGetRolesDto>> Handle(RequestGetRolesDto request, CancellationToken cancellationToken)
         {
-            var roles = await _db.Roles.Select(r => new GetRolesDto
+            var roles = await _db.Roles.Select(r => new ResponseGetRolesDto
             {
                 Id = r.Id,
                 Name = r.Name,
