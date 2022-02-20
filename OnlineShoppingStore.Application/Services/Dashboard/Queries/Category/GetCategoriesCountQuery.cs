@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Dashboard.Queries.Categories
 {
-    public class GetCategoriesCountQuery : IRequestHandler<RequestCategoryCountDto, ResponseCategoryCountDto>
+    public class GetCategoriesCountQuery : IRequestHandler<RequestCategoryCountDto, int>
     {
         private readonly IDataBaseContext _db;
 
@@ -16,13 +16,10 @@ namespace OnlineShoppingStore.Application.Services.Dashboard.Queries.Categories
             _db = db;
         }
 
-        public async Task<ResponseCategoryCountDto> Handle(RequestCategoryCountDto request, CancellationToken cancellationToken)
+        public async Task<int> Handle(RequestCategoryCountDto request, CancellationToken cancellationToken)
         {
             var catCount =await _db.Categories.Where(c => c.IsDeleted == false && c.ParentCategoryId == null).CountAsync();
-            return new ResponseCategoryCountDto
-            {
-                CatCount = catCount
-            };
+            return catCount;
         }
     }
 }

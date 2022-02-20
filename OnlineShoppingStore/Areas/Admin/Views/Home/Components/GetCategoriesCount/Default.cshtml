@@ -1,5 +1,4 @@
-﻿@model OnlineShoppingStore.Application.Services.Dashboard.Queries.Categories.ResponseCategoryCountDto
-@{
+﻿@{
     Layout = null;
 }
 
@@ -10,7 +9,7 @@
                 <div class="media d-flex">
                     <div class="media-body text-left">
                         <h6>تعداد گروه محصولات:</h6>
-                        <h3 class="text-success">@Model.CatCount</h3>
+                        <h3 class="text-success">@ViewBag.Count</h3>
                     </div>
                     <div>
                         <i class="font-large-2 la la-window-maximize text-success"></i>

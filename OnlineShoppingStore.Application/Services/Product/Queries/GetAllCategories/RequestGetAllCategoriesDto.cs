@@ -5,5 +5,6 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllCatego
 {
     public class RequestGetAllCategoriesDto : IRequest<ICollection<ResponseGetAllCategoriesDto>>
     {
+        public static readonly RequestGetAllCategoriesDto Instance = new();
     }
 }

@@ -16,8 +16,8 @@ namespace OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetUsersCount
 
         public async Task<IViewComponentResult> InvokeAsync()
         { 
-            var result = await _mediator.Send(RequestGetUserCountDto.Instance);
-            return View(result);
+            ViewBag.Count =  await _mediator.Send(RequestGetUserCountDto.Instance);
+            return View();
         }
     }
 }

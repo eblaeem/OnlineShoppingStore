@@ -5,5 +5,6 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllProper
 {
     public class RequestGetAllPropertiesDto: IRequest<ICollection<ResponseGetAllPropertiesDto>>
     {
+        public static readonly RequestGetAllPropertiesDto Instance = new();
     }
 }

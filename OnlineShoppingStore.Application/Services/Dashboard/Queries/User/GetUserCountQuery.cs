@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.Services.Dashboard.Queries
 {
-    public class GetUserCountQuery : IRequestHandler<RequestGetUserCountDto, ResponseGetUserCountDto>
+    public class GetUserCountQuery : IRequestHandler<RequestGetUserCountDto, int>
     {
         private readonly IDataBaseContext _db;
 
@@ -16,13 +16,10 @@ namespace OnlineShoppingStore.Application.Services.Dashboard.Queries
             _db = db;
         }
 
-        public async Task<ResponseGetUserCountDto> Handle(RequestGetUserCountDto request, CancellationToken cancellationToken)
+        public async Task<int> Handle(RequestGetUserCountDto request, CancellationToken cancellationToken)
         {
             var count =await _db.Users.Where(u => u.IsActive == true && u.IsDeleted != true).CountAsync();
-            return new ResponseGetUserCountDto
-            {
-                UserCount = count
-            };
+            return count;
         }
     }
 }

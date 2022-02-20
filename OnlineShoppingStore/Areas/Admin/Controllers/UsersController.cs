@@ -38,7 +38,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.RoleNameSelectList = new SelectList(await _mediator.Send(new RequestGetRolesDto()),"Id","Name");
+            ViewBag.RoleNameSelectList = new SelectList(await _mediator.Send(RequestGetRolesDto.Instance),"Id","Name");
             return View();
         }
 
@@ -80,7 +80,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(long id)
         {
-            ViewBag.RoleNameSelectList = new SelectList(await _mediator.Send(new RequestGetRolesDto()), "Id", "Name");
+            ViewBag.RoleNameSelectList = new SelectList(await _mediator.Send(RequestGetRolesDto.Instance), "Id", "Name");
 
             var user = await _mediator.Send(new RequestGetUserByIdDto { UserId = id });
 

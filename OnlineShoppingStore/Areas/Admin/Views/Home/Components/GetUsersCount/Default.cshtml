@@ -1,5 +1,4 @@
-﻿@model OnlineShoppingStore.Application.Services.Dashboard.Queries.ResponseGetUserCountDto
-@{
+﻿@{
     ViewData["Title"] = "View";
 }
 
@@ -10,7 +9,7 @@
                 <div class="media d-flex">
                     <div class="media-body text-left">
                         <h6>تعداد کاربران:</h6>
-                        <h3 class="text-info">@Model.UserCount</h3>
+                        <h3 class="text-info">@ViewBag.Count</h3>
                     </div>
                     <div>
                         <i class="font-large-2 la la-user-check text-info"></i>

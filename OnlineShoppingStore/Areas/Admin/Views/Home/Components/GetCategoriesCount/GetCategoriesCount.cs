@@ -15,8 +15,8 @@ namespace OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetCategoriesCou
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var result = await _mediator.Send(RequestCategoryCountDto.Instance);
-            return View(result);
+            ViewBag.Count = await _mediator.Send(RequestCategoryCountDto.Instance);
+            return View();
         }
     }
 }

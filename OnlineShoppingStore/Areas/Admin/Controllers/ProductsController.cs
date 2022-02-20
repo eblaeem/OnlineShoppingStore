@@ -23,15 +23,15 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _mediator.Send(new RequestGetAllProductsDto());
+            var result = await _mediator.Send(RequestGetAllProductsDto.Instance);
             return View(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.GetAllCat = new SelectList(await _mediator.Send(new RequestGetAllCategoriesDto()), "Id", "Name");
-            ViewBag.GetAllProp = await _mediator.Send(new RequestGetAllPropertiesDto());
+            ViewBag.GetAllCat = new SelectList(await _mediator.Send(RequestGetAllCategoriesDto.Instance), "Id", "Name");
+            ViewBag.GetAllProp = await _mediator.Send(RequestGetAllPropertiesDto.Instance);
             return View();
         }
 
