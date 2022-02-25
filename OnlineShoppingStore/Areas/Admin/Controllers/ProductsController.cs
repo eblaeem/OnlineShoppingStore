@@ -53,6 +53,8 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Displayed = request.Displayed,
                 Name = request.Name,
                 Quantity = request.Quantity,
+                ProductProperties = request.ProductProperties,
+                Images = images
             });
 
             var response = new ApiResult()

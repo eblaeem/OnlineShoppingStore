@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
+using OnlineShoppingStore.Domain.Entities.Products;
 using System.Collections.Generic;
 
 namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
@@ -15,15 +16,15 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
 
         public List<IFormFile> Images { get; set; }
         //public RequestPropertyDto PropertyDto { get; set; }
-        public List<RequestPropertyDto> PropertyDtos { get; set; }
+        public List<ProductProperty> ProductProperties { get; set; }
 
     }
-    public class RequestPropertyDto
-    {
-        public long PropertyId { get; set; }
-        public string PropertyName { get; set; }
+    //public class RequestPropertyDto
+    //{
+    //    public long PropertyId { get; set; }
+    //    public string PropertyName { get; set; }
         
-    }
+    //}
 
 
 }

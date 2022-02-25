@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using OnlineShoppingStore.Application.Interfaces.Context;
+using OnlineShoppingStore.Common;
 using OnlineShoppingStore.Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
@@ -32,10 +33,27 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
                 Quantity = request.Quantity,
                 Displayed = request.Displayed,
                 BasePrice = request.BasePrice,
-                InsertTime = DateTime.Now
+                
             };
-            //product.ProductProperties = request.ProductProperties;
             _db.Products.Add(product);
+            //ProductProperty productProperty = new()
+            //{
+            //    Value = request.ProductProperties[0].Value
+            //}
+            List<ProductProperty> productProperty = new();
+            foreach (var item in request.ProductProperties)
+            {
+                productProperty.Add(
+                    new ProductProperty
+                    {
+                        Product = product,
+                        Value = item.Value,
+                        PropertyId = item.PropertyId,
+                    });   
+            }
+            _db.ProductProperties.AddRange(productProperty);
+            
+
 
             Cost cost = new()
             {
@@ -55,17 +73,6 @@ namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
                 });
             }
             _db.Images.AddRange(images);
-
-            //List<ProductProperty> properties = new();
-            //foreach (var item in request.ProductProperties)
-            //{
-            //    properties.Add(new ProductProperty
-            //    {
-            //        Product = product,
-            //        Value = item.Value
-            //    });
-            //}
-            //_db.ProductProperties.AddRange(properties);
 
             await _db.SaveChangesAsync();
             return true;
