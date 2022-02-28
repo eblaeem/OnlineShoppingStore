@@ -1,4 +1,4 @@
-﻿@model OnlineShoppingStore.Areas.Admin.Models.CategoriesViewModel.CreateViewModel
+﻿@model OnlineShoppingStore.Areas.Admin.Models.CategoriesViewModel.CreateCategoriesModel
 
 @{
     ViewBag.Title = "ایجاد گروه جدید";
@@ -15,6 +15,7 @@
     </div>
 }
 
+<div asp-validation-summary="ModelOnly"></div>
 <section class="basic-elements">
     <div class="row">
         <div class="col-md-12">
@@ -43,6 +44,7 @@
                                             <input type="hidden" asp-for="@Model.parentId" value="@ViewBag.parentId" />
                                             <input type="text" class="form-control mb-1"
                                                    placeholder="نام دسته بندی" asp-for="@Model.Name">
+                                            <span asp-validation-for="Name"></span>
                                             <div class="form-control-position">
                                                 <i class="ft-grid fa-2x text-bitbucket"></i>
                                             </div>

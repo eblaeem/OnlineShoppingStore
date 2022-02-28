@@ -38,15 +38,16 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            ViewBag.RoleNameSelectList = new SelectList(await _mediator.Send(RequestGetRolesDto.Instance),"Id","Name");
+            ViewBag.RoleNameSelectList = new SelectList(await _mediator.Send(RequestGetRolesDto.Instance), "Id", "Name");
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateViewModel model)
+        public async Task<IActionResult> Create(CreateUsersModel model)
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.RoleNameSelectList = new SelectList(await _mediator.Send(RequestGetRolesDto.Instance), "Id", "Name");
                 return View(model);
             }
 
@@ -84,7 +85,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
 
             var user = await _mediator.Send(new RequestGetUserByIdDto { UserId = id });
 
-            var result = new EditViewModel()
+            var result = new EditUsersModel()
             {
                 FullName = user.FullName,
                 Email = user.Email,
@@ -94,7 +95,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditViewModel model)
+        public async Task<IActionResult> Edit(EditUsersModel model)
         {
             if (!ModelState.IsValid)
             {

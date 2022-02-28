@@ -47,7 +47,7 @@ namespace OnlineShoppingStore
             
             services.AddControllers().AddFluentValidation(options =>
             {
-                options.RegisterValidatorsFromAssemblyContaining<CreateViewModel>();
+                options.RegisterValidatorsFromAssemblyContaining<CreateUsersModel>();
             });
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(UnicodeRanges.All));
             services.AddScoped<IDataBaseContext, DataBaseContext>();

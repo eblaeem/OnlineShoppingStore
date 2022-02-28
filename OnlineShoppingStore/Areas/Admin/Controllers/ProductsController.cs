@@ -36,24 +36,29 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(RequestCreateProductDto request)
+        public async Task<IActionResult> Create(RequestCreateProductDto model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             List<IFormFile> images = new();
             for (int i = 0; i < Request.Form.Files.Count; i++)
             {
                 var file = Request.Form.Files[i];
                 images.Add(file);
             }
-            request.Images = images;
+            model.Images = images;
 
             var result = await _mediator.Send(new RequestCreateProductDto
             {
-                BasePrice = request.BasePrice,
-                CategoryId = request.CategoryId,
-                Displayed = request.Displayed,
-                Name = request.Name,
-                Quantity = request.Quantity,
-                ProductProperties = request.ProductProperties,
+                BasePrice = model.BasePrice,
+                CategoryId = model.CategoryId,
+                Displayed = model.Displayed,
+                Name = model.Name,
+                Quantity = model.Quantity,
+                ProductProperties = model.ProductProperties,
                 Images = images
             });
 

@@ -36,8 +36,12 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateViewModel model)
+        public async Task<IActionResult> Create(CreateCategoriesModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             var result = await _mediator.Send(new RequestCreateCategoryDto
             {
                 Name = model.Name,
@@ -78,7 +82,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Id = id
             });
 
-            var model = new EditViewModel
+            var model = new EditCategoriesModel
             {
                 Id = id,
                 Name = category.Name,
@@ -87,8 +91,12 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditViewModel model)
+        public async Task<IActionResult> Edit(EditCategoriesModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             var result = await _mediator.Send(new RequestEditCategoryDto
             {
                 Id = model.Id,

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 
@@ -14,5 +16,6 @@ namespace OnlineShoppingStore.Common
             var str = date.ToString("HH:mm:ss yyyy/MM/dd");
             return str;
         }
+
     }
 }
