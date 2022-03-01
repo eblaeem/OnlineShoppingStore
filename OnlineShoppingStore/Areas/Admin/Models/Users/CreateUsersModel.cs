@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using OnlineShoppingStore.Application.Services.Validation;
 
 namespace OnlineShoppingStore.Areas.Admin.Models
 {
@@ -9,7 +10,6 @@ namespace OnlineShoppingStore.Areas.Admin.Models
         public string Password { get; set; }
         public string RePassword { get; set; }
         public long RoleId { get; set; }
-
     }
 
     public class CreateUserValiation : AbstractValidator<CreateUsersModel>
@@ -24,8 +24,8 @@ namespace OnlineShoppingStore.Areas.Admin.Models
             RuleFor(c => c.Email)
                     .NotEmpty().WithMessage("مقدار ایمیل را تکمیل نمایید.")
                     .NotNull().WithMessage("مقدار ایمیل را تکمیل نمایید.")
-                    .EmailAddress().WithMessage("مقدار ایمیل را بصورت صحیح وارد نمایید.");
-                    
+                    .EmailAddress().WithMessage("مقدار ایمیل را بصورت صحیح وارد نمایید.")
+                    .UniqueEmail().WithMessage("شناسه ایمیل تکراری می باشد.");
 
             RuleFor(c => c.Password)
                 .NotEmpty().WithMessage("مقدار رمز عبور را تکمیل نمایید.")

@@ -99,6 +99,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.RoleNameSelectList = new SelectList(await _mediator.Send(RequestGetRolesDto.Instance), "Id", "Name");
                 return View(model);
             }
             var result = await _mediator.Send(new RequestEditDto

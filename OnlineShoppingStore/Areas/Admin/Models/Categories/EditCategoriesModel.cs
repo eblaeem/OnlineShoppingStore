@@ -13,8 +13,8 @@ namespace OnlineShoppingStore.Areas.Admin.Models.EditCategoryViewModel
         public EditCategoriesValidation()
         {
             RuleFor(c => c.Name)
-                .NotEmpty().WithMessage("مقدار گروه محصول را تکمیل نمایید.")
-                .NotNull().WithMessage("مقدار گروه محصول را تکمیل نمایید.");
+                .NotEmpty().WithMessage("نام دسته محصول را تکمیل نمایید.")
+                .NotNull().WithMessage("نام دسته بندی محصول را تکمیل نمایید.");
         }
     }
 }

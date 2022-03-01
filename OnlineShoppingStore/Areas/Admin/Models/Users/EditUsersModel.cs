@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using OnlineShoppingStore.Application.Services.Validation;
 
 namespace OnlineShoppingStore.Areas.Admin.Models
 {
@@ -7,12 +8,12 @@ namespace OnlineShoppingStore.Areas.Admin.Models
         public long Id { get; set; }
         public string Email { get; set; }
         public string FullName { get; set; }
-        public string Password { get;set ; }
-        public string RePassword { get;set ; }
+        public string Password { get; set; }
+        public string RePassword { get; set; }
         public long RoleId { get; set; }
     }
 
-    public class EditUsersValidation: AbstractValidator<EditUsersModel>
+    public class EditUsersValidation : AbstractValidator<EditUsersModel>
     {
         public EditUsersValidation()
         {
