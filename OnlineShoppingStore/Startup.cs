@@ -50,9 +50,11 @@ namespace OnlineShoppingStore
                 options.RegisterValidatorsFromAssemblyContaining<CreateUsersModel>();
             });
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(UnicodeRanges.All));
-            services.AddScoped<IDataBaseContext, DataBaseContext>();
+
+            services.AddScoped<IDataBaseContext>(provider=> provider.GetRequiredService<DataBaseContext>());
             services.AddDbContext<DataBaseContext>(option =>
             option.UseSqlServer(Configuration.GetConnectionString("OnlineShoppingStoreDb")));
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
         }
@@ -70,6 +72,11 @@ namespace OnlineShoppingStore
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //var scope = app.ApplicationServices.CreateScope();
+            //var db = scope.ServiceProvider.GetRequiredService<DataBaseContext>();
+            //db.Database.MigrateAsync();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

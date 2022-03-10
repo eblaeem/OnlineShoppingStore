@@ -13,6 +13,7 @@ namespace OnlineShoppingStore.Domain.Entities.Products
 
         public virtual ICollection<ProductCategory> ProductCategories { get; set; } = new HashSet<ProductCategory>();
         public virtual ICollection<ProductProperty> ProductProperties { get; set; } = new HashSet<ProductProperty>();
+        public virtual ICollection<OrderItem> Items { get; set; } = new HashSet<OrderItem>();
         public virtual ICollection<Image> Images { get; set; } = new HashSet<Image>();
         public virtual ICollection<Cost> Costs { get; set; } = new HashSet<Cost>();
     }

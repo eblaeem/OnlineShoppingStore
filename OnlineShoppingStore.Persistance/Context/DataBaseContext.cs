@@ -4,6 +4,10 @@ using OnlineShoppingStore.Common.RoleName;
 using OnlineShoppingStore.Domain.Entities.Products;
 using OnlineShoppingStore.Domain.Entities.Setting;
 using OnlineShoppingStore.Domain.Entities.User;
+using OnlineShoppingStore.Persistance.Configurations.ProductConfigurations;
+using OnlineShoppingStore.Persistance.Configurations.SettingConfigurations;
+using OnlineShoppingStore.Persistance.Configurations.UserConfigurations;
+using System.Linq;
 
 namespace OnlineShoppingStore.Persistance.Context
 {
@@ -34,45 +38,33 @@ namespace OnlineShoppingStore.Persistance.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductCategoryConfigurations());
+            modelBuilder.ApplyConfiguration(new ProductPropertyConfigurations());
+            modelBuilder.ApplyConfiguration(new OrderStatusConfigurations());
+            modelBuilder.ApplyConfiguration(new OrderItemConfigurations());
+            modelBuilder.ApplyConfiguration(new OrderConfigurations());
+            modelBuilder.ApplyConfiguration(new ProductConfigurations());
+            modelBuilder.ApplyConfiguration(new CustomerConfigurations());
+            modelBuilder.ApplyConfiguration(new PropertyTypeConfigurations());
+            modelBuilder.ApplyConfiguration(new CustomizerSettingConfiguration());
+            modelBuilder.ApplyConfiguration(new SettingValueConfiguration());
+
+
             SeedData(modelBuilder);
-            HasColumnType(modelBuilder);
 
-            modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
-
-            modelBuilder.Entity<ProductCategory>().HasKey(pc => new { pc.ProductId, pc.CategoryId });
-            modelBuilder.Entity<ProductProperty>().HasKey(pp => new { pp.ProductId, pp.PropertyId });
-            modelBuilder.Entity<OrderStatus>().HasKey(os => new { os.OrderId, os.StatusId });
-            modelBuilder.Entity<OrderItem>().HasKey(oi => new { oi.OrderId, oi.ProductId });
-
-            modelBuilder.Entity<ProductCategory>().HasOne<Product>(pc => pc.Product)
-                        .WithMany(p => p.ProductCategories).HasForeignKey(pc => pc.ProductId);
-
-            modelBuilder.Entity<ProductCategory>().HasOne<Category>(pc => pc.Category)
-                        .WithMany(c => c.ProductCategories).HasForeignKey(pc => pc.CategoryId);
-
-            modelBuilder.Entity<ProductProperty>().HasOne<Product>(pp => pp.Product)
-                        .WithMany(p => p.ProductProperties).HasForeignKey(pp => pp.ProductId);
-
-            modelBuilder.Entity<ProductProperty>().HasOne<Property>(pp => pp.Property)
-                        .WithMany(p => p.ProductProperties).HasForeignKey(pp => pp.PropertyId);
-
-            modelBuilder.Entity<OrderStatus>().HasOne<Order>(os => os.Order)
-                        .WithMany(o => o.OrderStatuses).HasForeignKey(os => os.OrderId);
-
-            modelBuilder.Entity<OrderStatus>().HasOne<Status>(os => os.Status)
-                        .WithMany(s => s.OrderStatuses).HasForeignKey(os => os.StatusId);
-
-            modelBuilder.Entity<Order>().HasMany(o => o.Items).WithOne(i => i.Order);
-            modelBuilder.Entity<Product>().HasMany(p => p.Costs).WithOne(c => c.Product);
-            modelBuilder.Entity<Product>().HasMany(p => p.Images).WithOne(e => e.Product);
-            modelBuilder.Entity<Customer>().HasMany(c=>c.Orders).WithOne(o => o.Customer);
-            modelBuilder.Entity<PropertyType>().HasMany(p => p.Properties).WithOne(p => p.PropertyType);
+            modelBuilder.SetDecimalPrecision();
 
 
-            modelBuilder.Entity<CustomizerSetting>().HasKey(x => x.Key);
-            modelBuilder.Entity<CustomizerSetting>().Property(x => x.Key).HasMaxLength(200);
-            modelBuilder.Entity<SettingValue>().HasKey(x => new { x.SettingKey, x.Value });
-            modelBuilder.Entity<SettingValue>().HasOne(x => x.Setting).WithMany().HasForeignKey(x => x.SettingKey).IsRequired();
+
+            //var types = typeof(OrderItemConfigurations)
+            //    .Assembly.GetExportedTypes()
+            //    .Where(t => t.GetInterfaces()
+            //    .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)));
+
+            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderItemConfigurations).Assembly);
         }
 
         private static void SeedData(ModelBuilder modelBuilder)
@@ -80,15 +72,6 @@ namespace OnlineShoppingStore.Persistance.Context
             modelBuilder.Entity<Role>().HasData(new Role { Id = 1, Name = nameof(RoleName.Admin) });
             modelBuilder.Entity<Role>().HasData(new Role { Id = 2, Name = nameof(RoleName.Operator) });
             modelBuilder.Entity<Role>().HasData(new Role { Id = 3, Name = nameof(RoleName.Customer) });
-        }
-
-        private static void HasColumnType(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Cost>().Property(c => c.Price).HasColumnType("decimal(10,4)");
-            modelBuilder.Entity<Product>().Property(c => c.Quantity).HasColumnType("decimal(10,4)");
-            modelBuilder.Entity<Product>().Property(c => c.BasePrice).HasColumnType("decimal(10,4)");
-            modelBuilder.Entity<OrderItem>().Property(c => c.OrderQuantity).HasColumnType("decimal(10,4)");
-            modelBuilder.Entity<OrderItem>().Property(c => c.Price).HasColumnType("decimal(10,4)");
         }
     }
 
