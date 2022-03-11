@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Application.Services.Dashboard.Queries.Categories
+namespace OnlineShoppingStore.Application.Services.Dashboard.Queries.Category
 {
-    public class GetCategoriesCountQuery : IRequestHandler<RequestCategoryCountDto, int>
+    public class GetCategoriesCountQuery : IRequestHandler<RequestGetCategoriesCount, int>
     {
         private readonly IDataBaseContext _db;
 
@@ -16,7 +16,7 @@ namespace OnlineShoppingStore.Application.Services.Dashboard.Queries.Categories
             _db = db;
         }
 
-        public async Task<int> Handle(RequestCategoryCountDto request, CancellationToken cancellationToken)
+        public async Task<int> Handle(RequestGetCategoriesCount request, CancellationToken cancellationToken)
         {
             var catCount =await _db.Categories.Where(c => c.IsDeleted == false && c.ParentCategoryId == null).CountAsync();
             return catCount;

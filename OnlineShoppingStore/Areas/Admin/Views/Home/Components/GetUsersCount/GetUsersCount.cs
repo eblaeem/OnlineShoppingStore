@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShoppingStore.Application.Services.Dashboard.Queries;
+using OnlineShoppingStore.Application.Services.Dashboard.Queries.User;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetUsersCount
@@ -16,7 +16,7 @@ namespace OnlineShoppingStore.Areas.Admin.Views.Home.Components.GetUsersCount
 
         public async Task<IViewComponentResult> InvokeAsync()
         { 
-            ViewBag.Count =  await _mediator.Send(RequestGetUserCountDto.Instance);
+            ViewBag.Count =  await _mediator.Send(RequestGetUserCount.Instance);
             return View();
         }
     }
