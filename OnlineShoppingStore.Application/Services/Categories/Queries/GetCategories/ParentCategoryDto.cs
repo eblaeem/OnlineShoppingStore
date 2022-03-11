@@ -1,4 +1,4 @@
-﻿namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategories
+﻿namespace OnlineShoppingStore.Application.Services.Categories.Handlers.Queries.GetCategories
 {
     public class ParentCategoryDto
     {

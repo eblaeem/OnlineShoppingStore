@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService
+namespace OnlineShoppingStore.Application.Services.Categories.Handlers.EditCategoryService
 {
     public class RequestEditCategoryDto : IRequest<bool>
     {

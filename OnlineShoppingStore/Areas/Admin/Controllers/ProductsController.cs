@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using OnlineShoppingStore.Application.Services.Categories.Handlers.GetAllCategoriesService;
 using OnlineShoppingStore.Application.Services.Products.Commands.Products;
-using OnlineShoppingStore.Application.Services.Products.Queries.GetAllCategoriesService;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetAllPropertiesService;
 using OnlineShoppingStore.Common.ResultDto;

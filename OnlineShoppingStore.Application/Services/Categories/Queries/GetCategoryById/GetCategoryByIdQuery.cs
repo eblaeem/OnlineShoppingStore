@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryByIdService
+namespace OnlineShoppingStore.Application.Services.Categories.Handlers.GetCategoryByIdService
 {
     public class GetCategoryByIdQuery : IRequestHandler<RequestGetCategoryByIdDto, ResponseGetCategoryByIdDto>
     {

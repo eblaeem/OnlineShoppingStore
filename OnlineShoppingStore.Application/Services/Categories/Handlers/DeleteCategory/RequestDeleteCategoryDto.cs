@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace OnlineShoppingStore.Application.Services.Products.Commands.DeleteCategoryService
+namespace OnlineShoppingStore.Application.Services.Categories.Handlers.DeleteCategoryService
 {
     public class RequestDeleteCategoryDto: IRequest<bool>
     {

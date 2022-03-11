@@ -1,13 +1,14 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OnlineShoppingStore.Application.Interfaces.Context;
+using OnlineShoppingStore.Application.Services.Categories.Handlers.Queries.GetCategories;
 using OnlineShoppingStore.Common;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategories
+namespace OnlineShoppingStore.Application.Services.Categories.Handlers.GetCategories
 {
     public class GetCategoryQuery : IRequestHandler<RequestGetCategoryDto, ICollection<ResponseCategoryDto>>
     {

@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService
+namespace OnlineShoppingStore.Application.Services.Categories.Handlers.EditCategoryService
 {
     public class EditCategoryHandler : IRequestHandler<RequestEditCategoryDto,bool>
     {

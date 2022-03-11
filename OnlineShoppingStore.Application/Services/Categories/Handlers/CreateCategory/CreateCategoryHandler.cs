@@ -4,7 +4,7 @@ using OnlineShoppingStore.Domain.Entities.Products;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Application.Services.Products
+namespace OnlineShoppingStore.Application.Services.Categories.Handlers.CreateCategory
 {
     public class CreateCategoryHandler : IRequestHandler<RequestCreateCategoryDto,bool>
     {

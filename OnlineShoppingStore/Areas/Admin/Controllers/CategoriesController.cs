@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShoppingStore.Application.Services.Products;
-using OnlineShoppingStore.Application.Services.Products.Commands.DeleteCategoryService;
-using OnlineShoppingStore.Application.Services.Products.Commands.EditCategoryService;
-using OnlineShoppingStore.Application.Services.Products.Queries.GetCategories;
-using OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryByIdService;
+using OnlineShoppingStore.Application.Services.Categories.Handlers.CreateCategory;
+using OnlineShoppingStore.Application.Services.Categories.Handlers.DeleteCategoryService;
+using OnlineShoppingStore.Application.Services.Categories.Handlers.EditCategoryService;
+using OnlineShoppingStore.Application.Services.Categories.Handlers.GetCategories;
+using OnlineShoppingStore.Application.Services.Categories.Handlers.GetCategoryByIdService;
 using OnlineShoppingStore.Areas.Admin.Models.CategoriesViewModel;
 using OnlineShoppingStore.Areas.Admin.Models.EditCategoryViewModel;
 using OnlineShoppingStore.Common.ResultDto;

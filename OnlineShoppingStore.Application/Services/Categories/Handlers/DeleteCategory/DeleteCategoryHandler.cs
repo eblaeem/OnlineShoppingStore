@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Application.Services.Products.Commands.DeleteCategoryService
+namespace OnlineShoppingStore.Application.Services.Categories.Handlers.DeleteCategoryService
 {
     public class DeleteCategoryHandler : IRequestHandler<RequestDeleteCategoryDto,bool>
     {

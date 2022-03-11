@@ -1,4 +1,4 @@
-﻿namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllCategoriesService
+﻿namespace OnlineShoppingStore.Application.Services.Categories.Handlers.GetAllCategoriesService
 {
     public class ResponseGetAllCategoriesDto
     {

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System.Collections.Generic;
 
-namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategories
+namespace OnlineShoppingStore.Application.Services.Categories.Handlers.GetCategories
 {
     public class RequestGetCategoryDto : IRequest<ICollection<ResponseCategoryDto>>
     {

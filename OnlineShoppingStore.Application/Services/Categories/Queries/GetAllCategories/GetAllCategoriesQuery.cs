@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllCategoriesService
+namespace OnlineShoppingStore.Application.Services.Categories.Handlers.GetAllCategoriesService
 {
     public class GetAllCategoriesQuery: IRequestHandler<RequestGetAllCategoriesDto, ICollection<ResponseGetAllCategoriesDto>>
     {

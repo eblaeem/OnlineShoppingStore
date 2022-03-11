@@ -1,4 +1,4 @@
-﻿namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategoryByIdService
+﻿namespace OnlineShoppingStore.Application.Services.Categories.Handlers.GetCategoryByIdService
 {
     public class ResponseGetCategoryByIdDto
     {

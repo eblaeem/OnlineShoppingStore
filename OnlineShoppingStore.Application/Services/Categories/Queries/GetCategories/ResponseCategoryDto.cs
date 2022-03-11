@@ -1,4 +1,6 @@
-﻿namespace OnlineShoppingStore.Application.Services.Products.Queries.GetCategories
+﻿using OnlineShoppingStore.Application.Services.Categories.Handlers.Queries.GetCategories;
+
+namespace OnlineShoppingStore.Application.Services.Categories.Handlers.GetCategories
 {
     public class ResponseCategoryDto
     {
