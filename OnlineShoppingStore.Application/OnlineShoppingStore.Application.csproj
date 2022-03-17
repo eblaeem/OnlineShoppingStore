@@ -19,7 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Dashboard\Handlers\" />
+    <Folder Include="AdminServices\Dashboard\Handlers\" />
+    <Folder Include="SiteServices\Products\Handlers\" />
   </ItemGroup>
 
 </Project>
