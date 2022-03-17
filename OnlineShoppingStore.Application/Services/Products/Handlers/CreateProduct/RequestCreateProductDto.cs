@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using OnlineShoppingStore.Domain.Entities.Products;
 using System.Collections.Generic;
 
-namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
+namespace OnlineShoppingStore.Application.Services.Products.Handlers.CreateProduct
 {
     public class RequestCreateProductDto : IRequest<bool>
     {

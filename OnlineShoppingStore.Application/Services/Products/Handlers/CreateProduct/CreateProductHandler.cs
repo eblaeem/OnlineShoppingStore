@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Common;
 using OnlineShoppingStore.Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
+namespace OnlineShoppingStore.Application.Services.Products.Handlers.CreateProduct
 {
     public class CreateProductHandler : IRequestHandler<RequestCreateProductDto,bool>
     {

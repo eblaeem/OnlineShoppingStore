@@ -52,6 +52,7 @@
                                                 <td>@item.CreatedDate</td>
                                                 <td>
                                                     <a class="btn btn-outline-success" href="addproperty/@item.Id">افزودن ویژگی</a>
+                                                    <button class="btn btn-outline-danger" onclick="DeleteProduct('@item.Id','@item.Name')">حذف</button>
                                                 </td>
                                             </tr>
                                         }
@@ -66,3 +67,6 @@
     </div>
 </section>
 
+@section scripts{
+    <script src="~/Admin/js/product-controller/index.js"></script>
+}

@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShoppingStore.Application.Services.Categories.Handlers.GetAllCategoriesService;
-using OnlineShoppingStore.Application.Services.Products.Commands.Products;
+using OnlineShoppingStore.Application.Services.Products.Handlers.CreateProduct;
+using OnlineShoppingStore.Application.Services.Products.Handlers.DeleteProduct;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService;
 using OnlineShoppingStore.Application.Services.Products.Queries.GetAllPropertiesService;
 using OnlineShoppingStore.Common.ResultDto;
@@ -68,6 +69,21 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Message = result == true ? "ثبت محصول با موفقیت انجام شد." : "ثبت محصول با خطا انجام شد."
             };
 
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(long id)
+        {
+            var result =await _mediator.Send(new RequestDeleteProductHandler
+            {
+                ProductId = id
+            });
+            var response = new ApiResult()
+            {
+                IsSuccess = result,
+                Message = result == true ? "حذف محصول با موفقیت انجام شد." : "حذف محصول با خطا مواجه شد."
+            };
             return Ok(response);
         }
     }

@@ -23,6 +23,7 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllProduc
             var product = await (from c in _db.Categories
                                  join ca in _db.Categories on c.Id equals ca.ParentCategoryId
                                  join p in _db.Products on c.Id equals p.Id
+                                 where p.IsDeleted == false
                                  select new ResponseGetAllProductsDto
                                  {
                                      Id = p.Id,

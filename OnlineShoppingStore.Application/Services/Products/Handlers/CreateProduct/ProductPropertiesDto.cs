@@ -1,4 +1,4 @@
-﻿namespace OnlineShoppingStore.Application.Services.Products.Commands.Products
+﻿namespace OnlineShoppingStore.Application.Services.Products.Handlers.CreateProduct
 {
     public class ProductPropertiesDto
     {
