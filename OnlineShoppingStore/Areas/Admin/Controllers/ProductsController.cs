@@ -69,7 +69,10 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Message = result == true ? "ثبت محصول با موفقیت انجام شد." : "ثبت محصول با خطا انجام شد."
             };
 
-            return Ok(response);
+            TempData["IsSuccess"] = response.IsSuccess;
+            TempData["Message"] = response.Message;
+
+            return View(model);
         }
 
         [HttpPost]

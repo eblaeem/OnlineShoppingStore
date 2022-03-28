@@ -1,19 +1,17 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Common;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductsInSite
 {
-    public class GetAllProductsInSite : IRequestHandler<RequestGetAllProductsInSite, ResponseGetAllProductsInSiteDto>
+    public class GetAllProductsInSiteQuery : IRequestHandler<RequestGetAllProductsInSite, ResponseGetAllProductsInSiteDto>
     {
         private readonly IDataBaseContext _db;
 
-        public GetAllProductsInSite(IDataBaseContext db)
+        public GetAllProductsInSiteQuery(IDataBaseContext db)
         {
             _db = db;
         }

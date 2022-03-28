@@ -8,7 +8,7 @@
 }
 
 @section styles{
-    <link href="~/Admin/css/product-controller/create.css" rel="stylesheet" />
+    <link href="~/Admin/css/products-controller/create.css" rel="stylesheet" />
 }
 
 @section roadMap{
@@ -139,5 +139,11 @@
 </section>
 
 @section scripts{
-    <script src="~/Admin/js/product-controller/create.js"></script>
+    @if (TempData["Message"] != null)
+    {
+        <partial name="_SweetAlert" />
+        TempData["IsSuccess"] = null;
+        TempData["Message"] = null;
+    }
+    <script src="~/Admin/js/products-controller/create.js"></script>
 }
