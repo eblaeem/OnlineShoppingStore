@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductDetailsInSite;
 using OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductsInSite;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Controllers

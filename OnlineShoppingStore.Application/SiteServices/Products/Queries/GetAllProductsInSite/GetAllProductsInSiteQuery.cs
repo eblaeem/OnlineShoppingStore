@@ -27,7 +27,8 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                     p.Name,
                     p.BasePrice,
                     i.Src
-                }).ToPaged(request.Page, 20, out int totalRow);
+                })
+                .ToPaged(request.Page, 20, out int totalRow);
 
             return new ResponseGetAllProductsInSiteDto
             {

@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using OnlineShoppingStore.Application.Interfaces.Context;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -23,6 +22,11 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
             var query = from p in _db.Products
                         join i in _db.Images on p.Id equals i.ProductId
                         join pp in _db.ProductProperties on p.Id equals pp.ProductId
+                        join pc in _db.ProductCategories on p.Id equals pc.ProductId
+                        join c in _db.Categories on pc.CategoryId equals c.Id
+                        join ca in _db.Categories on c.ParentCategoryId equals ca.Id
+                        let subCatName = c.Name
+                        let catName = ca.Name
                         where p.Id == request.Id
                         select new
                         {
@@ -34,9 +38,34 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                             i.Src,
                             i.ProductId,
                             pp.Property,
-                            pp.Value
+                            pp.Value,
+                            catName,
+                            subCatName
                         };
+
             var product = await query.FirstOrDefaultAsync(cancellationToken: cancellationToken);
+
+            var features = new List<ProductDetailFeatureDto>();
+            var images = new List<ProductDetailImagesDto>();
+
+            foreach (var item in query)
+            {
+                var record = new ProductDetailFeatureDto()
+                {
+                    Value = item.Value,
+                    DisplayName = item.Property.Title
+                };
+                
+                features.Add(record);
+            }
+
+            foreach (var item in query)
+            {
+                var record = new ProductDetailImagesDto()
+                {
+                    Src = item.Src
+                };
+            }
 
             return new ResponseGetAllProductDetailsInSite()
             {
@@ -45,22 +74,10 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                 Inventory = product.Quantity,
                 Displayed = product.Displayed,
                 Price = product.BasePrice,
-                Images = new List<ProductDetailImagesDto>()
-                {
-                   new ProductDetailImagesDto
-                   {
-                       Src = product.Src,
-                   }
-                }.ToList(),
-                Features = new List<ProductDetailFeatureDto>()
-                {
-                    new ProductDetailFeatureDto()
-                    {
-                     Value = product.Value,
-                     DisplayName = product.Property.Title
-                    }
-                }
-
+                Category = product.catName,
+                SubCategory = product.subCatName,
+                Features = features,
+                Images = images
             };
         }
     }
