@@ -24,17 +24,24 @@ namespace OnlineShoppingStore.Application.Services.Products.Handlers.CreateProdu
 
         public async Task<bool> Handle(RequestCreateProductDto request, CancellationToken cancellationToken)
         {
-            var cat = await _db.Categories.FindAsync(request.CategoryId);
-
             Product product = new()
             {
                 Name = request.Name,
                 Quantity = request.Quantity,
                 Displayed = request.Displayed,
-                BasePrice = request.BasePrice,
-                
+                BasePrice = request.BasePrice
             };
             _db.Products.Add(product);
+
+            var cat = await _db.Categories.FindAsync(request.CategoryId);
+            List<ProductCategory> productCategories = new();
+            productCategories.Add(new ProductCategory
+            {
+                Category = cat,
+                Product = product
+            });
+            _db.ProductCategories.AddRange(productCategories);
+            
             //ProductProperty productProperty = new()
             //{
             //    Value = request.ProductProperties[0].Value
@@ -46,8 +53,8 @@ namespace OnlineShoppingStore.Application.Services.Products.Handlers.CreateProdu
                     new ProductProperty
                     {
                         Product = product,
-                        Value = item.Value,
                         PropertyId = item.PropertyId,
+                        Value = item.Value,
                     });   
             }
             _db.ProductProperties.AddRange(productProperty);

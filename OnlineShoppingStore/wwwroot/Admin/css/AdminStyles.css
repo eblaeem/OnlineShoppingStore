@@ -11548,7 +11548,7 @@ textarea.form-control-lg {
   max-width: 100%;
   margin: 0;
   padding: 0.8em 1em 0;
-  color: #595959;
+  color: inherit;
   font-size: 1.875em;
   font-weight: 600;
   text-align: center;
@@ -11606,34 +11606,34 @@ textarea.form-control-lg {
   border: 0;
   border-radius: 0.25em;
   background: initial;
-  background-color: #7367f0;
+  background-color: #7066e0;
   color: #fff;
   font-size: 1em;
 }
 .swal2-styled.swal2-confirm:focus {
-  box-shadow: 0 0 0 3px rgba(115, 103, 240, 0.5);
+  box-shadow: 0 0 0 3px rgba(112, 102, 224, 0.5);
 }
 .swal2-styled.swal2-deny {
   border: 0;
   border-radius: 0.25em;
   background: initial;
-  background-color: #ea5455;
+  background-color: #dc3741;
   color: #fff;
   font-size: 1em;
 }
 .swal2-styled.swal2-deny:focus {
-  box-shadow: 0 0 0 3px rgba(234, 84, 85, 0.5);
+  box-shadow: 0 0 0 3px rgba(220, 55, 65, 0.5);
 }
 .swal2-styled.swal2-cancel {
   border: 0;
   border-radius: 0.25em;
   background: initial;
-  background-color: #6e7d88;
+  background-color: #6e7881;
   color: #fff;
   font-size: 1em;
 }
 .swal2-styled.swal2-cancel:focus {
-  box-shadow: 0 0 0 3px rgba(110, 125, 136, 0.5);
+  box-shadow: 0 0 0 3px rgba(110, 120, 129, 0.5);
 }
 .swal2-styled.swal2-default-outline:focus {
   box-shadow: 0 0 0 3px rgba(100, 150, 200, 0.5);
@@ -11650,7 +11650,7 @@ textarea.form-control-lg {
   margin: 1em 0 0;
   padding: 1em 1em 0;
   border-top: 1px solid #eee;
-  color: #545454;
+  color: inherit;
   font-size: 1em;
 }
 
@@ -11660,7 +11660,6 @@ textarea.form-control-lg {
   bottom: 0;
   left: 0;
   grid-column: auto !important;
-  height: 0.25em;
   overflow: hidden;
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -11718,7 +11717,7 @@ textarea.form-control-lg {
   margin: 1em 1.6em 0.3em;
   padding: 0;
   overflow: auto;
-  color: #545454;
+  color: inherit;
   font-size: 1.125em;
   font-weight: normal;
   line-height: normal;
@@ -11733,7 +11732,7 @@ textarea.form-control-lg {
 .swal2-select,
 .swal2-radio,
 .swal2-checkbox {
-  margin: 1em 2em 0;
+  margin: 1em 2em 3px;
 }
 
 .swal2-input,
@@ -11775,7 +11774,7 @@ textarea.form-control-lg {
 }
 
 .swal2-range {
-  margin: 1em 2em 0;
+  margin: 1em 2em 3px;
   background: #fff;
 }
 .swal2-range input {
@@ -16258,7 +16257,7 @@ html {
             transition: .3s ease all;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            min-height: calc(100% - 7rem)
+            min-height: calc(100% - 3.2rem)
         }
 
             html body .content.app-content.show-overlay .content-overlay {

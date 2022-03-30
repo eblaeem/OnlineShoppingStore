@@ -33,6 +33,7 @@
   {
     "outputFileName": "wwwroot/css/SiteStyles.css",
     "inputFiles": [
+      "node_modules/font-awesome/css/font-awesome.css",
       "node_modules/bootstrap/dist/css/bootstrap.css",
       "node_modules/owl.carousel/dist/assets/owl.carousel.css"
     ],
@@ -46,7 +47,8 @@
     "inputFiles": [
       "node_modules/jquery/dist/jquery.js",
       "node_modules/bootstrap/dist/js/bootstrap.js",
-      "node_modules/owl.carousel/dist/owl.carousel.js"
+      "node_modules/owl.carousel/dist/owl.carousel.js",
+      "node_modules/jquery-nice-select/js/jquery.nice-select.js"
     ],
     "minify": {
       "enabled": false,

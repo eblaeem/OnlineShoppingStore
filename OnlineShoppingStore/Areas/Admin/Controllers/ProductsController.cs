@@ -43,7 +43,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
             {
                 return View(model);
             }
-
+            ViewBag.GetAllProp = await _mediator.Send(RequestGetAllPropertiesDto.Instance);
             List<IFormFile> images = new();
             for (int i = 0; i < Request.Form.Files.Count; i++)
             {

@@ -20,18 +20,19 @@ namespace OnlineShoppingStore.Application.Services.Products.Queries.GetAllProduc
 
         public async Task<ICollection<ResponseGetAllProductsDto>> Handle(RequestGetAllProductsDto request, CancellationToken cancellationToken)
         {
-            var product = await (from c in _db.Categories
-                                 join ca in _db.Categories on c.Id equals ca.ParentCategoryId
-                                 join p in _db.Products on c.Id equals p.Id
+            var product = await (from p in _db.Products
+                                 join pc in _db.ProductCategories on p.Id equals pc.ProductId
+                                 join c in _db.Categories on pc.CategoryId equals c.Id 
+                                 join ca in _db.Categories on c.ParentCategoryId equals ca.Id
                                  where p.IsDeleted == false
                                  select new ResponseGetAllProductsDto
                                  {
                                      Id = p.Id,
                                      Name = p.Name,
-                                     CatName = c.Name,
-                                     SubCatName = ca.Name,
-                                     Displayed = p.Displayed,
                                      BasePrice = p.BasePrice,
+                                     Displayed = p.Displayed,
+                                     CatName = ca.Name,
+                                     SubCatName = c.Name,
                                      CreatedDate = p.InsertTime.ToshamsiDate()
                                  }).ToListAsync();
             return product;
