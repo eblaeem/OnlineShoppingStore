@@ -7,100 +7,97 @@
 }
 
 
-<div class="col-lg-12 col-md-12 col-xs-12 pl">
-    <div class="shop-archive-content mt-3 d-block">
-        <div class="archive-header">
-            <h2 class="archive-header-title">آرشیو محصولات</h2>
-            <div class="sort-tabs mt-0 d-inline-block pr">
-                <h4>مرتب&zwnj;سازی بر اساس :</h4>
-            </div>
-            <div class="nav-sort-tabs-res">
-                <ul class="nav sort-tabs-options" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="Most-visited-tab" data-toggle="tab" href="#Most-visited"
-                           role="tab" aria-controls="Most-visited" aria-selected="true">پربازدیدترین</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#Bestselling"
-                           role="tab" aria-controls="Bestselling" aria-selected="false">پرفروش&zwnj;ترین&zwnj;</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#Most-Popular"
-                           role="tab" aria-controls="Most-Popular" aria-selected="false">محبوب&zwnj;ترین</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#newest"
-                           role="tab" aria-controls="newest" aria-selected="false">جدیدترین</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#cheapest"
-                           role="tab" aria-controls="cheapest" aria-selected="false">ارزان&zwnj;ترین</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#most-expensive"
-                           role="tab" aria-controls="most-expensive" aria-selected="false">گران&zwnj;ترین</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="product-items">
-            <div class="tab-content" id="myTabContent">
+<!-- Start Content -->
+<div class="container py-5">
+    <div class="row">
 
+        <div class="col-lg-3">
+            <h1 class="h2 pb-4">Categories</h1>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-inline shop-top-menu pb-3 pt-1">
+                        <li class="list-inline-item">
+                            <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 pb-4">
+                    <div class="d-flex">
+                        <select class="form-control">
+                            <option>Featured</option>
+                            <option>A to Z</option>
+                            <option>Item</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 @foreach (var item in Model.Products)
                 {
-                    <div class="tab-pane fade show active" id="Most-visited" role="tabpanel" aria-labelledby="Most-visited-tab">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-3 col-xs-12 order-1 d-block mb-3">
-                                <section class="product-box product product-type-simple">
-                                    <div class="thumb">
-                                        <a href="#" class="d-block">
-                                            <img src="~/@item.ImgSrc">
-                                        </a>
-                                    </div>
-                                    <div class="title">
-                                        <a href="~/products/details/@item.Id">  @item.Name</a>
-                                    </div>
-                                    <div class="price">
-                                        <span class="amount">
-                                            @item.Price.ToString("n0")
-                                            <span>ريال</span>
-                                        </span>
-                                    </div>
-                                </section>
+                    <div class="col-md-4">
+                        <div class="card mb-4 product-wap rounded-0">
+                            <div class="card rounded-0">
+                                <img class="card-img rounded-0 img-fluid" src="~/@item.ImgSrc">
+                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                    <ul class="list-unstyled">
+                                        <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
+                                    </ul>
+                                </div>
                             </div>
-
+                            <div class="card-body">
+                                <a href="~/products/details/@item.Id" class="h3 text-decoration-none">@item.Name</a>
+                                <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                                    <li>M/L/X/XL</li>
+                                    <li class="pt-2">
+                                        <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+                                        <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                                    </li>
+                                </ul>
+                                <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                    <li>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-warning fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                        <i class="text-muted fa fa-star"></i>
+                                    </li>
+                                </ul>
+                                <p class="text-center mb-0">@item.Price.ToString("n0")</p>
+                            </div>
                         </div>
                     </div>
                 }
+
+            </div>
+            <div div="row">
+                <ul class="pagination pagination-lg justify-content-end">
+                    <li class="page-item disabled">
+                        <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
+                    </li>
+                </ul>
             </div>
         </div>
 
-        <div class="pagination-product">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">«</span>
-                        </a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link active" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">»</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
     </div>
 </div>
-
-
+<!-- End Content -->
