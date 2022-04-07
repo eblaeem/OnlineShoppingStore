@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OnlineShoppingStore.Domain.Entities.AboutUs;
 using OnlineShoppingStore.Domain.Entities.Products;
 using OnlineShoppingStore.Domain.Entities.Setting;
 using OnlineShoppingStore.Domain.Entities.User;
@@ -24,6 +25,7 @@ namespace OnlineShoppingStore.Application.Interfaces.Context
         DbSet<Property> Properties { get; set; }
         DbSet<PropertyType> PropertyTypes  { get; set; }
         DbSet<Status> Status { get; set; }
+        DbSet<StoreDetails> StoreDetails { get; set; }
 
         DbSet<CustomizerSetting> CustomizerSettings { get; set; }
         DbSet<SettingValue> SettingValues { get; set; }

@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="AdminServices\Dashboard\Handlers\" />
     <Folder Include="SiteServices\Products\Handlers\" />
+    <Folder Include="SiteServices\Store\Handlers\" />
   </ItemGroup>
 
 </Project>

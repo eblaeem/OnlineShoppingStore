@@ -1,0 +1,19 @@
+﻿@model OnlineShoppingStore.Application.SiteServices.Store.Queries.GetAllStoreInformation.ResponseGetAllStoreInformation
+
+<div class="col-md-4 pt-5">
+    <h2 class="h2 text-success border-bottom pb-3 border-light logo">Candle City</h2>
+    <ul class="list-unstyled text-light footer-link-list">
+        <li>
+            <i class="fa fa-map-marker fa-fw text-success"></i>
+            @Model.City،@Model.Address
+        </li>
+        <li>
+            <i class="fa fa-phone fa-fw text-success"></i>
+            <a class="text-decoration-none" href="@Model.MobileNumber">@Model.PhoneNumber - @Model.PrePhoneNumber </a>
+        </li>
+        <li>
+            <i class="fa fa-envelope fa-fw text-success"></i>
+            <a class="text-decoration-none" href="mailto:@Model.Email">@Model.Email</a>
+        </li>
+    </ul>
+</div>

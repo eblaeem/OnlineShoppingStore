@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Common.RoleName;
+using OnlineShoppingStore.Domain.Entities.AboutUs;
 using OnlineShoppingStore.Domain.Entities.Products;
 using OnlineShoppingStore.Domain.Entities.Setting;
 using OnlineShoppingStore.Domain.Entities.User;
+using OnlineShoppingStore.Persistance.Configurations.AboutUsConfiguration;
 using OnlineShoppingStore.Persistance.Configurations.ProductConfigurations;
 using OnlineShoppingStore.Persistance.Configurations.SettingConfigurations;
 using OnlineShoppingStore.Persistance.Configurations.UserConfigurations;
-using System.Linq;
 
 namespace OnlineShoppingStore.Persistance.Context
 {
@@ -31,10 +32,13 @@ namespace OnlineShoppingStore.Persistance.Context
         public DbSet<PropertyType> PropertyTypes { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<Status> Status { get; set; }
+        public DbSet<StoreDetails> StoreDetails { get; set; }
+
 
 
         public DbSet<CustomizerSetting> CustomizerSettings { get; set; }
         public DbSet<SettingValue> SettingValues { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -51,6 +55,7 @@ namespace OnlineShoppingStore.Persistance.Context
             modelBuilder.ApplyConfiguration(new PropertyTypeConfigurations());
             modelBuilder.ApplyConfiguration(new CustomizerSettingConfiguration());
             modelBuilder.ApplyConfiguration(new SettingValueConfiguration());
+            modelBuilder.ApplyConfiguration(new StoreDetailsConfiguration());
 
 
             SeedData(modelBuilder);
