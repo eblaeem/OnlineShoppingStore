@@ -20,8 +20,6 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
         public async Task<ResponseGetAllProductDetailsInSite> Handle(RequestGetAllProductDetailsInSite request, CancellationToken cancellationToken)
         {
             var query = from p in _db.Products
-                        join i in _db.Images on p.Id equals i.ProductId
-                        join pp in _db.ProductProperties on p.Id equals pp.ProductId
                         join pc in _db.ProductCategories on p.Id equals pc.ProductId
                         join c in _db.Categories on pc.CategoryId equals c.Id
                         join ca in _db.Categories on c.ParentCategoryId equals ca.Id
@@ -35,37 +33,12 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                             p.Quantity,
                             p.Displayed,
                             p.BasePrice,
-                            i.Src,
-                            i.ProductId,
-                            pp.Property,
-                            pp.Value,
+                            p.Star,
                             catName,
                             subCatName
                         };
 
-            var product = await query.FirstOrDefaultAsync(cancellationToken: cancellationToken);
-
-            var features = new List<ProductDetailFeatureDto>();
-            var images = new List<ProductDetailImagesDto>();
-
-            foreach (var item in query)
-            {
-                var record = new ProductDetailFeatureDto()
-                {
-                    Value = item.Value,
-                    DisplayName = item.Property.Title
-                };
-                
-                features.Add(record);
-            }
-
-            foreach (var item in query)
-            {
-                var record = new ProductDetailImagesDto()
-                {
-                    Src = item.Src
-                };
-            }
+            var product = await query.FirstAsync(cancellationToken: cancellationToken);
 
             return new ResponseGetAllProductDetailsInSite()
             {
@@ -73,12 +46,58 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                 Name = product.Name,
                 Inventory = product.Quantity,
                 Displayed = product.Displayed,
+                Star = product.Star,
                 Price = product.BasePrice,
                 Category = product.catName,
                 SubCategory = product.subCatName,
-                Features = features,
-                Images = images
+                Features = await GetProductDetailFeatureAsync(request.Id),
+                Images = await GetProductDetailImagesAsync(request.Id)
             };
+        }
+
+        private async Task<List<ProductDetailImagesDto>> GetProductDetailImagesAsync(long productId)
+        {
+            var images = await _db.Images
+                .Where(p => p.ProductId == productId)
+                .ToListAsync();
+
+            var imageDto = new List<ProductDetailImagesDto>();
+
+            foreach (var item in images)
+            {
+                var record = new ProductDetailImagesDto()
+                {
+                    Id = item.Id,
+                    Src = item.Src
+                };
+                imageDto.Add(record);
+            }
+
+            return imageDto;
+        }
+
+        private async Task<List<ProductDetailFeatureDto>> GetProductDetailFeatureAsync(long productId)
+        {
+            var feature = await _db.ProductProperties
+                .Include(p => p.Property)
+                .Where(p => p.ProductId == productId)
+                .ToListAsync();
+
+            var featureDto = new List<ProductDetailFeatureDto>();
+
+
+            foreach (var item in feature)
+            {
+                var record = new ProductDetailFeatureDto()
+                {
+                    Value = item.Value,
+                    DisplayName = item.Property != null ? item.Property.Title : ""
+                };
+
+                featureDto.Add(record);
+            }
+
+            return featureDto;
         }
     }
 }

@@ -29,7 +29,8 @@ namespace OnlineShoppingStore.Application.Services.Products.Handlers.CreateProdu
                 Name = request.Name,
                 Quantity = request.Quantity,
                 Displayed = request.Displayed,
-                BasePrice = request.BasePrice
+                BasePrice = request.BasePrice,
+                Star = request.Star,
             };
             _db.Products.Add(product);
 

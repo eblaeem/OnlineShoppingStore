@@ -57,6 +57,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 BasePrice = model.BasePrice,
                 CategoryId = model.CategoryId,
                 Displayed = model.Displayed,
+                Star = model.Star,
                 Name = model.Name,
                 Quantity = model.Quantity,
                 ProductProperties = model.ProductProperties,

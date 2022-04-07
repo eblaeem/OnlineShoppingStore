@@ -12,6 +12,7 @@ namespace OnlineShoppingStore.Application.Services.Products.Handlers.CreateProdu
         public bool Displayed { get; set; }
         public decimal BasePrice { get; set; }
         public decimal Quantity { get; set; }
+        public int Star { get; set; }
 
 
         public List<IFormFile> Images { get; set; }

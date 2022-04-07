@@ -13,6 +13,7 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
         public decimal Price { get; set; }
         public decimal Inventory { get; set; }
         public bool Displayed { get; set; }
+        public int Star { get; set; }
         public List<ProductDetailFeatureDto> Features { get; set; }
         public List<ProductDetailImagesDto> Images { get; set; }
     }
