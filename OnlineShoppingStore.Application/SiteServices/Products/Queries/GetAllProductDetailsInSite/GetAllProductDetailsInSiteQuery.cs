@@ -91,7 +91,7 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                 var record = new ProductDetailFeatureDto()
                 {
                     Value = item.Value,
-                    DisplayName = item.Property != null ? item.Property.Title : ""
+                    DisplayName = item.Property.Title
                 };
 
                 featureDto.Add(record);

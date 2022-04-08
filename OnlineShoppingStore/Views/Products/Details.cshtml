@@ -1,5 +1,6 @@
 ﻿@using OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductDetailsInSite;
 @model ResponseGetAllProductDetailsInSite;
+
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -67,45 +68,49 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <p class="h5" style="font-weight:700 !important">نام محصول: @Model.Name
-                        <br />
+                        <div class="align-items-center d-flex justify-content-lg-start mb-2">
+                            <h5 class="text-success fw-600">نام محصول: </h5>
+                            <h6 class="mr-10">@Model.Name</h6>
+                        </div>
 
-                        <span class="h5">قیمت: </span>
-                        <span class="py-2">@Model.Price ريال</span>
-                        <br />
+                        <div class="align-items-center d-flex justify-content-lg-start mb-2">
+                            <h5 class="text-success fw-600">قیمت: </h5>
+                            <h6 class="mr-10">@Model.Price.ToString("n0") ريال</h6>
+                        </div>
 
-                        <span class="h5">امتیاز: </span>
-                        <span class="py-2">
-                            @for (int i = 1; i <= Model.Star; i++)
-                            {
-                                <i class="fa fa-star text-warning"></i>
-                            }
-                            @for (int i = 1; i <= (5 - Model.Star); i++)
-                            {
-                                <i class="fa fa-star text-secondary"></i>
-                            }
+                        <div class="align-items-center d-flex justify-content-lg-start mb-2">
+                            <h5 class="text-success fw-600">امتیاز: </h5>
+                            <h6 class="mr-10">
+                                @for (int i = 1; i <= Model.Star; i++)
+                                {
+                                    <i class="fa fa-star text-warning"></i>
+                                }
+                                @for (int i = 1; i <= (5 - Model.Star); i++)
+                                {
+                                    <i class="fa fa-star text-secondary"></i>
+                                }
+                            </h6>
+                        </div>
 
-                        </span>
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <p>برند:</p>
-                            </li>
-                            <li class="list-inline-item">
-                                <p class="text-muted"><strong>@Model.Brand</strong></p>
-                            </li>
-                        </ul>
+                        <div class="align-items-center d-flex justify-content-lg-start mb-2">
+                            <h5 class="text-success fw-600">برند: </h5>
+                            <h6 class="mr-10">@Model.Brand</h6>
+                        </div>
 
-                        <p>توضیحات:</p>
-                        <p>@Model.Description</p>
+                        <div class="d-flex flex-column">
+                            <h5 class="text-success fw-600">توضیحات:</h5>
+                            <p class="justify rtl">
+                                @Model.Description
+                            </p>
+                        </div>
 
-
-                        <p>ویژگی‌های محصول:</p>
+                        <h5 class="text-success fw-600">ویژگی‌های محصول:</h5>
                         <ul class="list-unstyled pb-3">
 
                             @foreach (var item in Model.Features.Take(5))
                             {
-                                <li class="font-small-2">
-                                    <span>@item.DisplayName: </span>
+                                <li style="font-size:15px !important;">
+                                    <span class="text-success">@item.DisplayName: </span>
                                     <span>@item.Value</span>
                                     <br />
                                 </li>
@@ -114,13 +119,13 @@
                         </ul>
 
                         <form action="" method="GET">
-                            <input type="hidden" name="product-title" value="Activewear">
+                            @*<input type="hidden" name="product-title" value="Activewear">*@
                             <div class="row">
                                 <div class="col-auto">
                                     <ul class="list-inline pb-3">
                                         <li class="list-inline-item">
-                                            Size :
-                                            <input type="hidden" name="product-size" id="product-size" value="S">
+                                            سایز:
+                                            @*<input type="hidden" name="product-size" id="product-size" value="S">*@
                                         </li>
                                         <li class="list-inline-item"><span class="btn btn-success btn-size">S</span></li>
                                         <li class="list-inline-item"><span class="btn btn-success btn-size">M</span></li>
@@ -135,7 +140,7 @@
                                             <input type="hidden" name="product-quanity" id="product-quanity" value="1">
                                         </li>
                                         <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                                        <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+                                        <li class="list-inline-item" style="margin-left:8px;"><span class="badge bg-secondary" id="var-value">1</span></li>
                                         <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
                                     </ul>
                                 </div>

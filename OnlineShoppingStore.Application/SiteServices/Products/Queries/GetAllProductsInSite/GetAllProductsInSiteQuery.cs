@@ -17,18 +17,14 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
         }
         public async Task<ResponseGetAllProductsInSiteDto> Handle(RequestGetAllProductsInSite request, CancellationToken cancellationToken)
         {
-            var product = _db.Products
-                .Join(_db.Images,
-                p => p.Id,
-                i => i.ProductId,
-                (p, i) => new
-                {
-                    p.Id,
-                    p.Name,
-                    p.BasePrice,
-                    i.Src
-                })
-                .ToPaged(request.Page, 20, out int totalRow);
+            var product =_db.Products.Select(p => new
+            {
+                p.Id,
+                p.Name,
+                p.BasePrice,
+                image = p.Images.FirstOrDefault()
+            }).ToPaged(request.Page, 20, out int totalRow);
+                
 
             return new ResponseGetAllProductsInSiteDto
             {
@@ -38,9 +34,9 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                     Id = p.Id,
                     Name = p.Name,
                     Price = p.BasePrice,
-                    ImgSrc = p.Src
+                    ImgSrc = p.image != null ? p.image.Src : "images/NoImageAv.png"
                 }).ToList()
             };
         }
-    }   
+    }
 }
