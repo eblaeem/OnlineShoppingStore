@@ -122,6 +122,5 @@ namespace OnlineShoppingStore.Application.Services.Products.Handlers.CreateProdu
             return null;
         }
 
-
     }
 }
