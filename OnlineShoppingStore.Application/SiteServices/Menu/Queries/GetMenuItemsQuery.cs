@@ -20,6 +20,7 @@ namespace OnlineShoppingStore.Application.SiteServices.Menu.Queries
         {
             var category =await _db.Categories
                 .Include(p => p.SubCategories)
+                .Where(p=>p.ParentCategoryId == null)
                 .Select(p => new ResponseGetMenuItems
                 {
                     CatId = p.Id,

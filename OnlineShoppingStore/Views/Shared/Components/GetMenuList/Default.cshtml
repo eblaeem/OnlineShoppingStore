@@ -1,0 +1,30 @@
+﻿@using OnlineShoppingStore.Application.SiteServices.Menu.Queries;
+@model List<ResponseGetMenuItems>
+
+@foreach (var item in Model)
+{
+    <div class="collapse navbar-collapse rtl" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav p-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown" href="#" id="get-menu-list" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    @item.Name
+                </a>
+                @if (item.Child.Count() >0)
+                {
+                    <ul class="dropdown-menu dropdown-menu-end rtl" aria-labelledby="get-menu-list">
+
+                        @foreach (var itemChild in item.Child)
+                        {
+                            <li>
+                                <a href="~/products/index?CatId=@itemChild.CatId" class="dropdown-item">
+                                    @itemChild.Name
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                }
+            </li>
+        </ul>
+    </div>
+}
+
