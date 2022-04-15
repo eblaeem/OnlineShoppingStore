@@ -14,11 +14,12 @@ namespace OnlineShoppingStore.Controllers
         {
             _mediator = mediator;
         }
-        public async Task<IActionResult> Index(int page)
+        public async Task<IActionResult> Index(int page,long? catId=null)
         {
             var result = await _mediator.Send(new RequestGetAllProductsInSite
             {
-                Page = page
+                Page = page,
+                CatId = catId
             });
             return View(result);
         }

@@ -17,14 +17,23 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
         }
         public async Task<ResponseGetAllProductsInSiteDto> Handle(RequestGetAllProductsInSite request, CancellationToken cancellationToken)
         {
-            var product =_db.Products.Select(p => new
+            var productQuery = from p in _db.Products
+                               join pc in _db.ProductCategories
+                               on p.Id equals pc.ProductId
+                               select new
+                               {
+                                   p.Id,
+                                   p.Name,
+                                   p.BasePrice,
+                                   image = p.Images.FirstOrDefault(),
+                                   pc.CategoryId
+                               };
+
+            if (request.CatId != null)
             {
-                p.Id,
-                p.Name,
-                p.BasePrice,
-                image = p.Images.FirstOrDefault()
-            }).ToPaged(request.Page, 20, out int totalRow);
-                
+                productQuery = productQuery.Where(p => p.CategoryId == request.CatId).AsQueryable();
+            }
+            var product = productQuery.ToPaged(request.Page, 20, out int totalRow);
 
             return new ResponseGetAllProductsInSiteDto
             {
