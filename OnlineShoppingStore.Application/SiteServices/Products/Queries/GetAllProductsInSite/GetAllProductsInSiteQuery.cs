@@ -33,6 +33,12 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
             {
                 productQuery = productQuery.Where(p => p.CategoryId == request.CatId).AsQueryable();
             }
+
+            if (!string.IsNullOrEmpty(request.SearchKey))
+            {
+                productQuery = productQuery.Where(p => p.Name.Contains(request.SearchKey));
+            }
+
             var product = productQuery.ToPaged(request.Page, 20, out int totalRow);
 
             return new ResponseGetAllProductsInSiteDto

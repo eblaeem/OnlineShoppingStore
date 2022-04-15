@@ -6,5 +6,6 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
     {
         public int Page { get; set; }
         public long? CatId { get; set; }
+        public string SearchKey { get; set; }
     }
 }

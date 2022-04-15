@@ -14,11 +14,12 @@ namespace OnlineShoppingStore.Controllers
         {
             _mediator = mediator;
         }
-        public async Task<IActionResult> Index(int page,long? catId=null)
+        public async Task<IActionResult> Index(int page, string searchKey, long? catId = null)
         {
             var result = await _mediator.Send(new RequestGetAllProductsInSite
             {
                 Page = page,
+                SearchKey = searchKey,
                 CatId = catId
             });
             return View(result);
@@ -26,7 +27,7 @@ namespace OnlineShoppingStore.Controllers
 
         public async Task<IActionResult> Details(long id)
         {
-            var result =await _mediator.Send(new RequestGetAllProductDetailsInSite
+            var result = await _mediator.Send(new RequestGetAllProductDetailsInSite
             {
                 Id = id
             });
