@@ -1,5 +1,6 @@
-﻿@using OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService;
-@model ICollection<ResponseGetAllProductsDto>
+﻿@addTagHelper *,LazZiya.TagHelpers
+@using OnlineShoppingStore.Application.Services.Products.Queries.GetAllProductService;
+@model ResponseGetAllProductsDto
 
 @{
     ViewBag.Title = "لیست محصولات";
@@ -42,7 +43,7 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach (var item in Model)
+                                        @foreach (var item in Model.Products)
                                         {
                                             <tr role="row">
 
@@ -64,6 +65,21 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="text-center">
+        <paging total-records="Model.RowCount"
+                page-no="Model.CurrentPage"
+                page-size="Model.PageSize"
+                show-prev-next="true"
+                show-total-pages="false"
+                show-total-records="false"
+                show-page-size-nav="true"
+                show-first-numbered-page="true"
+                show-last-numbered-page="true"
+                query-string-key-page-no="Page"
+                query-string-key-page-size="PageSize"
+                gap-size="2">
+        </paging>
     </div>
 </section>
 

@@ -22,9 +22,13 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         {
             _mediator = mediator;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1,int pageSize = 20)
         {
-            var result = await _mediator.Send(RequestGetAllProductsDto.Instance);
+            var result = await _mediator.Send(new RequestGetAllProductsDto
+            {
+                Page = page,
+                PageSize = pageSize
+            });
             return View(result);
         }
 
