@@ -25,6 +25,7 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                                    p.Id,
                                    p.Name,
                                    p.BasePrice,
+                                   p.ViewCount,
                                    image = p.Images.FirstOrDefault(),
                                    pc.CategoryId
                                };
@@ -39,7 +40,33 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                 productQuery = productQuery.Where(p => p.Name.Contains(request.SearchKey));
             }
 
-            var product = productQuery.ToPaged(request.Page, 20, out int totalRow);
+            switch (request.Ordering)
+            {
+                case OrderingEnum.NoOrder:
+                    productQuery = productQuery.OrderByDescending(p => p.Id).AsQueryable();
+                    break;
+                case OrderingEnum.MostVisited:
+                    productQuery = productQuery.OrderByDescending(p => p.ViewCount).AsQueryable();
+                    break;
+                //case OrderingEnum.BestSelling:
+                //    productQuery = productQuery.OrderByDescending(p => p.BasePrice).AsQueryable();
+                //    break;
+                //case OrderingEnum.MostLikes: 
+                //    break;
+                case OrderingEnum.TheNewest:
+                    productQuery = productQuery.OrderByDescending(p => p.Id).AsQueryable();
+                    break;
+                case OrderingEnum.LowestPrice:
+                    productQuery = productQuery.OrderBy(p => p.BasePrice).AsQueryable();
+                    break;
+                case OrderingEnum.HighestPrice:
+                    productQuery = productQuery.OrderByDescending(p => p.BasePrice).AsQueryable();
+                    break;
+                default:
+                    break;
+            }
+
+            var product = productQuery.ToPaged(request.Page,20, out int totalRow);
 
             return new ResponseGetAllProductsInSiteDto
             {

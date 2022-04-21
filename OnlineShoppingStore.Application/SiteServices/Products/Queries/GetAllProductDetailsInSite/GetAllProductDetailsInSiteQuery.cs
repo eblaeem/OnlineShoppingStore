@@ -19,7 +19,7 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
 
         public async Task<ResponseGetAllProductDetailsInSite> Handle(RequestGetAllProductDetailsInSite request, CancellationToken cancellationToken)
         {
-            var query = from p in _db.Products
+            var query =await ( from p in _db.Products
                         join pc in _db.ProductCategories on p.Id equals pc.ProductId
                         join c in _db.Categories on pc.CategoryId equals c.Id
                         join ca in _db.Categories on c.ParentCategoryId equals ca.Id
@@ -34,11 +34,15 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                             p.Displayed,
                             p.BasePrice,
                             p.Star,
+                            p.ViewCount,
                             catName,
                             subCatName
-                        };
+                        }).FirstOrDefaultAsync(cancellationToken);
 
-            var product = await query.FirstAsync(cancellationToken: cancellationToken);
+            var product =_db.Products.Find(query.Id);
+            product.ViewCount++;
+
+            _db.SaveChanges();
 
             return new ResponseGetAllProductDetailsInSite()
             {
@@ -48,8 +52,8 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                 Displayed = product.Displayed,
                 Star = product.Star,
                 Price = product.BasePrice,
-                Category = product.catName,
-                SubCategory = product.subCatName,
+                Category = query.catName,
+                SubCategory = query.subCatName,
                 Features = await GetProductDetailFeatureAsync(request.Id),
                 Images = await GetProductDetailImagesAsync(request.Id)
             };

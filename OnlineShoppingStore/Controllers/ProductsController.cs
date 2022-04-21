@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductDetailsInSite;
 using OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductsInSite;
+using OnlineShoppingStore.ViewModels.Products;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Controllers
@@ -14,13 +15,15 @@ namespace OnlineShoppingStore.Controllers
         {
             _mediator = mediator;
         }
-        public async Task<IActionResult> Index(int page, string searchKey, long? catId = null)
+
+        public async Task<IActionResult> Index(ProductsIndexViewModel model)
         {
             var result = await _mediator.Send(new RequestGetAllProductsInSite
             {
-                Page = page,
-                SearchKey = searchKey,
-                CatId = catId
+                Page = model.Page,
+                SearchKey = model.SearchKey,
+                CatId = model.CatId,
+                Ordering = model.Ordering
             });
             return View(result);
         }

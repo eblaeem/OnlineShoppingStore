@@ -6,6 +6,4 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
     {
         public long Id { get; set; }
     }
-
-
 }

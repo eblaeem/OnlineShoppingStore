@@ -10,6 +10,7 @@ namespace OnlineShoppingStore.Domain.Entities.Products
         public string Name { get; set; }
         public bool Displayed { get; set; }
         public int Star { get; set; }
+        public int ViewCount { get; set; }
 
 
         public virtual ICollection<ProductCategory> ProductCategories { get; set; } = new HashSet<ProductCategory>();

@@ -1,9 +1,14 @@
-﻿@using OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductsInSite
+﻿@addTagHelper *, LazZiya.TagHelpers
+@using OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductsInSite
 @model ResponseGetAllProductsInSiteDto
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int pageNumber = 1;
+    int pageSize = 20;
+    int.TryParse(Context.Request.Query["page"], out pageNumber);
+    int.TryParse(Context.Request.Query["pageSize"], out pageSize);
 }
 
 
@@ -13,10 +18,10 @@
         <div class="col-lg-3">
             <div class="row">
                 <div class="col-md-12 pb-3">
-                    <div class="inner-addon left-addon position-relative">
-                        <i class="fa fa-search position-absolute text-black-50" style="padding:10px;"></i>
-                        <input class="form-control" type="text" style="padding-right:30px;"
-                               placeholder="در محصولات زیر جستجو نمایید.">
+                    <div class="d-flex align-items-center position-relative">
+                        <i class="fa fa-search position-absolute text-black-50"></i>
+                        <input class="form-control border-0 bg-whitesmoke" type="text" style="padding-right:25px;"
+                               placeholder="جستجو در محصولات زیر...">
                     </div>
                 </div>
             </div>
@@ -26,22 +31,37 @@
         </div>
 
         <div class="col-lg-9">
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="list-inline shop-top-menu pb-3 pt-1">
+                    <ul class="sort-filters-container list-inline shop-top-menu">
                         <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none mr-3" href="#">All</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none mr-3" href="#">Men's</a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="h3 text-dark text-decoration-none" href="#">Women's</a>
+                            <span class="text-black-50 ml-10">
+                                مرتب سازی:
+                            </span>
+                            <a class="text-dark text-decoration-none mr-5"
+                               href="~/Products?Searchkey=@Context.Request.Query["Searchkey"]&CatId=@Context.Request.Query[""]&Ordering=TheNewest">
+                                جدیدترین
+                            </a>
+                            <a class="text-dark text-decoration-none mr-5"
+                               href="~/Products?Searchkey=@Context.Request.Query["Searchkey"]&CatId=@Context.Request.Query[""]&Ordering=MostVisited">
+                                بیشترین بازدید
+                            </a>
+                            <a class="text-dark text-decoration-none mr-5"
+                               href="~/Products?Searchkey=@Context.Request.Query["Searchkey"]&CatId=@Context.Request.Query[""]&Ordering=BestSelling">
+                                پرفروش‌ترین
+                            </a>
+                            <a class="text-dark text-decoration-none mr-5"
+                               href="~/Products?Searchkey=@Context.Request.Query["Searchkey"]&CatId=@Context.Request.Query[""]&Ordering=MostLikes">
+                                محبوب‌ترین
+                            </a>
+                            <a class="text-dark text-decoration-none mr-5"
+                               href="~/Products?Searchkey=@Context.Request.Query["Searchkey"]&CatId=@Context.Request.Query[""]&Ordering=LowestPrice">
+                                ارزان‌ترین
+                            </a>
+                            <a class="text-dark text-decoration-none mr-5"
+                               href="~/Products?Searchkey=@Context.Request.Query["Searchkey"]&CatId=@Context.Request.Query[""]&Ordering=HighestPrice">
+                                گران‌ترین
+                            </a>
                         </li>
                     </ul>
-                </div>
-
-            </div>
             <div class="row">
                 @foreach (var item in Model.Products)
                 {
@@ -86,17 +106,20 @@
 
             </div>
             <div div="row">
-                <ul class="pagination pagination-lg justify-content-end">
-                    <li class="page-item disabled">
-                        <a class="page-link active rounded-2 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link rounded-2 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link rounded-2 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
-                    </li>
-                </ul>
+                <paging total-records="@Model.TotalRow"
+                        page-no="@(pageNumber==0?1:pageNumber)"
+                        page-size="@(pageSize==0?20:pageSize)"
+                        show-prev-next="true"
+                        show-total-pages="false"
+                        show-total-records="false"
+                        show-page-size-nav="true"
+                        show-first-numbered-page="true"
+                        show-last-numbered-page="true"
+                        query-string-key-page-no="Page"
+                        query-string-key-page-size="PageSize"
+                        query-string-value="@@(Request.QueryString.Value)"
+                        gap-size="2">
+                </paging>
             </div>
         </div>
 
