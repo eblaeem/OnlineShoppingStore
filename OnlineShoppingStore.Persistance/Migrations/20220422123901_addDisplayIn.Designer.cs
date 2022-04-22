@@ -10,8 +10,8 @@ using OnlineShoppingStore.Persistance.Context;
 namespace OnlineShoppingStore.Persistance.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20220422105419_addNewDisplayInToMainSlider")]
-    partial class addNewDisplayInToMainSlider
+    [Migration("20220422123901_addDisplayIn")]
+    partial class addDisplayIn
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

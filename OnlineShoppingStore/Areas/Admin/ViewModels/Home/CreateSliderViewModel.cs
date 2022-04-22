@@ -9,5 +9,6 @@ namespace OnlineShoppingStore.Areas.Admin.ViewModels.Home
         public string Title { get; set; }
         public string PreTitle { get; set; }
         public string Paragraph { get; set; }
+        public bool Location { get; set; }
     }
 }

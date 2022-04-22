@@ -39,6 +39,37 @@
                                                     <i class="ft-upload-cloud fa-2x text-bitbucket"></i>
                                                 </div>
                                             </fieldset>
+
+                                            <fieldset>
+                                                @*<div class="float-left">
+                                                        <div class="bootstrap-switch-null bootstrap-switch-undefined bootstrap-switch-undefined
+                                                             bootstrap-switch-undefined bootstrap-switch-undefined bootstrap-switch
+                                                             bootstrap-switch-wrapper bootstrap-switch-focused bootstrap-switch-animate"
+                                                             style="width: 116px;">
+                                                            <div class="bootstrap-switch-container" style="width: 171px; margin-left: -57px;">
+                                                                <span class="bootstrap-switch-handle-on bootstrap-switch-primary" style="width: 57px;">ON</span>
+                                                                <span class="bootstrap-switch-label" style="width: 57px;">&nbsp;</span>
+                                                                <span class="bootstrap-switch-handle-off bootstrap-switch-default" style="width: 57px;">Right</span>
+                                                                <input type="checkbox" class="switchBootstrap" id="switchBootstrap6" data-off-text="Right">
+                                                            </div>
+                                                        </div>
+                                                    </div>*@
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="Location" value="true"
+                                                          @*@(Model.Location ? "checked='checked'": string.Empty)*@ checked>
+                                                    <label class="form-check-label" for="exampleRadios1">
+                                                        اسلایدر
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="Location" value="false"
+                                                            @*@(!Model.Location ? "checked='checked'": string.Empty)*@>
+                                                    <label class="form-check-label" for="exampleRadios2">
+                                                        بهترین‌های ماه
+                                                    </label>
+                                                </div>
+                                            </fieldset>
                                         </div>
                                         <div class="card-body">
                                             <div class="px-3 upload-box">

@@ -8,18 +8,7 @@
         public string Title { get; set; }
         public string PreTitle { get; set; }
         public string Paragraph { get; set; }
-        public Location Location { get; set; }
-
+        public bool Location { get; set; }
     }
 
-    public enum Location
-    {
-        Top,
-        TopLeft,
-        TopRight,
-        Middle,
-        Bottom,
-        BottomLeft,
-        BottomRight
-    }
 }

@@ -62,6 +62,9 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("DisplayIn")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
 

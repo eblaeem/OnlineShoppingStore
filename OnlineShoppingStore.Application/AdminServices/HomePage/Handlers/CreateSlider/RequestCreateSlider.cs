@@ -10,5 +10,6 @@ namespace OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.Create
         public string Title { get; set; }
         public string PreTitle { get; set; }
         public string Paragraph { get; set; }
+        public bool Location { get; set; }
     }
 }

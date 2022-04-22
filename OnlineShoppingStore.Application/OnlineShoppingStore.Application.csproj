@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <Folder Include="AdminServices\Dashboard\Handlers\" />
+    <Folder Include="SiteServices\HomePage\Handlers\" />
+    <Folder Include="SiteServices\HomePage\Queries\" />
     <Folder Include="SiteServices\Menu\Handlers\" />
     <Folder Include="SiteServices\Products\Handlers\" />
     <Folder Include="SiteServices\Store\Handlers\" />

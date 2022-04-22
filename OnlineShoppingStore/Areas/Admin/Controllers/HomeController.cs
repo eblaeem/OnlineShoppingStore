@@ -32,7 +32,8 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
 
         public IActionResult CreateSlider()
         {
-            return View();
+            var model = new CreateSliderViewModel();
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> CreateSlider(CreateSliderViewModel model)
@@ -44,6 +45,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Title= model.Title,
                 PreTitle = model.PreTitle,
                 Paragraph = model.Paragraph,
+                Location = model.Location
             });
             return View(result);
         }

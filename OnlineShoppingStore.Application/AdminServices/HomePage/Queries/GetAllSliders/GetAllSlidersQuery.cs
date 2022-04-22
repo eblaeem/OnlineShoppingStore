@@ -20,18 +20,17 @@ namespace OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllS
         {
             var sliders = await _db.MainSliders
                 .OrderByDescending(p => p.Id)
-                .Where(p=>p.IsDeleted == false)
+                .Where(p => p.IsDeleted == false)
                 .Select(p => new ResponseGetAllSliders
-            {
-                Link = p.Link,
-                Src = p.Src,
-                Title = p.Title,
-                PreTitle = p.PreTitle,
-                Paragraph = p.Paragraph,
-                Id = p.Id,
-                Location = Location.Top
-                
-            }).ToListAsync();
+                {
+                    Id = p.Id,
+                    Link = p.Link,
+                    Src = p.Src,
+                    Title = p.Title,
+                    PreTitle = p.PreTitle,
+                    Paragraph = p.Paragraph,
+                    Location = p.DisplayIn
+                }).ToListAsync();
 
             return sliders;
         }

@@ -2,7 +2,7 @@
 
 namespace OnlineShoppingStore.Persistance.Migrations
 {
-    public partial class addNewDisplayInToMainSlider : Migration
+    public partial class addDisplayIn : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
