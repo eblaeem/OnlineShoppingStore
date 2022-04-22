@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders;
 using OnlineShoppingStore.Models;
-using System;
-using System.Collections.Generic;
+using OnlineShoppingStore.ViewModels.Home;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Controllers
@@ -12,15 +12,22 @@ namespace OnlineShoppingStore.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IMediator _mediator;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            HomeIndexViewModels homeIndexViewModels = new()
+            {
+                Slider = await _mediator.Send(new RequestGetAllSliders())
+            };
+       
+            return View(homeIndexViewModels);
         }
 
         public IActionResult Privacy()

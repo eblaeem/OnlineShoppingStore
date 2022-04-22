@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "ایجاد اسلایدر";
+    Layout = "~/Areas/Admin/Views/Shared/_Adminlayout.cshtml";
+}
+
+@section styles{
+    <link href="~/Admin/css/products-controller/create.css" rel="stylesheet" />
+}
+
+@section roadMap{
+    <div class="d-flex align-items-center main-roadmap">
+        <a href="~/admin/home/dashboard">پنل مدیریت</a>
+        <i class="la la-location-arrow"></i>
+        <a href="~/admin/home/index">مدیریت اسلایدرها</a>
+        <i class="la la-location-arrow"></i>
+        <h6>ایجاد اسلایدر جدید</h6>
+    </div>
+}
+
+<section class="basic-elements">
+    <div class="row">
+        <form method="post" enctype="multipart/form-data">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title-wrap bar-success">
+                            <h4 class="card-title mb-0">افزودن اسلایدر جدید</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="px-3">
+                            <div class="form">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                            <fieldset class="form-group position-relative has-icon-left">
+                                                <input type="text" class="form-control mb-1" placeholder="آدرس لینک" name="link">
+                                                <div class="form-control-position">
+                                                    <i class="ft-upload-cloud fa-2x text-bitbucket"></i>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="px-3 upload-box">
+                                                <fieldset class="form-group">
+                                                    <label class="btn btn-bitbucket">
+                                                        <span>انتخاب تصاویر:</span>
+                                                        <input type="file" multiple=""
+                                                               class="upload__inputfile" name="file">
+                                                    </label>
+                                                    <div class="upload-img-wrap"></div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title-wrap bar-success">
+                            <h4 class="card-title mb-0">مشخصات اصلی محصول</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="px-3">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-8 col-md-12 mb-3">
+                                        <fieldset class="form-group">
+                                            <input type="text" name="Title" class="form-control mb-1"
+                                                   placeholder="عنوان اصلی" />
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="col-xl-6 col-lg-8 col-md-12 mb-3">
+                                        <fieldset class="form-group">
+                                            <input type="text" name="PreTitle" class="form-control mb-1"
+                                                   placeholder="عنوان فرعی" />
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 mb-2">
+                                        <fieldset class="form-group">
+                                            <textarea type="text" name="Pragraph" class="form-control"
+                                                      placeholder="توضیحات"></textarea>
+                                        </fieldset>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="col-xl-12 col-lg-12 col-md-12 mt-3">
+                        <fieldset class="form-group text-center">
+                            <button class="btn btn-bitbucket col-md-2" id="btnAddProduct">ثبت اسلایدر</button>
+                        </fieldset>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>
+
+@section scripts{
+    @if (TempData["Message"] != null)
+    {
+        <partial name="_SweetAlert" />
+        TempData["IsSuccess"] = null;
+        TempData["Message"] = null;
+    }
+    <script src="~/Admin/js/products-controller/create.js"></script>
+}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShoppingStore.Domain.Entities.AboutUs;
+using OnlineShoppingStore.Domain.Entities.HomePage.MainSlider;
 using OnlineShoppingStore.Domain.Entities.Products;
 using OnlineShoppingStore.Domain.Entities.Setting;
 using OnlineShoppingStore.Domain.Entities.User;
@@ -26,6 +27,7 @@ namespace OnlineShoppingStore.Application.Interfaces.Context
         DbSet<PropertyType> PropertyTypes  { get; set; }
         DbSet<Status> Status { get; set; }
         DbSet<StoreDetails> StoreDetails { get; set; }
+        DbSet<MainSlider> MainSliders { get; set; }
 
         DbSet<CustomizerSetting> CustomizerSettings { get; set; }
         DbSet<SettingValue> SettingValues { get; set; }

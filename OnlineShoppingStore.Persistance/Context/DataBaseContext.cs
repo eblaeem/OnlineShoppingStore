@@ -2,6 +2,7 @@
 using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Common.RoleName;
 using OnlineShoppingStore.Domain.Entities.AboutUs;
+using OnlineShoppingStore.Domain.Entities.HomePage.MainSlider;
 using OnlineShoppingStore.Domain.Entities.Products;
 using OnlineShoppingStore.Domain.Entities.Setting;
 using OnlineShoppingStore.Domain.Entities.User;
@@ -33,6 +34,7 @@ namespace OnlineShoppingStore.Persistance.Context
         public DbSet<Property> Properties { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<StoreDetails> StoreDetails { get; set; }
+        public DbSet<MainSlider> MainSliders { get; set; }
 
 
 
