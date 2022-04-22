@@ -31,7 +31,7 @@ namespace OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.Create
                 Src = resultUpload.FileNameAddress,
                 Title = request.Title,
                 PreTitle = request.PreTitle,
-                Pragraph =request.Pragraph,
+                Paragraph =request.Paragraph,
             }; 
 
             _db.MainSliders.Add(mainSlider);

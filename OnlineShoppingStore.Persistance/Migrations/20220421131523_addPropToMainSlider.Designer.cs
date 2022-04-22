@@ -73,7 +73,7 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Pragraph")
+                    b.Property<string>("Paragraph")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PreTitle")

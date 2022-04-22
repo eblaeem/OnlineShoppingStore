@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.CreateSlider;
+using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.DeleteImageFromSlider;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders;
 using OnlineShoppingStore.Areas.Admin.ViewModels.Home;
+using OnlineShoppingStore.Common.ResultDto;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Areas.Admin.Controllers
@@ -41,9 +43,26 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Link = model.Link,
                 Title= model.Title,
                 PreTitle = model.PreTitle,
-                Pragraph = model.Pragraph,
+                Paragraph = model.Paragraph,
             });
             return View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteSlider(long id)
+        {
+            var result = await _mediator.Send(new RequestDeleteImageFromSlider()
+            {
+                SliderImageId = id
+            });
+
+            var response = new ApiResult()
+            {
+                IsSuccess = result,
+                Message = result == true ? "حذف  با موفقیت انجام شد." : "حذف  با خطا مواجه شد."
+            };
+
+            return Ok(response);
         }
     }
 }

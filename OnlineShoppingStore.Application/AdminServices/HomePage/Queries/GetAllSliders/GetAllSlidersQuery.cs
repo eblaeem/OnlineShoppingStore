@@ -18,13 +18,18 @@ namespace OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllS
         }
         public async Task<List<ResponseGetAllSliders>> Handle(RequestGetAllSliders request, CancellationToken cancellationToken)
         {
-            var sliders = await _db.MainSliders.OrderByDescending(p => p.Id).Select(p => new ResponseGetAllSliders
+            var sliders = await _db.MainSliders
+                .OrderByDescending(p => p.Id)
+                .Where(p=>p.IsDeleted == false)
+                .Select(p => new ResponseGetAllSliders
             {
                 Link = p.Link,
                 Src = p.Src,
                 Title = p.Title,
                 PreTitle = p.PreTitle,
-                Pragraph = p.Pragraph,
+                Paragraph = p.Paragraph,
+                Id = p.Id,
+                Location = Location.Top
                 
             }).ToListAsync();
 

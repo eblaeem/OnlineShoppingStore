@@ -47,24 +47,15 @@
                                             <tr role="row">
                                                 <td class="justify">@item.Title</td>
                                                 <td class="justify">@item.PreTitle</td>
-                                                <td class="justify">@item.Pragraph</td>
+                                                <td class="justify">@item.Paragraph</td>
                                                 <td style="width:200px">
-                                                    <img src="~/@item.Src" style="height:150px; width:150px;"/>
+                                                    <img src="~/@item.Src" style="height:150px; width:150px;" />
                                                 </td>
-                                                
-                                                @*<td>
-                                                    @if (item.Parent == null)
-                                                    {
-                                                        <a href="~/admin/categories/create?ParentId=@item.Id" class="btn btn-success">ایجاد زیرگروه</a>
-                                                    }
 
-                                                    @if (item.HasChild == true)
-                                                    {
-                                                        <a href="~/admin/categories/index?parentId=@item.Id" class="btn btn-info">مشاهده لیست زیر گروه ها </a>
-                                                    }
-                                                    <a href="~/Admin/categories/edit?id=@item.Id" class="btn btn-outline-primary">ویرایش</a>
-                                                    <button class="btn btn-outline-danger" onclick="DeleteCategory('@item.Id','@item.Name')">حذف</button>
-                                                </td>*@
+                                                <td>
+                                                    @*<a href="~/Admin/categories/edit?id=@item.Id" class="btn btn-outline-primary">ویرایش</a>*@
+                                                    <button class="btn btn-outline-danger" onclick="DeleteSliderImage('@item.Id','@item.Title')">حذف</button>
+                                                </td>
                                             </tr>
                                         }
                                     </tbody>
@@ -77,3 +68,7 @@
         </div>
     </div>
 </section>
+
+@section scripts{
+    <script src="~/Admin/js/home-controller/index.js"></script>
+}
