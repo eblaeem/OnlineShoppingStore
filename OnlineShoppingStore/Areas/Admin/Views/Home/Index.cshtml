@@ -1,0 +1,79 @@
+﻿@using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders;
+@model List<ResponseGetAllSliders>;
+
+@{
+    ViewBag.Title = "لیست تصاویر موجود در اسلایدر";
+    Layout = "~/Areas/Admin/Views/Shared/_Adminlayout.cshtml";
+}
+
+@section roadMap{
+    <div class="d-flex align-items-center main-roadmap">
+        <a href="~/Admin/home/dashboard">پنل مدیریت</a>
+        <i class="la la-location-arrow"></i>
+        <a href="~/admin/home/index">مدیریت اسلایدر</a>
+        <i class="la la-location-arrow"></i>
+        <h6>لیست تصاویر موجود در اسلایدر</h6>
+    </div>
+}
+
+<section class="basic-elements">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4>لیست تصاویر موجود در اسلایدر</h4>
+                    </div>
+                </div>
+
+                <div class="card-body collapse show">
+                    <div class="card-block card-dashboard">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr role="row">
+                                            <th>عنوان اصلی</th>
+                                            <th>عنوان فرعی</th>
+                                            <th>توضیحات</th>
+                                            <th>تصویر</th>
+                                            <th>عملیات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr role="row">
+                                                <td class="justify">@item.Title</td>
+                                                <td class="justify">@item.PreTitle</td>
+                                                <td class="justify">@item.Pragraph</td>
+                                                <td style="width:200px">
+                                                    <img src="~/@item.Src" style="height:150px; width:150px;"/>
+                                                </td>
+                                                
+                                                @*<td>
+                                                    @if (item.Parent == null)
+                                                    {
+                                                        <a href="~/admin/categories/create?ParentId=@item.Id" class="btn btn-success">ایجاد زیرگروه</a>
+                                                    }
+
+                                                    @if (item.HasChild == true)
+                                                    {
+                                                        <a href="~/admin/categories/index?parentId=@item.Id" class="btn btn-info">مشاهده لیست زیر گروه ها </a>
+                                                    }
+                                                    <a href="~/Admin/categories/edit?id=@item.Id" class="btn btn-outline-primary">ویرایش</a>
+                                                    <button class="btn btn-outline-danger" onclick="DeleteCategory('@item.Id','@item.Name')">حذف</button>
+                                                </td>*@
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.CreateSlider;
+using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders;
 using OnlineShoppingStore.Areas.Admin.ViewModels.Home;
 using System.Threading.Tasks;
 
@@ -21,9 +22,10 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         {
             return View();
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var result = await _mediator.Send(new RequestGetAllSliders());
+            return View(result);
         }
 
         public IActionResult CreateSlider()
