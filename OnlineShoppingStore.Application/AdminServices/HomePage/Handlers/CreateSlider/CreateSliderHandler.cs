@@ -32,7 +32,7 @@ namespace OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.Create
                 Title = request.Title,
                 PreTitle = request.PreTitle,
                 Paragraph =request.Paragraph,
-                DisplayIn = request.Location
+                DisplayIn = request.LocationEnum
             }; 
 
             _db.MainSliders.Add(mainSlider);

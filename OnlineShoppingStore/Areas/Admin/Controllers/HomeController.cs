@@ -1,7 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers;
+using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.ChangeVisibility;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.CreateSlider;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.DeleteImageFromSlider;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders;
@@ -24,6 +23,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
         {
             return View();
         }
+
         public async Task<IActionResult> Index()
         {
             var result = await _mediator.Send(new RequestGetAllSliders());
@@ -35,6 +35,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
             var model = new CreateSliderViewModel();
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateSlider(CreateSliderViewModel model)
         {
@@ -45,9 +46,17 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Title= model.Title,
                 PreTitle = model.PreTitle,
                 Paragraph = model.Paragraph,
-                Location = model.Location
+                LocationEnum = model.LocationEnum
             });
-            return View(result);
+            var response = new ApiResult()
+            {
+                IsSuccess = result,
+                Message = result == true ? "ثبت تصویر در اسلایدر با موفقیت انجام شد." : "ثبت تصویر در اسلایدر با خطا مواجه شد."
+            };
+            TempData["IsSuccess"] = response.IsSuccess;
+            TempData["Message"] = response.Message;
+
+            return View(model);
         }
 
         [HttpPost]
@@ -64,6 +73,21 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Message = result == true ? "حذف  با موفقیت انجام شد." : "حذف  با خطا مواجه شد."
             };
 
+            return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeImageVisibility(long id)
+        {
+            var result = await _mediator.Send(new RequestChangeVisibility
+            {
+                Id = id
+            });
+            var response = new ApiResult()
+            {
+                IsSuccess = result,
+                Message = result == true ? "وضعیت نمایش تصویر با موفقیت تغییر کرد." : "وضعیت نمایش تصویر با خطا مواجه شد."
+            };
             return Ok(response);
         }
     }

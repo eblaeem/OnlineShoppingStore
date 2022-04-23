@@ -9,8 +9,21 @@ namespace OnlineShoppingStore.Domain.Entities.HomePage.MainSlider
         public string Title { get; set; }
         public string PreTitle { get; set; }
         public string Paragraph { get; set; }
-        public bool DisplayIn { get; set; }
+        public Location DisplayIn { get; set; }
+        public bool IsVisibility { get; set; }
+    }
 
+    public enum Location
+    {
+        Top = 0,
+        Bottom = 1,
+        Left = 2,
+        Right = 3,
+        TopLeft = 4,
+        TopRight = 5,
+        BottomLeft = 6,
+        BottomRight = 7,
+        Center = 8
     }
 }
  

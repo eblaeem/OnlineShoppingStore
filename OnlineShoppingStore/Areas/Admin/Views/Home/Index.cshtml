@@ -54,6 +54,14 @@
 
                                                 <td>
                                                     @*<a href="~/Admin/categories/edit?id=@item.Id" class="btn btn-outline-primary">ویرایش</a>*@
+                                                    @if (item.IsVisibility)
+                                                    {
+                                                        <button class="btn btn-outline-danger" onclick="ChangeImageVisibility('@item.Id','@item.Title')">نمایش</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button class="btn btn-outline-danger" onclick="ChangeImageVisibility('@item.Id','@item.Title')">عدم نمایش</button>
+                                                    }
                                                     <button class="btn btn-outline-danger" onclick="DeleteSliderImage('@item.Id','@item.Title')">حذف</button>
                                                 </td>
                                             </tr>

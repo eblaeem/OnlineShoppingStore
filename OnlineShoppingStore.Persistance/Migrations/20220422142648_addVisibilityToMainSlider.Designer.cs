@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShoppingStore.Persistance.Context;
 
 namespace OnlineShoppingStore.Persistance.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220422142648_addVisibilityToMainSlider")]
+    partial class addVisibilityToMainSlider
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,8 +64,8 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Property<DateTime?>("DeletedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DisplayIn")
-                        .HasColumnType("int");
+                    b.Property<bool>("DisplayIn")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("InsertTime")
                         .HasColumnType("datetime2");
