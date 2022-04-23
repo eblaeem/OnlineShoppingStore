@@ -29,7 +29,9 @@ namespace OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllS
                     Title = p.Title,
                     PreTitle = p.PreTitle,
                     Paragraph = p.Paragraph,
-                    LocationEnum = p.DisplayIn
+                    LocationEnum = p.DisplayIn,
+                    IsVisibility = p.IsVisibility,
+                    
                 }).ToListAsync();
 
             return sliders;

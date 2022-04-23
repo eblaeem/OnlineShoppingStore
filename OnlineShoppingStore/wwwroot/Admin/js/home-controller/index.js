@@ -49,13 +49,10 @@
     })
 }
 
-
-
-
 function ChangeImageVisibility(id) {
     swal.fire({
         title: 'تغییر وضعیت',
-        text: `آیا از نمایش/عدم نمایش تصویر مطمئن هستید؟`,
+        text: `آیا از انجام عملیات مطمئن هستید؟`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',

@@ -26,6 +26,7 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                                    p.Name,
                                    p.BasePrice,
                                    p.ViewCount,
+                                   p.Star,
                                    image = p.Images.FirstOrDefault(),
                                    pc.CategoryId
                                };
@@ -76,6 +77,7 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
                     Id = p.Id,
                     Name = p.Name,
                     Price = p.BasePrice,
+                    Star = p.Star,
                     ImgSrc = p.image != null ? p.image.Src : "images/NoImageAv.png"
                 }).ToList()
             };

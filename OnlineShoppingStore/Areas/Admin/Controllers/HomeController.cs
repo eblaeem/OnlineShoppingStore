@@ -6,6 +6,7 @@ using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.DeleteImag
 using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders;
 using OnlineShoppingStore.Areas.Admin.ViewModels.Home;
 using OnlineShoppingStore.Common.ResultDto;
+using System;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Areas.Admin.Controllers
@@ -48,6 +49,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
                 Paragraph = model.Paragraph,
                 LocationEnum = model.LocationEnum
             });
+            
             var response = new ApiResult()
             {
                 IsSuccess = result,
@@ -83,6 +85,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
             {
                 Id = id
             });
+
             var response = new ApiResult()
             {
                 IsSuccess = result,

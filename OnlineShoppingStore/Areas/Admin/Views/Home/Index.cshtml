@@ -36,35 +36,39 @@
                                             <th>عنوان اصلی</th>
                                             <th>عنوان فرعی</th>
                                             <th>توضیحات</th>
-                                            <th>تصویر</th>
+                                            <th>محل نمایش</th>
+                                            <th>قابلیت نمایش؟</th>
                                             <th>عملیات</th>
+                                            <th>تصویر</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         @foreach (var item in Model)
                                         {
-                                            <tr role="row">
-                                                <td class="justify">@item.Title</td>
-                                                <td class="justify">@item.PreTitle</td>
-                                                <td class="justify">@item.Paragraph</td>
-                                                <td style="width:200px">
-                                                    <img src="~/@item.Src" style="height:150px; width:150px;" />
-                                                </td>
+                                        <tr role="row">
+                                            <td class="justify">@item.Title</td>
+                                            <td class="justify">@item.PreTitle</td>
+                                            <td class="justify" style="width:400px;">@item.Paragraph</td>
+                                            <td class="justify">@item.LocationEnum</td>
 
-                                                <td>
-                                                    @*<a href="~/Admin/categories/edit?id=@item.Id" class="btn btn-outline-primary">ویرایش</a>*@
-                                                    @if (item.IsVisibility)
-                                                    {
-                                                        <button class="btn btn-outline-danger" onclick="ChangeImageVisibility('@item.Id','@item.Title')">نمایش</button>
-                                                    }
-                                                    else
-                                                    {
-                                                        <button class="btn btn-outline-danger" onclick="ChangeImageVisibility('@item.Id','@item.Title')">عدم نمایش</button>
-                                                    }
-                                                    <button class="btn btn-outline-danger" onclick="DeleteSliderImage('@item.Id','@item.Title')">حذف</button>
-                                                </td>
-                                            </tr>
+                                            <td class="justify">@item.IsVisibility</td>
+                                            <td>
+
+                                                @if (item.IsVisibility)
+                                                {
+                                                <button class="btn btn-outline-warning" onclick="ChangeImageVisibility('@item.Id')">عدم نمایش</button>
+                                                }
+                                                else
+                                                {
+                                                    <button class="btn btn-outline-primary" onclick="ChangeImageVisibility('@item.Id')"> نمایش</button>
+                                                }
+                                                <button class="btn btn-outline-danger" onclick="DeleteSliderImage('@item.Id','@item.Title')">حذف</button>
+                                            </td>
+                                            <td style="width:200px">
+                                                <img src="~/@item.Src" style="height:150px; width:150px;" />
+                                            </td>
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>

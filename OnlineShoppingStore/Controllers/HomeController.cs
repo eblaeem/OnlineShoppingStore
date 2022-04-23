@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders;
+using OnlineShoppingStore.Application.SiteServices.HomePage.Queries;
+using OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductsInSite;
 using OnlineShoppingStore.Models;
 using OnlineShoppingStore.ViewModels.Home;
 using System.Diagnostics;
@@ -24,7 +26,15 @@ namespace OnlineShoppingStore.Controllers
         {
             HomeIndexViewModels homeIndexViewModels = new()
             {
-                Slider = await _mediator.Send(new RequestGetAllSliders())
+                Slider = await _mediator.Send(new RequestGetPicsForSliderAndBanners()),
+                CanldeProducts = await _mediator.Send(new RequestGetAllProductsInSite()
+                {
+                    CatId = 16,
+                    SearchKey = null,
+                    Page = 1,
+                    Ordering = OrderingEnum.MostVisited,
+                    PageSize= 1
+                }),
             };
        
             return View(homeIndexViewModels);
