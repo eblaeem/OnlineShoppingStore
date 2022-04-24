@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.ChangeVisibility;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.CreateSlider;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.DeleteImageFromSlider;
-using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders;
+using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetPicsForSliderAndBannersInAdmin;
 using OnlineShoppingStore.Areas.Admin.ViewModels.Home;
 using OnlineShoppingStore.Common.ResultDto;
 using System;
@@ -27,7 +27,7 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var result = await _mediator.Send(new RequestGetAllSliders());
+            var result = await _mediator.Send(new RequestGetPicsForSliderAndBannersInAdmin());
             return View(result);
         }
 

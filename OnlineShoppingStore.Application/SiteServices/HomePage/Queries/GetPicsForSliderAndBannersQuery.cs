@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders;
+using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetPicsForSliderAndBannersInAdmin;
 using OnlineShoppingStore.Application.Interfaces.Context;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Application.SiteServices.HomePage.Queries
 {
-    public class GetPicsForSliderAndBannersQuery : IRequestHandler<RequestGetPicsForSliderAndBanners, List<ResponseGetAllSliders>>
+    public class GetPicsForSliderAndBannersQuery : IRequestHandler<RequestGetPicsForSliderAndBanners, List<ResponseGetPicsForSliderAndBannersInAdmin>>
     {
         private readonly IDataBaseContext _db;
 
@@ -18,12 +18,13 @@ namespace OnlineShoppingStore.Application.SiteServices.HomePage.Queries
         {
             _db = db;
         }
-        public async Task<List<ResponseGetAllSliders>> Handle(RequestGetPicsForSliderAndBanners request, CancellationToken cancellationToken)
+        public async Task<List<ResponseGetPicsForSliderAndBannersInAdmin>> Handle(RequestGetPicsForSliderAndBanners request, CancellationToken cancellationToken)
         {
             var Images = await _db.MainSliders
                  .OrderByDescending(p => p.Id)
                  .Where(p => p.IsDeleted == false && p.IsVisibility == true)
-                 .Select(p => new ResponseGetAllSliders
+                 .Take(request.Take)
+                 .Select(p => new ResponseGetPicsForSliderAndBannersInAdmin
                  {
                      Id = p.Id,
                      Link = p.Link,

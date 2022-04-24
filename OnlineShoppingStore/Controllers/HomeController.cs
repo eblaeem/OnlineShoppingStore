@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders;
+using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetPicsForSliderAndBannersInAdmin;
 using OnlineShoppingStore.Application.SiteServices.HomePage.Queries;
 using OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductsInSite;
 using OnlineShoppingStore.Models;
@@ -24,10 +24,14 @@ namespace OnlineShoppingStore.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var TakeCount = 10;
             HomeIndexViewModels homeIndexViewModels = new()
             {
-                Slider = await _mediator.Send(new RequestGetPicsForSliderAndBanners()),
-                CanldeProducts = await _mediator.Send(new RequestGetAllProductsInSite()
+                Slider = await _mediator.Send(new RequestGetPicsForSliderAndBanners()
+                {
+                    Take = TakeCount
+                }),
+                CandleProducts = await _mediator.Send(new RequestGetAllProductsInSite()
                 {
                     CatId = 16,
                     SearchKey = null,

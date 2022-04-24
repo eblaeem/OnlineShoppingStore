@@ -1,8 +1,8 @@
 ﻿using OnlineShoppingStore.Domain.Entities.HomePage.MainSlider;
 
-namespace OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders
+namespace OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetPicsForSliderAndBannersInAdmin
 {
-    public class ResponseGetAllSliders
+    public class ResponseGetPicsForSliderAndBannersInAdmin
     {
         public long Id { get; set; }
         public string Src { get; set; }

@@ -6,22 +6,22 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetAllSliders
+namespace OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetPicsForSliderAndBannersInAdmin
 {
-    public class GetAllSlidersQuery : IRequestHandler<RequestGetAllSliders, List<ResponseGetAllSliders>>
+    public class GetPicsForSliderAndBannersInAdminQuery : IRequestHandler<RequestGetPicsForSliderAndBannersInAdmin, List<ResponseGetPicsForSliderAndBannersInAdmin>>
     {
         private readonly IDataBaseContext _db;
 
-        public GetAllSlidersQuery(IDataBaseContext db)
+        public GetPicsForSliderAndBannersInAdminQuery(IDataBaseContext db)
         {
             _db = db;
         }
-        public async Task<List<ResponseGetAllSliders>> Handle(RequestGetAllSliders request, CancellationToken cancellationToken)
+        public async Task<List<ResponseGetPicsForSliderAndBannersInAdmin>> Handle(RequestGetPicsForSliderAndBannersInAdmin request, CancellationToken cancellationToken)
         {
             var sliders = await _db.MainSliders
                 .OrderByDescending(p => p.Id)
                 .Where(p => p.IsDeleted == false)
-                .Select(p => new ResponseGetAllSliders
+                .Select(p => new ResponseGetPicsForSliderAndBannersInAdmin
                 {
                     Id = p.Id,
                     Link = p.Link,
