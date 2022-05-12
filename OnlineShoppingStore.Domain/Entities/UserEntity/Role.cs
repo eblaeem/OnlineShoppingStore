@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OnlineShoppingStore.Domain.Entities.User
+namespace OnlineShoppingStore.Domain.Entities.UserEntity
 {
     public class Role
     {

@@ -1,5 +1,5 @@
-﻿namespace OnlineShoppingStore.Domain.Entities.User
-{
+﻿namespace OnlineShoppingStore.Domain.Entities.UserEntity
+{ 
     public class UserRole
     {
         public long Id { get; set; }

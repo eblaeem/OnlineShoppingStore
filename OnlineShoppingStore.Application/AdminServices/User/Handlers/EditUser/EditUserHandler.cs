@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Common.ResultDto;
-using OnlineShoppingStore.Domain.Entities.User;
-using System;
+using OnlineShoppingStore.Domain.Entities.UserEntity;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

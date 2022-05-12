@@ -1,5 +1,5 @@
 ﻿using OnlineShoppingStore.Application.Interfaces.Context;
-using OnlineShoppingStore.Domain.Entities.User;
+using OnlineShoppingStore.Domain.Entities.UserEntity;
 using System.Collections.Generic;
 using OnlineShoppingStore.Common;
 using System.Threading.Tasks;

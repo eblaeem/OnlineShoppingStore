@@ -4,9 +4,8 @@ using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.ChangeVisi
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.CreateSlider;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Handlers.DeleteImageFromSlider;
 using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetPicsForSliderAndBannersInAdmin;
-using OnlineShoppingStore.Areas.Admin.ViewModels.Home;
+using OnlineShoppingStore.Areas.Admin.Models.Home;
 using OnlineShoppingStore.Common.ResultDto;
-using System;
 using System.Threading.Tasks;
 
 namespace OnlineShoppingStore.Areas.Admin.Controllers
@@ -33,13 +32,18 @@ namespace OnlineShoppingStore.Areas.Admin.Controllers
 
         public IActionResult CreateSlider()
         {
-            var model = new CreateSliderViewModel();
+            var model = new CreateSliderAndBanner();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSlider(CreateSliderViewModel model)
+        public async Task<IActionResult> CreateSlider(CreateSliderAndBanner model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             var result = await _mediator.Send(new RequestCreateSlider
             {
                 File = model.File,

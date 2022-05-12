@@ -52,6 +52,81 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.ToTable("StoreDetails");
                 });
 
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Cart.CartItem", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(10,4)");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ShoppingCartId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("ShoppingCartId");
+
+                    b.ToTable("CartItems");
+                });
+
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Cart.ShoppingCart", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid>("BrowserToken")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Finished")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ShoppingCarts");
+                });
+
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.HomePage.MainSlider.MainSlider", b =>
                 {
                     b.Property<long>("Id")
@@ -452,7 +527,7 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.ToTable("SettingValues");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.Role", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.Role", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -484,7 +559,7 @@ namespace OnlineShoppingStore.Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.User", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -524,7 +599,7 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.UserRole", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.UserRole", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -544,6 +619,34 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Cart.CartItem", b =>
+                {
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.Products.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.Cart.ShoppingCart", "ShoppingCart")
+                        .WithMany("CartItems")
+                        .HasForeignKey("ShoppingCartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("ShoppingCart");
+                });
+
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Cart.ShoppingCart", b =>
+                {
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.UserEntity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.Category", b =>
@@ -684,15 +787,15 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Navigation("Setting");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.UserRole", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.UserRole", b =>
                 {
-                    b.HasOne("OnlineShoppingStore.Domain.Entities.User.Role", "Role")
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.UserEntity.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineShoppingStore.Domain.Entities.User.User", "User")
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.UserEntity.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -701,6 +804,11 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Cart.ShoppingCart", b =>
+                {
+                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.Products.Category", b =>
@@ -750,12 +858,12 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Navigation("OrderStatuses");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.Role", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.Role", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.User", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.User", b =>
                 {
                     b.Navigation("UserRoles");
                 });

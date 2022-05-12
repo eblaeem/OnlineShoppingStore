@@ -80,7 +80,7 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.ToTable("SettingValue");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.Role", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.Role", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace OnlineShoppingStore.Persistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.User", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -152,7 +152,7 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.UserRole", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.UserRole", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -194,15 +194,15 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Navigation("Setting");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.UserRole", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.UserRole", b =>
                 {
-                    b.HasOne("OnlineShoppingStore.Domain.Entities.User.Role", "Role")
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.UserEntity.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("OnlineShoppingStore.Domain.Entities.User.User", "User")
+                    b.HasOne("OnlineShoppingStore.Domain.Entities.UserEntity.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -218,12 +218,12 @@ namespace OnlineShoppingStore.Persistance.Migrations
                     b.Navigation("SubCategories");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.Role", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.Role", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.User.User", b =>
+            modelBuilder.Entity("OnlineShoppingStore.Domain.Entities.UserEntity.User", b =>
                 {
                     b.Navigation("UserRoles");
                 });

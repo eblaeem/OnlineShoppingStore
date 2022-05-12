@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShoppingStore.Domain.Entities.AboutUs;
+using OnlineShoppingStore.Domain.Entities.Cart;
 using OnlineShoppingStore.Domain.Entities.HomePage.MainSlider;
 using OnlineShoppingStore.Domain.Entities.Products;
 using OnlineShoppingStore.Domain.Entities.Setting;
-using OnlineShoppingStore.Domain.Entities.User;
+using OnlineShoppingStore.Domain.Entities.UserEntity;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,6 +29,8 @@ namespace OnlineShoppingStore.Application.Interfaces.Context
         DbSet<Status> Status { get; set; }
         DbSet<StoreDetails> StoreDetails { get; set; }
         DbSet<MainSlider> MainSliders { get; set; }
+        DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        DbSet<CartItem> CartItems { get; set; }
 
         DbSet<CustomizerSetting> CustomizerSettings { get; set; }
         DbSet<SettingValue> SettingValues { get; set; }

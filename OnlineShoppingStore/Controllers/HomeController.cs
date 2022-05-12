@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OnlineShoppingStore.Application.AdminServices.HomePage.Queries.GetPicsForSliderAndBannersInAdmin;
 using OnlineShoppingStore.Application.SiteServices.HomePage.Queries;
 using OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllProductsInSite;
 using OnlineShoppingStore.Models;

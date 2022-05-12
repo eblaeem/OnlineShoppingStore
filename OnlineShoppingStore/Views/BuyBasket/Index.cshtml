@@ -1,0 +1,115 @@
+﻿@using OnlineShoppingStore.Application.SiteServices.Cart.Queries.GetCart;
+@model ResponseGetCart;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    decimal _finalTotal = 0;
+}
+
+@section styles{ 
+    <link href="~/css/buybasket/index.css" rel="stylesheet" />
+}
+
+
+@if (Model.CartItemDtos.Count == 0)
+{
+    <section class="bg-white py-5">
+        <div class="container rtl">
+            <div class="d-flex flex-column align-items-center justify-content-lg-center py-5">
+
+                <div class="d-flex flex-column mb-4 mt-4 align-items-center">
+                    <img src="~/images/shopping-cart.png" class="mb-5 h-50 w-50">
+                    <p class="cart-empty-title">سبد خرید شما در حال حاضر خالی است.</p>
+                </div>
+
+                <div class="d-flex flex-column mb-4 mt-4">
+                    <a href="#" class="btn btn-success mb-2">ورود به حساب کاربری</a>
+                    <a href="~/home/index" class="btn btn-secondary">بازگشت به صفحه اصلی</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+}
+else
+{
+    <div class="container rtl justify">
+
+        <section id="cart">
+            @foreach (var item in Model.CartItemDtos)
+            {
+                <article class="product">
+                    <header>
+                        <a class="remove" href="~/buybasket/RemoveFromBasket?ProductId=@item.ProductId">
+                            <img src="~/@item.ImageSrc">
+
+                            <h3>حذف</h3>
+                        </a>
+                    </header>
+
+                    <div class="content">
+                        <h1>
+                            <span class="text-black-50">
+                                نام محصول:
+                            </span>
+                            @item.ProductName
+                        </h1>
+
+                        <p>
+                            شمع ها به عنوان یکی از اولین اختراعات بشر با داشتن بیش از 5000 سال قدمت ، اگرچه تاریخ اولیه پیدایش آن همچنان ناشناخته است اما همواره به عنوان یک منبع نور جایگاه ویژه ای در تاریخ بشر داشته اند
+                        </p>
+                    </div>
+
+                    <footer class="content">
+                        <span class="qt-minus" onclick="RemoveCount('@item.Id')">
+                            <i class="fa fa-minus" aria-hidden="true"></i>
+                        </span>
+
+                        <span class="qt" id="count-@item.Id">@item.Count</span>
+
+                        <span class="qt-plus" onclick="AddCount('@item.Id')">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                        </span>
+
+                        <h2 class="full-price">
+                            @{
+                                var total = item.Count * item.Price;
+                                _finalTotal += total;
+                            }
+                        </h2>
+                        <h2 class="price">
+                            @item.Price
+                        </h2>
+                    </footer>
+                </article>
+            }
+
+        </section>
+    </div>
+
+    <footer id="site-footer">
+        <div class="container clearfix">
+            <div class="right text-center">
+                <h6 class="total">
+                    جمع نهایی:
+                    <span>
+                        @_finalTotal.ToString("n0")
+                    </span>ريال
+                </h6>
+                <a class="btn btn-success">پرداخت</a>
+            </div>
+        </div>
+    </footer>
+}
+
+@section scripts{
+    <script>
+        function AddCount(cartItemId) {
+            window.location.replace('/BuyBasket/Plus?cartItemId=' + cartItemId)
+        }
+        function RemoveCount(cartItemId) {
+            window.location.replace('/BuyBasket/Minus?cartItemId=' + cartItemId)
+        }
+    </script>
+}  

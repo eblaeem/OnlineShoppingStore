@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="~/css/site-style.css" rel="stylesheet" />
     <link href="~/css/main.css" rel="stylesheet" />
+    @RenderSection("styles",required:false)
 </head>
 
 <body>
@@ -168,6 +169,7 @@
     <!-- Start Script -->
     <script src="~/js/site-scripts.js"></script>
     <script src="~/js/main.js"></script>
+    @RenderSection("scripts", required: false)
     <!-- End Script -->
 
 </body>

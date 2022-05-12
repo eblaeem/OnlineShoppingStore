@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnlineShoppingStore.Domain.Entities.User;
+using OnlineShoppingStore.Domain.Entities.UserEntity;
 using System;
 
 namespace OnlineShoppingStore.Persistance.Configurations.UserConfigurations

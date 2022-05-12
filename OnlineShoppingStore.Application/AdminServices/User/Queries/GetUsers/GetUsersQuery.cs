@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Common;
-using OnlineShoppingStore.Domain.Entities.User;
+using OnlineShoppingStore.Domain.Entities.UserEntity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

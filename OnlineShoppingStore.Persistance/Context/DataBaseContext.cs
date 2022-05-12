@@ -2,11 +2,13 @@
 using OnlineShoppingStore.Application.Interfaces.Context;
 using OnlineShoppingStore.Common.RoleName;
 using OnlineShoppingStore.Domain.Entities.AboutUs;
+using OnlineShoppingStore.Domain.Entities.Cart;
 using OnlineShoppingStore.Domain.Entities.HomePage.MainSlider;
 using OnlineShoppingStore.Domain.Entities.Products;
 using OnlineShoppingStore.Domain.Entities.Setting;
-using OnlineShoppingStore.Domain.Entities.User;
+using OnlineShoppingStore.Domain.Entities.UserEntity;
 using OnlineShoppingStore.Persistance.Configurations.AboutUsConfiguration;
+using OnlineShoppingStore.Persistance.Configurations.CartConfiguration;
 using OnlineShoppingStore.Persistance.Configurations.ProductConfigurations;
 using OnlineShoppingStore.Persistance.Configurations.SettingConfigurations;
 using OnlineShoppingStore.Persistance.Configurations.UserConfigurations;
@@ -35,7 +37,8 @@ namespace OnlineShoppingStore.Persistance.Context
         public DbSet<Status> Status { get; set; }
         public DbSet<StoreDetails> StoreDetails { get; set; }
         public DbSet<MainSlider> MainSliders { get; set; }
-
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
 
         public DbSet<CustomizerSetting> CustomizerSettings { get; set; }
@@ -58,6 +61,8 @@ namespace OnlineShoppingStore.Persistance.Context
             modelBuilder.ApplyConfiguration(new CustomizerSettingConfiguration());
             modelBuilder.ApplyConfiguration(new SettingValueConfiguration());
             modelBuilder.ApplyConfiguration(new StoreDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new CartItemConfiguration());
+            modelBuilder.ApplyConfiguration(new ShoppingCartConfiguration());
 
 
             SeedData(modelBuilder);
