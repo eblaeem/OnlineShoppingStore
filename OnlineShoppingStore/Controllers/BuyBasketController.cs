@@ -23,9 +23,12 @@ namespace OnlineShoppingStore.Controllers
 
         public async Task<IActionResult> Index()
         {
+           var userId =  ClaimUtilities.GetUSerId(User);
+
             var result =await _mediator.Send(new RequestGetCart
             {
-                BrowserId = cookiesManeger.GetBrowserToken(HttpContext)
+                BrowserId = cookiesManeger.GetBrowserToken(HttpContext),
+                UserId = userId,   
             });
             return View(result);
         }

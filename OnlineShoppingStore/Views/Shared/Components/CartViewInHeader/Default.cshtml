@@ -1,0 +1,71 @@
+﻿@using OnlineShoppingStore.Application.SiteServices.Cart.Queries.GetCart;
+@model ResponseGetCart;
+
+@section styles{
+    <link href="~/css/buybasket/index.css" rel="stylesheet" />
+
+}
+<style>
+    #cartView {
+        position: absolute;
+        background-color: #fff;
+        border-radius: 4px;
+        z-index: 1;
+        width: 500px;
+    }
+
+</style>
+
+
+<a class="nav-icon position-relative text-decoration-none cart-arrow-down">
+    <i class="fa fa-cart-arrow-down text-dark mr-1"></i>
+    <span class="position-absolute top-0 left-100 translate-middle 
+          badge rounded-pill bg-success text-dark" style="font-size:10px !important">@Model.ProductCount</span>
+</a>
+
+<div id="cartView">
+    <div class="container rtl justify w-100">
+
+        <div id="cart">
+            @foreach (var item in Model.CartItemDtos)
+            {
+                <div class="d-flex flex-grow-1">
+                    <div class="d-flex" style="width: 200px">
+                        <a class="remove" href="~/buybasket/RemoveFromBasket?ProductId=@item.ProductId">
+                            @*<span style="position: absolute;width: 75%;height: 100%;background-color: #6f7377;
+                                opacity: 0.07;top: 0;right: 0;border-radius: 8px;"></span>*@
+                            <img src="~/@item.ImageSrc" class="w-75">
+                        </a>
+                    </div>
+
+                    <div class="flex-fill flex-grow-1">
+                        <h3 style="font-size:14px; font-weight:bolder; margin-bottom:15px;">
+                            @item.ProductName
+                        </h3>
+                        <a>
+                            <h4 style="font-size: 13px; color: #000; margin-bottom: 16px; font-weight: 400; white-space: nowrap; overflow: hidden; max-width: 270px; -o-text-overflow: ellipsis; text-overflow: ellipsis; -webkit-transition: 0.2s all; -o-transition: 0.2s all; transition: 0.2s all;">
+                                @item.ProductName
+                            </h4>
+                        </a>
+                        <div class="d-flex">
+
+                        </div>
+                        <div class="d-flex">
+                            <h2 class="price" style="font-size:14px; font-weight:bolder; margin-bottom:15px;">
+                                @item.Price.ToString("n0")
+                            </h2>
+                            <span>
+                                تومان
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            }
+            <div class="d-flex">
+                <a class="btn btn-success text-white  " href="~/buybasket/index"
+                   style="margin:10px 0px;">بازگشت به سبد خرید</a>
+            </div>
+        </div>
+    </div>
+</div>
