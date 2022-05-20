@@ -63,6 +63,7 @@ namespace OnlineShoppingStore.Application.SiteServices.Products.Queries.GetAllPr
         {
             var images = await _db.Images
                 .Where(p => p.ProductId == productId)
+                .Take(6)
                 .ToListAsync();
 
             var imageDto = new List<ProductDetailImagesDto>();

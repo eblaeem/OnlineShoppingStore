@@ -12,7 +12,7 @@
         <div class="row rtl">
             <div class="col-lg-5 mt-5">
                 <div class="card mb-3">
-                    <img class="card-img img-fluid" src="~/img/product_single_10.jpg" alt="Card image cap" id="product-detail">
+                    <img class="card-img img-fluid" src="~/@Model.Images.FirstOrDefault().Src" alt="Card image cap" id="product-detail">
                 </div>
                 <div class="row">
                     <!--Start Controls-->
@@ -31,24 +31,36 @@
                             <!--First slide-->
                             <div class="carousel-item active">
                                 <div class="row">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="~/img/product_single_02.jpg" alt="Product Image 2">
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="~/img/product_single_02.jpg" alt="Product Image 2">
-                                        </a>
-                                    </div>
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <img class="card-img img-fluid" src="~/img/product_single_03.jpg" alt="Product Image 3">
-                                        </a>
-                                    </div>
+
+                                    @foreach (var item in Model.Images.Take(3))
+                                    {
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid" src="~/@item.Src">
+                                            </a>
+                                        </div>
+                                    }
+
                                 </div>
                             </div>
                             <!--/.First slide-->
+
+                            <!--Second slide-->
+                            <div class="carousel-item">
+                                <div class="row">
+
+                                    @foreach (var item in Model.Images.Skip(3).Take(3))
+                                    {
+                                        <div class="col-4">
+                                            <a href="#">
+                                                <img class="card-img img-fluid" src="~/@item.Src">
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <!--/.Second slide-->
+
                         </div>
                         <!--End Slides-->
                     </div>
